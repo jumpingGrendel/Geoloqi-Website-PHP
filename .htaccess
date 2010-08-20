@@ -1,0 +1,14 @@
+RewriteEngine on
+
+# Home page
+RewriteRule ^$ index.php?controller=home&method=index [QSA,L]
+
+# User pages short form (geoloqi.com/aaronpk)
+RewriteRule ^settings$ index.php?controller=settings&method=index [QSA,L]
+RewriteRule ^([^/]+)$ index.php?controller=map&method=index&value=$1 [QSA,L]
+
+# All other pages (geoloqi.com/settings/profile)
+RewriteRule ^([^/]+)/([^/]+)$ index.php?controller=$1&method=$2 [QSA,L]
+
+# Error handler
+ErrorDocument 404 /index.php?controller=error&method=error404
