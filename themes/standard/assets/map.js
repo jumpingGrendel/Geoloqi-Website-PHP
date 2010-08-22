@@ -14,6 +14,7 @@ $(function(){
 });
 
 function resize_map(){
-	$("#map").css("height", (window.innerHeight-$("#map-footer").height())+"px").css("width", (window.innerWidth-$("#sidebar").width())+"px");
+	$("#map-container").css("height", (window.innerHeight-$("#map-footer").height())+"px").css("width", (window.innerWidth-$("#sidebar").width())+"px");
+	$("#map").css("height", "100%").css("width", "100%");
 	google.maps.event.trigger(map, 'resize');
 }

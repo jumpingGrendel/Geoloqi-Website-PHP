@@ -18,19 +18,24 @@ img {
 
 .round {
 	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
+.round-bottom {
+	-moz-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+}	
 
 #page {
-	width: 900px;
+	width: 800px;
 	margin: 0 auto;
+	position: relative;
 }
 
 #content {
-	background-color: #eee;
-	-moz-border-radius: 0 0 5px 5px;
+	background-color: #ddd;
 }
-#content .inner {
-	padding: 10px;
+#content > .inner {
+	padding: 70px 0 0 0;
 }
 
 #footer {
@@ -59,3 +64,66 @@ img {
 	width: 240px;
 	float: left;
 }
+
+#geoloqi-logo {
+	position: absolute;
+	top: 10px;
+	left: 20px;
+	background: url(images/geoloqi-logo-text.png) no-repeat;
+	width: 143px;
+	height: 51px;
+}
+
+#header-bar {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: white;
+	font-size: 0.8em;
+}
+#header-bar .inner {
+	padding: 4px;
+}
+#header-bar .signed-out {
+	margin-left: 7px;
+	margin-right: 7px;
+}
+#header-bar ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+#header-bar li {
+	float: left;
+	margin-left: 7px;
+	margin-right: 7px;
+}
+#header-bar a {
+	text-decoration: none;
+}
+
+
+#settings-menu {
+	background-color: #666;
+	padding-left: 40px;
+	padding-top: 10px;
+	padding-bottom: 0;
+}
+#settings-menu a {
+	float: left;
+	margin-left: 9px;
+	margin-right: 9px;
+	text-decoration: none;
+	-moz-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	background-color: #444;
+	color: white;
+	padding: 0 12px;
+	font-size: 0.9em;
+}
+#settings-menu a.selected {
+	color: black;
+	background-color: #ddd;
+}
+
+
