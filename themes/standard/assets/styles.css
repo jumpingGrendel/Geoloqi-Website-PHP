@@ -1,6 +1,7 @@
 
 body {
-	font-family: "Trebuchet MS", verdana, arial, sans-serif;
+	font-family: "Lucida Grande", verdana, arial, sans-serif;
+	font-size: 10pt;
 	background-color: #252525;
 	color: black;
 	margin: 0;
@@ -26,20 +27,23 @@ img {
 }	
 
 #page {
-	width: 800px;
+	width: 900px;
 	margin: 0 auto;
 	position: relative;
 }
 
 #content {
-	background-color: #ddd;
+	background-color: #fff;
 }
-#content > .inner {
-	padding: 70px 0 0 0;
+#header-bkg {
+	background: #ddd;
+	height: 70px;
 }
+
 
 #footer {
 	margin-top: 10px;
+	margin-bottom: 20px;
 	text-align: center;
 	background-color: white;
 	padding: 5px 0;
@@ -53,8 +57,17 @@ img {
 	margin: 0 8px;
 }
 
+#map-page td {
+	vertical-align: top;
+}
+
+#map-footer {
+	margin: 0;
+	padding: 0;	
+}
 #map-footer .round {
 	-moz-border-radius: 0;
+	border-radius: 0;
 }
 #map-footer #footer {
 	margin-top: 0;
@@ -62,7 +75,9 @@ img {
 
 #sidebar {
 	width: 240px;
-	float: left;
+	background-color: #ccc;
+	color: black;
+	border-right: 3px #444 solid;
 }
 
 #geoloqi-logo {
@@ -74,12 +89,57 @@ img {
 	height: 51px;
 }
 
+#sidebar-logo {
+	padding: 6px 0;
+	background-color: #777;
+}
+#sidebar #geoloqi-logo {
+	position: relative;
+	left: 0;
+	top: 0;
+	margin: 0 auto;
+}
+
+.sidebar-panel {
+	margin: 10px;
+	padding: 5px;
+	background-color: #fff;
+}
+.sidebar-panel .small {
+	font-size: 0.8em;
+	color: #666;
+}
+#profile-info .line {
+	margin-bottom: 4px;
+}
+#profile-info .label {
+	font-weight: bold;
+}
+#profile-info .name {
+	font-size: 1.3em;
+	font-weight: bold;
+	color: #333;
+}
+
+.sidebar-geonote.active {
+	background-color: #c8e6f1;
+	border:3px solid #3E829B;
+}
+#geonote_success {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.3em;
+}	
+
+
+
 #header-bar {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background-color: white;
+	background-color: #fff;
 	font-size: 0.8em;
+	z-index: 100;
 }
 #header-bar .inner {
 	padding: 4px;
@@ -97,6 +157,7 @@ img {
 	float: left;
 	margin-left: 7px;
 	margin-right: 7px;
+	padding: 2px 0;
 }
 #header-bar a {
 	text-decoration: none;
@@ -118,12 +179,140 @@ img {
 	border-radius: 5px 5px 0 0;
 	background-color: #444;
 	color: white;
-	padding: 0 12px;
+	padding: 4px 12px;
 	font-size: 0.9em;
 }
 #settings-menu a.selected {
 	color: black;
-	background-color: #ddd;
+	background-color: white;
 }
 
 
+.settings-wrap {
+	padding-top: 10px;
+	padding-bottom: 30px;
+}
+.settings table {
+	width: 660px;
+	margin: 10px 50px;
+}
+.settings table .label {
+	font-size: 18pt;
+}
+.settings table .description {
+	color: #666;
+}
+.settings table td {
+	vertical-align: top;
+}
+.settings table .left {
+	width: 150px;
+	padding-right: 20px;
+}
+.settings table input.field, .settings table textarea.field {
+	width: 250px;
+	border: 2px #999 solid;
+	padding: 3px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+.settings table .submit {
+	border: 3px #666 solid;
+	font-size: 18px;
+	padding: 2px 18px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.settings td {
+	padding-bottom: 15px;
+}
+.settings-stacked .checkbox {
+	float: left;
+	margin-right: 10px;
+}
+
+.settings .header {
+	background-color: #ccc;
+	font-size: 18pt;
+	font-weight: bold;
+	padding: 4px 50px;
+	margin-top: 10px;
+}
+.settings .app_icon {
+	margin-right: 10px;
+}
+
+.settings input.text {
+	border: 3px #666 solid;
+	font-size: 18px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	margin-bottom: 4px;
+	width: 220px;
+}
+
+.settings .applications .label {
+	display: inline;
+}
+.settings .applications .author {
+	font-size: 0.8em;
+	display: inline;
+}
+.settings .applications .author a {
+	text-decoration: none;
+}
+.settings .applications .info {
+	font-size: 0.8em;
+}
+.settings .applications .info a {
+	font-weight: bold;
+}
+
+.settings .coming-soon {
+	opacity: 0.2;
+	-moz-opacity: 0.2;
+}
+.settings .coming-soon .description {
+	color: black;
+}
+
+
+
+#GB_overlay {
+	z-index: 200;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width:  100%;
+	height: 100%;
+	margin: auto;
+	background-color: #000;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+}
+
+#GB_window {
+	display: none;
+	position: fixed;
+	z-index: 201;
+	width: 400px;
+	height: 240px;
+	top: 20px;
+	left: 0;
+	margin: 0 auto;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	background: #fff;
+	border: 4px #ccc solid;
+	overflow: hidden;	
+}
+
+#GB_frame {
+	padding: 20px;
+}
+
+#GB_frame.notice {
+	text-align: center;
+	font-size: 18pt;
+}

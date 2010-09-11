@@ -34,9 +34,26 @@ class Site
 	protected $theme;
 	
 	/**
+	 * The Geoloqi API object
+	 */
+	protected $api;
+	
+	/**
 	 * Whether the method was accessed using GET or POST
 	 */
-	protected $_post = FALSE;
+	protected $post = FALSE;
+	
+	/**
+	 * Store the names of the controller and method called
+	 */
+	protected $controller;
+	protected $method;
+	protected $is_ajax;
+	
+	/**
+	 * Whether this page is only visible when the visitor is logged in
+	 */
+	protected $force_login = TRUE;
 	
 	/**
 	 * Set by the respond() function when it's called from one of the methods.
@@ -46,7 +63,7 @@ class Site
 	
 	public function __construct()
 	{
-		$this->_post = strtolower($_SERVER['REQUEST_METHOD']) == 'post';
+		$this->post = strtolower($_SERVER['REQUEST_METHOD']) == 'post';
 	}
 	
 	/**
@@ -54,21 +71,43 @@ class Site
 	 */
 	public function auth()
 	{
+		$this->api = new GeoloqiAPI(GEOLOQI_CLIENT_ID, GEOLOQI_CLIENT_SECRET);
+
+		
 		
 		return TRUE;
 	}
 	
-	public function init()
+	public function init($controller, $method, $is_ajax)
 	{
+		$this->controller = $controller;
+		$this->method = $method;
+		$this->is_ajax = $is_ajax;
+		
 		if(substr($_SERVER['SERVER_NAME'], 0, 2) == 'm.')
 			$this->theme = 'mobile';
 		else
 			$this->theme = 'standard';
-		
+
 		// Some variables are required by the header and footer.
 		// This also sets default values for variables that can be customized by the individual pages. 
 		$this->data['title'] = 'Geoloqi';
 		$this->data['theme_root'] = '/themes/' . $this->theme . '/assets/';
+		$this->data['image_root'] = $this->data['theme_root'] . '/images/';
+		$this->data['logged_in'] = array_key_exists('username', $_SESSION); // note: this does not guarantee the access token is still valid
+		if($this->data['logged_in'])
+		{
+			$this->user = $_SESSION['user_profile'];
+			$this->data['username'] = $_SESSION['username'];
+		}
+		else
+		{
+			if($this->force_login)
+			{
+				header('Location: /');
+				die();
+			}
+		}
 	}
 	
 	protected function theme_file($filename)
@@ -79,59 +118,64 @@ class Site
 	public function render($method, $params=FALSE)
 	{
 		$this->responded = TRUE;
-		
-		// Call the method of the controller which will set a bunch of variables in $this->data
-		$this->{$method}($params);
 
-		extract($this->data);
-
-		// Load the view which will output html and also set some headers in $this->head
-		ob_start();
-		include($this->theme_file($_GET['controller'] . '/' . $_GET['method'] . '.php'));
-		$html = ob_get_clean();
-
-		// Now that $this->head has been populated by the view, the header layout will be able to use it
-		include($this->theme_file('layouts/header.php'));
-		echo $html;
-		include($this->theme_file('layouts/footer.php'));
+		if(!$this->is_ajax)
+		{
+			// Call the method of the controller which will set a bunch of variables in $this->data
+			$this->{$method}($params);
+	
+			extract($this->data);
+	
+			// Load the view which will output html and also set some headers in $this->head
+			ob_start();
+			include($this->theme_file($this->controller . '/' . $this->method . '.php'));
+			$html = ob_get_clean();
+	
+			// Now that $this->head has been populated by the view, the header layout will be able to use it
+			include($this->theme_file('layouts/header.php'));
+			echo $html;
+			include($this->theme_file('layouts/footer.php'));
+		}
+		else
+		{
+			// For AJAX calls, the method of the controller will return an object for the JSON response
+			echo json_encode($this->{$method}($params));
+		}
 	}
 
 	public function error($code, $error, $msg)
 	{
 		header('HTTP/1.1 ' . $code . ' ' . $this->_codeString($code));
 		
-		// Capture any outputted errors now so that we can return them in the response
-		$output = trim(strip_tags(str_replace('<br>', "\n", ob_get_clean())));
-		$response = array('error'=>$error, 'error_description'=>$msg);
-		if(DEBUG_MODE && $output)
-			$response['debug_output'] = trim(strip_tags(str_replace('<br>', "\n", $output)));
-			
-		pa($response);
-		die();
-	}
-	
-	public function respond($data, $code=HTTP_OK, $headers=array())
-	{
 		$this->responded = TRUE;
 		
 		// Capture any outputted errors now so that we can return them in the response
 		$output = trim(strip_tags(str_replace('<br>', "\n", ob_get_clean())));
+
+		$response = array('error'=>$error, 'error_description'=>$msg);
 		if(DEBUG_MODE && $output)
-			if(is_array($data))
-				$data['debug_output'] = $output;
-			elseif(is_object($data))
-				$data->debug_output = $output;
-
-		foreach($headers as $h)
-			header($h);
+			$response['debug_output'] = trim(strip_tags(str_replace('<br>', "\n", $output)));
 			
-		if($code != HTTP_OK)
-			header('HTTP/1.1 ' . $code . ' ' . $this->_codeString($code));
-
-		pa($data);
-		die();
+		if($this->is_ajax)
+			echo json_encode($response);
+		else
+		{
+			$this->data['error_description'] = $response['error_description'];
+			if(DEBUG_MODE && $output)
+				$this->data['debug_output'] = $response['debug_output'];
+			extract($this->data);
+			include($this->theme_file('layouts/header.php'));
+			include($this->theme_file('layouts/error.php'));
+			include($this->theme_file('layouts/footer.php'));
+		}
 	}
 
+	public function redirect($url)
+	{
+		header('Location: ' . $url);
+		die();
+	}
+	
 	public function stub()
 	{
 		header('HTTP/1.1 ' . HTTP_NOT_IMPLEMENTED . ' Method Not Implemented');

@@ -1,6 +1,8 @@
 <?php 
 class Site_Account extends Site
 {
+	protected $force_login = FALSE;
+	
 	public function login()
 	{
 		if($this->post)
@@ -23,12 +25,20 @@ class Site_Account extends Site
 				$_SESSION['refresh_token'] = $response->refresh_token;
 				
 				$response = $this->api->request('account/profile');
-				$_SESSION['user_profile'] = json_encode($response);
+				$_SESSION['user_profile'] = $response;
 				$_SESSION['username'] = $response->username;
 				$this->data['username'] = $_SESSION['username'];
 			}
 			$this->data['api_response'] = $response;
+			
+			$this->redirect('/' . $_SESSION['username']);
 		}
+	}
+	
+	public function logout()
+	{
+		session_destroy();
+		$this->redirect('/');
 	}
 }
 ?>

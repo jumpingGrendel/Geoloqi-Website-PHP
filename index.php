@@ -7,20 +7,27 @@ ob_start();
 
 set_include_path(dirname(__FILE__) . '/include' . PATH_SEPARATOR . dirname(__FILE__) . '/themes' . PATH_SEPARATOR . get_include_path());
 
+session_start();
+
 include('config.php');
+include('GeoloqiAPI.php');
 include('Site.php');
 
-$controller = get('controller');
+$controllerName = get('controller');
 $method = get('method');
 $value = get('value');
 
-switch($controller)
+if(get('mode') == 'ajax')
+	$method .= '_ajax';
+
+switch($controllerName)
 {
 	case 'map':
 	case 'settings':
+	case 'account':
 	case 'home':
-		require_once('Site/' . ucfirst($controller) . '.php');
-		$className = 'Site_' . ucfirst($controller);
+		require_once('Site/' . ucfirst($controllerName) . '.php');
+		$className = 'Site_' . ucfirst($controllerName);
 		$controller = new $className();
 		break;
 	default:
@@ -30,7 +37,7 @@ switch($controller)
 // Verify session data, etc
 $controller->auth();
 
-$controller->init();
+$controller->init($controllerName, $method, get('mode') == 'ajax');
 
 try
 {
@@ -90,6 +97,13 @@ function request($key)
 {
 	if(array_key_exists($key, $_REQUEST))
 		return $_REQUEST[$key];
+	else
+		return FALSE;
+}
+function session($key)
+{
+	if(array_key_exists($key, $_SESSION))
+		return $_SESSION[$key];
 	else
 		return FALSE;
 }

@@ -10,6 +10,14 @@ class GeoloqiAPI
 		$this->_clientSecret = $clientSecret;
 	}
 	
+	protected function error()
+	{
+		// The server rejected our tokens, nothing we can do here. Log the user out and redirect to the home page.
+		session_destroy();
+		header('Location: /');
+		die();
+	} 
+	
 	public function request($method, $post=FALSE)
 	{
 		ob_start();
@@ -27,14 +35,20 @@ class GeoloqiAPI
 			$client = array('client_id' => $this->_clientID, 'client_secret' => $this->_clientSecret);
 			curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 			curl_setopt($ch, CURLOPT_USERPWD, implode(':', $client));
-			$baseURL = GEOLOQI_API_BASEURL;
+			$baseURL = GEOLOQI_API_BASEURL_SECURE;
 		}
 		else
 		{
-			// Pass the OAuth token in the HTTP headers
-			$httpHeader[] = 'Authorization: OAuth ' . $_SESSION['oauth_token'];
-			
-			$baseURL = GEOLOQI_API_BASEURL_SECURE;
+			if(session('oauth_token'))
+			{
+				// Pass the OAuth token in the HTTP headers
+				$httpHeader[] = 'Authorization: OAuth ' . $_SESSION['oauth_token'];
+			}
+			else
+				// We don't have an access token in the session, bye!
+				$this->error();
+					
+			$baseURL = GEOLOQI_API_BASEURL;
 		}
 		
 		curl_setopt($ch, CURLOPT_URL, $baseURL . $method);
@@ -107,25 +121,40 @@ class GeoloqiAPI
 		}	
 		pa($data);
 			
-		if(array_key_exists('WWW-Authenticate', $headers) && preg_match('/error=\'expired_token\'/', $headers['WWW-Authenticate']))
+		if(array_key_exists('WWW-Authenticate', $headers))
 		{
-			// If the token expired, use the refresh token to get a new access token
-			$response = $this->request('oauth/token', array(
-				'grant_type' => 'refresh_token',
-				'refresh_token' => $_SESSION['refresh_token']
-			));
+			if(preg_match('/error=\'expired_token\'/', $headers['WWW-Authenticate']))
+			{
+				// If the token expired, use the refresh token to get a new access token
+				$response = $this->request('oauth/token', array(
+					'grant_type' => 'refresh_token',
+					'refresh_token' => $_SESSION['refresh_token']
+				));
+
+				if(property_exists($response, 'access_token'))
+				{
+					// Store the tokens in the session
+					$_SESSION['oauth_token'] = $response->access_token;
+					$_SESSION['refresh_token'] = $response->refresh_token;
 			
-			// Store the tokens in the session
-			$_SESSION['oauth_token'] = $response->access_token;
-			$_SESSION['refresh_token'] = $response->refresh_token;
-	
-			echo "<b>SESSION</b>\n";
-			pa($_SESSION);
-			
-			// Try the original request again
-			return $this->request($originalMethod, $post);
+					#echo "<b>SESSION</b>\n";
+					#pa($_SESSION);
+					
+					ob_end_clean();
+					
+					// Try the original request again
+					return $this->request($method, $post);
+				}
+				else
+					// The server rejected the refresh token
+					$this->error();
+			}
+			else
+			{
+				// The server rejected the request, not because of an expired token. There's nothing more we can do
+				$this->error();
+			}
 		}
-	
 		echo "\n";
 
 		echo '</pre>';
