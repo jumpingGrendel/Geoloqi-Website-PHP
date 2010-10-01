@@ -139,6 +139,7 @@ class Site
 		else
 		{
 			// For AJAX calls, the method of the controller will return an object for the JSON response
+			header('Content-type: text/javascript');
 			echo json_encode($this->{$method}($params));
 		}
 	}

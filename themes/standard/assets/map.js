@@ -2,7 +2,9 @@
 var map;
 var last = false;
 var lastPosition = false;
+var thePath = false;
 var marker = false; // The marker of the user's location
+var autoPan = true; // pan the map when a new point is received
 
 $(function(){
 	var latlng = new google.maps.LatLng(45.51, -122.63);
@@ -17,6 +19,23 @@ $(function(){
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	
 	resize_map();
+
+	// Dragging the map turns off auto-pan
+	google.maps.event.addListener(map, 'dragstart', function(){
+		autoPan = false;
+	});
+
+	setInterval(function(){
+		$.getJSON("/map/history.ajax", {
+			after: last.date
+		},
+		function(data){
+			for(var i in data){
+				var point = data[i];
+				receive_location(point);
+			}
+		});
+	}, 10000);
 });
 
 function resize_map(){
@@ -26,15 +45,31 @@ function resize_map(){
 }
 
 function receive_location(l){
-	lastPosition = new google.maps.LatLng(last.location.position.latitude, last.location.position.longitude);
-	map.setCenter(lastPosition);
+	newPosition = new google.maps.LatLng(l.location.position.latitude, l.location.position.longitude);
+	lastPosition = newPosition;
 	
+	if(autoPan) {
+		map.panTo(newPosition);
+	}
+
 	if(marker == false){
 		marker = new google.maps.Marker({
-			position: lastPosition,
+			position: newPosition,
 			map: map
 		});
 	}else{
-		marker.setPosition(lastPosition);
+		marker.setPosition(newPosition);
 	}
+
+	if(thePath == false){
+		thePath = new google.maps.Polyline({
+			strokeColor: "#000000",
+			strokeOpacity: 0.8,
+			strokeWeight: 3
+		});
+		thePath.setMap(map);
+	}
+	thePath.getPath().push(newPosition);
+
+	last = l;
 }

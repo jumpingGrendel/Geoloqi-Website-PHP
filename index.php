@@ -26,6 +26,7 @@ switch($controllerName)
 	case 'settings':
 	case 'account':
 	case 'home':
+	case 'oauth':
 		require_once('Site/' . ucfirst($controllerName) . '.php');
 		$className = 'Site_' . ucfirst($controllerName);
 		$controller = new $className();

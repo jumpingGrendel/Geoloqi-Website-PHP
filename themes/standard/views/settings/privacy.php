@@ -10,7 +10,7 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Show public location</div>
 			<input type="checkbox" name="public_location" class="checkbox" />
 			<div class="description">
-				Warning: This will make your exact position available on your map and through the API.
+				Warning: This will make your exact position available on your map and to third-party applications.
 			</div>
 		</td>
 	</tr>

@@ -1,0 +1,17 @@
+
+#authorize-page {
+	position: relative;
+	width: 600px;		
+	margin: 0 auto;
+}
+
+#authorize-wrap {
+	padding-top: 70px;
+}
+#authorize {
+	background-color: white;
+}
+
+#authorize .in {
+	padding: 20px;
+}

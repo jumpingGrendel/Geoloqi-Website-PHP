@@ -34,5 +34,14 @@ class Site_Map extends Site
 		return $response;
 	}
 	
+	public function history_ajax()
+	{
+		$response = $this->api->request('location/history', array(
+			'after' => get('after'),
+			'sort' => 'desc'
+		));
+		return $response;
+	}
+	
 }
 ?>
