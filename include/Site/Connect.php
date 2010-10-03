@@ -1,6 +1,6 @@
 <?php
 require_once('EpiCurl.php');
-require_once('EpiOauth.php');
+require_once('EpiOAuth.php');
 require_once('EpiTwitter.php');
 
 class Site_Connect extends Site
