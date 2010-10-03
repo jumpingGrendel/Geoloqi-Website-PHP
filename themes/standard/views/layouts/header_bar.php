@@ -15,8 +15,9 @@ if($logged_in)
 }
 else
 {
+	// <div class="signed-out">Have an account? <a href="/account/login">Sign in</a> or <a href="/account/signup">Join Now</a></div>
 ?>
-	<div class="signed-out">Have an account? <a href="/account/login">Sign in</a> or <a href="/account/signup">Join Now</a></div>
+	<div class="signed-out">Have an account? <a href="/connect/twitter">Sign in</a> or <a href="/connect/twitter">Join Now</a></div>
 <?php
 }
 ?>

@@ -5,7 +5,7 @@ include($this->theme_file('settings/menu.php'));
 
 <div class="settings-wrap"><div class="settings settings-stacked">
 <table>
-	<tr>
+	<tr class="coming-soon">
 		<td colspan="2">
 			<div class="label">Show public location</div>
 			<input type="checkbox" name="public_location" class="checkbox" />
@@ -48,7 +48,7 @@ include($this->theme_file('settings/menu.php'));
 			</div>
 		</td>
 	</tr>
-	<tr>
+	<tr class="coming-soon">
 		<td colspan="2">
 			<input type="submit" value="Save" class="submit" />
 		</td>

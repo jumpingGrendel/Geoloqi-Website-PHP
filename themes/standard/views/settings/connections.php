@@ -1,4 +1,5 @@
-<?php 
+<?php
+$this->head[] = '<script type="text/javascript" src="' . $theme_root . 'settings-connections.js"></script>';
 include($this->theme_file('layouts/site_header.php'));
 include($this->theme_file('settings/menu.php'));
 ?>
@@ -18,9 +19,15 @@ include($this->theme_file('settings/menu.php'));
 			</div>
 		</td>
 		<td>
-			<input type="button" class="submit" value="Connect" />
+			<?php 
+				if($_SESSION['user_profile']->twitter == '')
+					echo '<input type="button" class="submit" value="Connect" />';
+				else
+					echo 'Connected: <a href="http://twitter.com/' . $_SESSION['user_profile']->twitter . '">' . $_SESSION['user_profile']->twitter . '</a>';
+			?>
 		</td>
 	</tr>
+	<!-- 
 	<tr class="coming-soon">
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/facebook-geoloqi.png" width="64" height="64" /></div>
@@ -77,11 +84,12 @@ include($this->theme_file('settings/menu.php'));
 			<input type="button" class="submit" value="Connect" />
 		</td>
 	</tr>
+	-->
 </table>
 
 <div class="header">Geolocation Services</div>
 <table>
-	<tr>
+	<tr class="coming-soon">
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/instamapper-geoloqi.png" width="64" height="64" /></div>
 		</td>
@@ -96,6 +104,7 @@ include($this->theme_file('settings/menu.php'));
 			<input type="button" class="submit" value="Save" />
 		</td>
 	</tr>
+	<!-- 
 	<tr class="coming-soon">
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/trackr-geoloqi.png" width="64" height="64" /></div>
@@ -111,10 +120,12 @@ include($this->theme_file('settings/menu.php'));
 			<input type="button" class="submit" value="Save" />
 		</td>
 	</tr>
+	-->
 </table>
 
 <div class="header">Applications</div>
 <table class="applications">
+	<!-- 
 	<tr>
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/icecondor-geoloqi.png" width="64" height="64" /></div>
@@ -130,10 +141,39 @@ include($this->theme_file('settings/menu.php'));
 			</div>
 		</td>
 	</tr>
+	-->
 	<tr>
 		<td colspan="2">
 			<div class="application-1">Don't see an app here that does what you want?</div>
-			<div class="application-2">Why not <a href="http://geoloqi.com/developers">build one?</a></div>
+			<div class="application-2">Why not <a href="http://geoloqi.org/API">build one?</a></div>
+		</td>
+	</tr>
+</table>
+
+
+<div class="header">Developers</div>
+<table class="applications">
+	<tr>
+		<td width="64">
+			<div class="app_icon" style="width: 64px; height: 64px;"></div>
+		</td>
+		<td>
+			<div class="label">OAuth 2 Access Token</div>
+			<div class="description">
+				You can request a permanent access token for your account so you can start building apps right away! This access token will never expire, and has full access to your account, so guard it carefully! Only use it over https.
+				<br /><br />
+<?php 
+				if($permanent_token)
+				{
+					echo '<input type="text" class="text" id="permanent_access_token" value="' . $permanent_token . '" style="width: 400px;" />';	
+				}
+				else
+				{
+					echo '<input type="button" class="submit" value="Get Access Token" id="request_access_token" />';
+					echo '<input type="text" class="text" id="permanent_access_token" style="display: none; width: 400px;" />';	
+				}
+?>
+			</div>
 		</td>
 	</tr>
 </table>

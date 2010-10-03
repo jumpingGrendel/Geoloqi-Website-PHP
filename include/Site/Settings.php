@@ -37,8 +37,13 @@ class Site_Settings extends Site
 	
 	public function connections()
 	{
-		
-		
+		$response = $this->api->request('account/permanent_token');
+		$this->data['permanent_token'] = $response->access_token;
+	}
+	
+	public function get_permanent_token_ajax()
+	{
+		return $this->api->request('account/permanent_token', array());
 	}
 	
 	public function share()

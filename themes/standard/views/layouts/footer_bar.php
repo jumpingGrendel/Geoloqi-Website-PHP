@@ -9,5 +9,7 @@
 	<span>&bull;</span>
 	<a href="http://github.com/geoloqi">Github</a>
 	<span>&bull;</span>
+	<a href="http://geoloqi.com/blog/">Blog</a>
+	<span>&bull;</span>
 	<a href="http://geoloqi.org/API">API</a>
 </div>
