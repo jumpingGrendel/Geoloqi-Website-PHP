@@ -13,6 +13,7 @@ $(function(){
 			email: $("#profile_email").val(),
 			bio: $("#profile_bio").val(),
 			website: $("#profile_website").val(),
+			phone: $("#profile_phone").val(),
 			timezone: $("#profile_timezone").val()
 		}, function(data){
 			gb_update("Ok!");

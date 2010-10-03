@@ -12,6 +12,7 @@ class Site_Settings extends Site
 		$this->data['profile_email'] = $this->user->email;
 		$this->data['profile_name'] = $this->user->name;
 		$this->data['profile_bio'] = $this->user->bio;
+		$this->data['profile_phone'] = $this->user->phone;
 		$this->data['profile_website'] = $this->user->website;
 		$this->data['profile_timezone'] = $this->user->timezone;
 	}
@@ -22,6 +23,7 @@ class Site_Settings extends Site
 			'name' => post('name'),
 			'bio' => post('bio'),
 			'email' => post('email'),
+			'phone' => post('phone'),
 			'website' => post('website'),
 			'timezone' => post('timezone')
 		));

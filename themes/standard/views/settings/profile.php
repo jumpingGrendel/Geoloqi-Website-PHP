@@ -41,6 +41,17 @@ include($this->theme_file('settings/menu.php'));
 	</tr>
 	<tr>
 		<td class="left">
+			<div class="label">Phone</div>
+		</td>
+		<td class="right">
+			<input type="text" name="phone" id="profile_phone" value="<?=$profile_phone?>" class="field" />
+			<div class="description">
+				Enter your cell phone number to receive Geonotes by SMS.
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="left">
 			<div class="label">Bio</div>
 		</td>
 		<td class="right">
