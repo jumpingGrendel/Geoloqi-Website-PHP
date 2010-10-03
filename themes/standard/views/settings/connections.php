@@ -89,7 +89,7 @@ include($this->theme_file('settings/menu.php'));
 
 <div class="header">Geolocation Services</div>
 <table>
-	<tr class="coming-soon">
+	<tr>
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/instamapper-geoloqi.png" width="64" height="64" /></div>
 		</td>
@@ -100,8 +100,8 @@ include($this->theme_file('settings/menu.php'));
 			</div>
 		</td>
 		<td>
-			<input type="text" id="" value="" class="text" />
-			<input type="button" class="submit" value="Save" />
+			<input type="text" id="instamapper_key" value="<?=$instamapper_key?>" class="text" />
+			<input type="button" class="submit" value="Save" id="instamapper_save" />
 		</td>
 	</tr>
 	<!-- 

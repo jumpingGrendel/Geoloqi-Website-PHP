@@ -38,7 +38,17 @@ class Site_Settings extends Site
 	public function connections()
 	{
 		$response = $this->api->request('account/permanent_token');
+		$this->data['instamapper_key'] = $_SESSION['user_profile']->instamapper_key;
 		$this->data['permanent_token'] = $response->access_token;
+	}
+	
+	public function connections_ajax()
+	{
+		$response = $this->api->request('account/profile', array(
+			'instamapper_key' => post('instamapper_key')
+		));
+		$_SESSION['user_profile'] = $this->api->request('account/profile');
+		return $response;
 	}
 	
 	public function get_permanent_token_ajax()

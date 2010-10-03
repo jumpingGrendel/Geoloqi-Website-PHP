@@ -8,3 +8,20 @@ $(function(){
 		}, "json");
 	});
 });
+
+$(function(){
+	$("#instamapper_save").click(function(){
+		gb_show({
+			message: "Saving...",
+			width: 300,
+			height: 60
+		});
+		
+		$.post("/settings/connections.ajax", {
+			instamapper_key: $("#instamapper_key").val()
+		}, function(data){
+			gb_update("Ok!");
+			setTimeout(gb_hide, 1500);
+		});
+	});
+});
