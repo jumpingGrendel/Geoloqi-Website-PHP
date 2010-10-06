@@ -63,5 +63,11 @@ class Site_Settings extends Site
 		
 		
 	}
+
+	public function layer()
+	{
+		$this->data['user_layers'] = $this->api->request('layer/list', array());		
+	}
+	
 }
 ?>
