@@ -77,7 +77,18 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Time Zone</div>
 		</td>
 		<td class="right">
-			<input type="text" name="timezone" id="profile_timezone" value="<?=$profile_timezone?>" class="field" />
+			<select id="profile_timezone" name="timezone" class="field">
+			<?php
+			$tz = array('America/Puerto_Rico', 'America/New_York', 'America/Chicago', 'America/Boise', 'America/Phoenix', 'America/Los_Angeles', 'America/Juneau', 'UTC');
+			foreach ($tz as $z) {
+				if ($z == $profile_timezone) {
+					echo '<option value="'.$z.'" selected>'.$z.'</option>';
+				} else {
+					echo '<option value="'.$z.'">'.$z.'</option>';
+				}
+			}
+			?>
+			</select>
 			<div class="description">
 				Times will appear in the time zone you set here.
 			</div>

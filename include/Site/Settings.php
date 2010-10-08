@@ -33,8 +33,22 @@ class Site_Settings extends Site
 	
 	public function privacy()
 	{
-		
-		
+		$this->data['public_location'] = $_SESSION['user_privacy']->public_location;
+		$this->data['public_geonotes'] = $_SESSION['user_privacy']->public_geonotes;
+		$this->data['public_geonote_email'] = $_SESSION['user_privacy']->public_geonote_email;
+		$this->data['default_share_expiration'] = $_SESSION['user_privacy']->default_share_expiration;
+	}
+	
+	public function privacy_ajax()
+	{
+		$response = $this->api->request('account/privacy', array(
+			'public_location' => post('public_location'),
+			'public_geonotes' => post('public_geonotes'),
+			'public_geonote_email' => post('public_geonote_email'),
+			'default_share_expiration' => post('default_share_expiration')
+		));
+		$_SESSION['user_privacy'] = $this->api->request('account/privacy');
+		return $response;
 	}
 	
 	public function connections()
