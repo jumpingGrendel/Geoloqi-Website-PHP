@@ -1,0 +1,13 @@
+
+Example Apache virtual host file
+
+<VirtualHost *:80>
+	ServerName geoloqi.dev
+	
+	DocumentRoot "/var/www/geoloqi.com"
+	<Directory "/var/www/geoloqi.com">
+		Options +FollowSymLinks
+		AllowOverride all
+		allow from all
+	</Directory>
+</VirtualHost>
