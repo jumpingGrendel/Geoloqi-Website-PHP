@@ -164,6 +164,8 @@ class Site
 			$this->data['error_description'] = $response['error_description'];
 			if(DEBUG_MODE && $output)
 				$this->data['debug_output'] = $response['debug_output'];
+			else
+				$this->data['debug_output'] = '';
 			extract($this->data);
 			include($this->theme_file('layouts/header.php'));
 			include($this->theme_file('layouts/error.php'));

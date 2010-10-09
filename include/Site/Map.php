@@ -36,10 +36,14 @@ class Site_Map extends Site
 	
 	public function history_ajax()
 	{
-		$response = $this->api->request('location/history', array(
-			'after' => get('after'),
-			'sort' => 'desc'
-		));
+		$params = array();
+		$params['sort'] = 'desc';
+		
+		foreach(array('after', 'count', 'thinning') as $p)
+			if(get($p))
+				$params[$p] =  get($p);
+
+		$response = $this->api->request('location/history', $params);
 		return $response;
 	}
 	

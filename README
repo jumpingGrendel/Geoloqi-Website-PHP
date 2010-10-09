@@ -1,5 +1,6 @@
 
-Example Apache virtual host file
+Example Apache Config
+=====================
 
 <VirtualHost *:80>
 	ServerName geoloqi.dev
@@ -11,3 +12,4 @@ Example Apache virtual host file
 		allow from all
 	</Directory>
 </VirtualHost>
+

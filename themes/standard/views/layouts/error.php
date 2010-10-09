@@ -6,6 +6,8 @@ include($this->theme_file('layouts/site_header.php'));
 
 <div style="padding: 10px; color: #600; font-size: 12pt;"><?=$error_description?></div>
 
+<div style="padding: 10px; color: #600; font-size: 12pt;"><?=$debug_output?></div>
+
 <?php 
 include($this->theme_file('layouts/site_footer.php'));
 ?>

@@ -5,13 +5,14 @@ var lastPosition = false;
 var thePath = false;
 var marker = false; // The marker of the user's location
 var autoPan = true; // pan the map when a new point is received
+var polyline;		// The line showing the user's history trail
 
 $(function(){
 	var latlng = new google.maps.LatLng(45.51, -122.63);
 
 	// Set up the map
 	var myOptions = {
-		zoom: 13,
+		zoom: 14,
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false
@@ -25,17 +26,30 @@ $(function(){
 		autoPan = false;
 	});
 
-	setInterval(function(){
-		$.getJSON("/map/history.ajax", {
-			after: last.date
-		},
-		function(data){
-			for(var i in data){
-				var point = data[i];
-				receive_location(point);
-			}
-		});
-	}, 10000);
+	$.getJSON("/map/history.ajax", {
+		count: 100,
+		thinning: thinning
+	}, function(data){
+		autoPan = false;
+		for(var i in data){
+			// Turn on auto-pan on the last point so the map is centered
+			if(i == data.length - 1)
+				autoPan = true;
+			
+			receive_location(data[i]);
+		}
+		setInterval(function(){
+			$.getJSON("/map/history.ajax", {
+				after: last.date
+			},
+			function(data){
+				for(var i in data){
+					var point = data[i];
+					receive_location(point);
+				}
+			});
+		}, 10000);
+	});
 });
 
 function resize_map(){

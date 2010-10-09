@@ -6,7 +6,8 @@ include($this->theme_file('settings/menu.php'));
 <div class="settings-wrap"><div class="settings settings-columns">
 	<div class="round" style="float:left;"><ul><li><a href="#">Remove</a></li></ul></div><div class="round" style="float:right"><ul><li><a href="#">Add a New Layer</a></li></ul></div>
 </div></div>
-	<div style="clear:both;">
+<div style="clear:both;">
+
 	<table style="border-spacing:0px; width:100%;">
 		<tr style="text-align:left; background-color:#CCC;">
 			<th style="width:40px; text-align:center"><input type="checkbox" name="" value="" /></th>
@@ -66,7 +67,7 @@ include($this->theme_file('settings/menu.php'));
 			<th></th>
 			<th style="width:100px;"></th>
 		</tr>
-		<tr style="vertical-align:top">
+		<tr style="vertical-align:top;">
 			<td></td>
 			<td class="left">
 				<div class="label"><a href="#">Geonotes</a></div>

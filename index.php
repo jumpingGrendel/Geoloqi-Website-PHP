@@ -95,6 +95,26 @@ function post($key, $val=NULL)
 			$_POST[$key] = $val;
 	}
 }
+// Retrieves $key from $object without throwing a notice, and works whether $object is an array or object
+function k($object, $key, $notfound=NULL)
+{
+	if(is_object($object))
+	{
+		if(property_exists($object, $key))
+			return $object->{$key};
+		else
+			return $notfound;
+	}
+	elseif(is_array($object))
+	{
+		if(array_key_exists($key, $object))
+			return $object[$key];
+		else
+			return $notfound;
+	}
+	else
+		return $notfound;
+}
 function request($key)
 {
 	if(array_key_exists($key, $_REQUEST))

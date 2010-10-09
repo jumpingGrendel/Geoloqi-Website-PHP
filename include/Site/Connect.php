@@ -54,8 +54,8 @@ class Site_Connect extends Site
 					
 					$this->data['error'] = FALSE;
 					
-					// TODO: Redirect to the map if it's not a new account
-					$this->redirect('/settings/connections');
+					// TODO: What to do for brand new accounts?
+					$this->redirect('/settings/profile');
 				}
 				$this->data['api_response'] = $response;
 			}
