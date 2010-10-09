@@ -209,7 +209,7 @@ img {
 	width: 150px;
 	padding-right: 20px;
 }
-.settings table input.field, .settings table textarea.field {
+.settings table input.field, .settings table textarea.field, .settings table select.field {
 	width: 250px;
 	border: 2px #999 solid;
 	padding: 3px;

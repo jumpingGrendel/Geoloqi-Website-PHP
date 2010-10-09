@@ -26,7 +26,7 @@ include($this->theme_file('settings/menu.php'));
 			</td>
 			<td class="right">
 				<div class="description">
-					<select name="user_layer[<?=$layer->id?>]">
+					<select name="user_layer[<?=$layer->id?>]" class="field">
 						<option value="0" <?=($layer->public==0)?'selected="selected"':''?>>Private</option>
 						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->users->id)?'editable':'non editable' ?>)</option>
 					</select>

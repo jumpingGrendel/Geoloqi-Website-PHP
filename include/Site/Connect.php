@@ -51,6 +51,8 @@ class Site_Connect extends Site
 					
 					$_SESSION['user_profile'] = $profile;
 					$_SESSION['username'] = $profile->username;
+					$privacy = $this->api->request('account/privacy');
+					$_SESSION['user_privacy'] = $privacy;
 					
 					$this->data['error'] = FALSE;
 					
