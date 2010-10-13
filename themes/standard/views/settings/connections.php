@@ -165,7 +165,7 @@ include($this->theme_file('settings/menu.php'));
 <?php 
 				if($permanent_token)
 				{
-					echo '<input type="text" class="text" id="permanent_access_token" value="' . $permanent_token . '" style="width: 400px;" />';	
+					echo '<input type="text" class="text" id="permanent_access_token" value="' . $permanent_token . '" style="width: 500px;" />';	
 				}
 				else
 				{
