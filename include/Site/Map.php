@@ -5,19 +5,27 @@ class Site_Map extends Site
 	
 	public function index($username)
 	{
-		// Right now, users can only see their own profile. Redirect if they're looking at someone else's page.
-		if($_SESSION['username'] != $username)
-			$this->redirect('/' . $_SESSION['username']);
-				
-		$profile = $this->api->request('account/profile');
-		$last = $this->api->request('location/last');
-		
+		// If the user is logged in, make the call with their access token 
+		if(array_key_exists('username', $_SESSION))
+		{
+			$profile = $this->api->request('account/profile?username=' . $username);
+			$last = $this->api->request('location/last?username=' . $username);
+		}
+		else
+		{
+			// Attempt to make the API call with no user tokens. This will only succeed if 
+			// the requested user's account is set to public
+			$profile = $this->api->request('account/profile?username=' . $username, FALSE, TRUE);
+			$last = $this->api->request('location/last?username=' . $username, FALSE, TRUE);
+		}
+
 		$this->data['last'] = $last;
 		
 		$this->data['name'] = $profile->name;
 		$this->data['username'] = $username;
 		$this->data['bio'] = $profile->bio;
 		$this->data['website'] = $profile->website;
+		$this->data['self_map'] = $username == $_SESSION['username']; // whether the user is looking at their own map
 		
 		// TODO: Configure this based on the user's privacy settings
 		$this->data['enable_geonotes'] = TRUE;
@@ -47,5 +55,10 @@ class Site_Map extends Site
 		return $response;
 	}
 	
+	public function last_ajax()
+	{
+		$response = $this->api->request('location/last?username=' . get('username'), FALSE, !array_key_exists('username', $_SESSION));
+		return $response;
+	}
 }
 ?>

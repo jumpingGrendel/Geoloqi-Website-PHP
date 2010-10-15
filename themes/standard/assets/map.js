@@ -26,30 +26,39 @@ $(function(){
 		autoPan = false;
 	});
 
-	$.getJSON("/map/history.ajax", {
-		count: 100,
-		thinning: thinning
-	}, function(data){
-		autoPan = false;
-		for(var i in data){
-			// Turn on auto-pan on the last point so the map is centered
-			if(i == data.length - 1)
-				autoPan = true;
-			
-			receive_location(data[i]);
-		}
-		setInterval(function(){
-			$.getJSON("/map/history.ajax", {
-				after: last.date
-			},
-			function(data){
-				for(var i in data){
-					var point = data[i];
-					receive_location(point);
-				}
-			});
-		}, 10000);
-	});
+	if(self_map){
+		$.getJSON("/map/history.ajax", {
+			count: 100,
+			thinning: thinning
+		}, function(data){
+			autoPan = false;
+			for(var i in data){
+				// Turn on auto-pan on the last point so the map is centered
+				if(i == data.length - 1)
+					autoPan = true;
+				
+				receive_location(data[i]);
+			}
+			setInterval(function(){
+				$.getJSON("/map/history.ajax", {
+					after: last.date
+				},
+				function(data){
+					for(var i in data){
+						var point = data[i];
+						receive_location(point);
+					}
+				});
+			}, 10000);
+		});
+	}else{
+		$.getJSON("/map/last.ajax",{
+			username: username
+		}, function(data){
+			autoPan = true;
+			receive_location(data);
+		});
+	}
 });
 
 function resize_map(){

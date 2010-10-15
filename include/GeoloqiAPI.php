@@ -18,7 +18,7 @@ class GeoloqiAPI
 		die();
 	} 
 	
-	public function request($method, $post=FALSE)
+	public function request($method, $post=FALSE, $doClientAuth=FALSE)
 	{
 		ob_start();
 		echo '<pre>';
@@ -30,7 +30,7 @@ class GeoloqiAPI
 		// TODO: Change this timezone to the logged-in user's timezone
 		$httpHeader[] = 'Timezone: ' . date('c') . ';;America/Los_Angeles';
 		
-		if(substr($method, 0, 5) == 'oauth' || substr($method, 0, 4) == 'user')
+		if(substr($method, 0, 5) == 'oauth' || substr($method, 0, 4) == 'user' || $doClientAuth)
 		{
 			$client = array('client_id' => $this->_clientID, 'client_secret' => $this->_clientSecret);
 			curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);

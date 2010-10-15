@@ -25,15 +25,11 @@ if($last)
 			echo "\t" . 'thinning = ' . ($last->raw->rate_limit > 30 ? '0' : '3') . ";\n";	
 	}
 }
+
+echo 'var self_map = ' . ($self_map ? 1 : 0) . ";\n";
+echo 'var username = "' . $username . '";' . "\n";
+
 ?>
-/*
-$(function(){
-	if(last){
-		// This is not needed because map.js loads up the last 100 points now
-		receive_location(last);
-	}
-});
-*/
 </script>
 <table cellspacing="0" cellpadding="0" id="map-page">
 	<tr>
