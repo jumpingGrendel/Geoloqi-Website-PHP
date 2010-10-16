@@ -5,6 +5,16 @@ class Site_Map extends Site
 	
 	public function index($username)
 	{
+		// Alias 'me' to the current logged-in user
+		if($username == 'me')
+		{
+			if(session('username'))
+				header('Location: /' . session('username'));
+			else
+				header('Location: /');
+			die();
+		}
+		
 		// If the user is logged in, make the call with their access token 
 		if(array_key_exists('username', $_SESSION))
 		{
@@ -21,7 +31,7 @@ class Site_Map extends Site
 
 		// If there was some error retrieving the user's profile or location (such as non-public location or invalid username), throw an error and stop
 		if(k($profile, 'error') == 'user_not_found')
-			$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user ' . $username . ' doesn\'t exist!');
+			$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user "' . $username . '" doesn\'t exist!');
 		elseif(k($profile, 'error') != NULL)
 			$this->error(HTTP_NOT_FOUND, $profile->error, $profile->error_description);
 		

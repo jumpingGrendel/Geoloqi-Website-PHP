@@ -23,8 +23,22 @@ include($this->theme_file('settings/menu.php'));
 				if($_SESSION['user_profile']->twitter == '')
 					echo '<input type="button" class="submit" value="Connect" />';
 				else
-					echo 'Connected: <a href="http://twitter.com/' . $_SESSION['user_profile']->twitter . '">' . $_SESSION['user_profile']->twitter . '</a>';
+					echo 'Connected: <div class="connection-username"><a href="http://twitter.com/' . $_SESSION['user_profile']->twitter . '">@' . $_SESSION['user_profile']->twitter . '</a></div>';
 			?>
+		</td>
+	</tr>
+	<tr class="coming-soon">
+		<td>
+			<div class="app_icon"><img src="<?=$image_root?>apps/foursquare-geoloqi.png" width="64" height="64" /></div>
+		</td>
+		<td>
+			<div class="label">Foursquare</div>
+			<div class="description">
+				Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places.
+			</div>
+		</td>
+		<td>
+			<input type="button" class="submit" value="Connect" />
 		</td>
 	</tr>
 	<!-- 
@@ -36,20 +50,6 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Facebook</div>
 			<div class="description">
 				Connect your Facebook account to log in via Twitter, update your Geoloqi location via Facebook, or share your location via Facebook.
-			</div>
-		</td>
-		<td>
-			<input type="button" class="submit" value="Connect" />
-		</td>
-	</tr>
-	<tr class="coming-soon">
-		<td>
-			<div class="app_icon"><img src="<?=$image_root?>apps/foursquare-geoloqi.png" width="64" height="64" /></div>
-		</td>
-		<td>
-			<div class="label">Foursquare</div>
-			<div class="description">
-				Connect your Twitter account to log in via Twitter, update your Geoloqi location via Twitter, or share your location via Twitter.
 			</div>
 		</td>
 		<td>
@@ -96,7 +96,7 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<div class="label">Instamapper API Key</div>
 			<div class="description">
-				You can connect a Boost Mobile phone or any device that runs Instamapper to Geoloqi.com by entering your Instamapper key.
+				You can connect a Boost Mobile phone or any device that runs Instamapper to Geoloqi.com by entering your Instamapper key. <a href="http://geoloqi.com/blog/2010/08/how-do-i-get-my-instamapper-device-and-api-key/" target="_blank">How?</a>
 			</div>
 		</td>
 		<td>

@@ -9,6 +9,12 @@ define('GEOLOQI_API_BASEURL', 'http://api.geoloqi.dev/1/');
 define('GEOLOQI_API_BASEURL_SECURE', 'https://api.geoloqi.dev/1/');
 
 /**
+ * Features in development
+ */
+define('GEOLOQI_ENABLE_LAYERS', FALSE);
+define('GEOLOQI_ENABLE_SHARED', FALSE);
+
+/**
  * Twitter client information
  * Go to http://dev.twitter.com to set up your application
  */
