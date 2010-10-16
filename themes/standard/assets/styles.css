@@ -76,6 +76,7 @@ img {
 #sidebar {
 	width: 240px;
 	background-color: #ccc;
+	background: url(images/map-pane-sidebar-bkg.png);
 	color: black;
 	border-right: 3px #444 solid;
 }
@@ -102,13 +103,38 @@ img {
 
 .sidebar-panel {
 	margin: 10px;
-	padding: 5px;
+	padding: 4px;
 	background-color: #fff;
+	border:2px solid #fff;
 }
+.sidebar-panel.active {
+	background-color: #c8e6f1;
+	border:2px solid #3E829B;
+}
+
+.sidebar-panel .panel-title {
+	font-weight: bold;
+	background: url(images/tiny-arrows-blue.png) left bottom no-repeat;
+	padding-left: 19px;
+}
+.sidebar-panel .panel-title.active {
+	background: url(images/tiny-arrows-blue.png) left top no-repeat;
+}
+
+.sidebar-panel .panel-title.hover {
+	cursor: pointer;
+}
+
 .sidebar-panel .small {
 	font-size: 0.8em;
 	color: #666;
 }
+
+.sidebar-panel th {
+	text-align: left;
+}
+
+
 #profile-info .line {
 	margin-bottom: 4px;
 }
@@ -127,10 +153,6 @@ img {
 	font-style: italic;
 }
 
-.sidebar-geonote.active {
-	background-color: #c8e6f1;
-	border:3px solid #3E829B;
-}
 #geonote_success {
 	text-align: center;
 	font-weight: bold;

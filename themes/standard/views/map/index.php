@@ -46,11 +46,11 @@ echo 'var username = "' . $username . '";' . "\n";
 		if($enable_geonotes)
 		{
 ?>
-			<div class="round sidebar-panel sidebar-geonote">
-				<div style="margin-bottom: 10px;"><input type="button" value="Leave a geonote!" onclick="start_geonotes()" /></div>
-				<div class="small">Leave a short note that will be sent to <?=$name?> at a specific location.</div>
-				<div id="geonote_info">
-					<div id="geonote_prompt" style="display: none;">
+			<div class="round sidebar-panel" id="sidebar_geonote">
+				<div class="panel-title">Leave a Geonote</div>
+				<div class="panel-content" style="display: none;">
+					<div id="geonote_prompt" style="margin-top: 10px;">
+					<div class="small">Leave a short note that will be sent to <?=$name?> at a specific location.</div>
 						<textarea id="geonote_text" maxlen="140"></textarea>
 						<input type="button" id="geonote_create" value="Create" />
 						<div style="font-size: 9pt;"><table cellpadding="0" cellspacing="0">
@@ -77,63 +77,63 @@ echo 'var username = "' . $username . '";' . "\n";
 		}
 ?>
 
-		<!--
-		<div class="round sidebar-panel">
-			<div id="loading"><div style="height: 16px; text-align: right; padding: 10px;"><img src="loading.gif" height="16" width="16" style="display: none;" /></div></div>
-			<table class="params">
-				<tr>
-					<td class="header" colspan="2">Geoloqi API <span class="help"><a href="http://geoloqi.org/API/location/history" target="_blank">help</a></span></td>
-				</tr>
-				<tr>
-					<th>Points</th>
-					<td><input id="param_count" type="text" size="10" value="200" /></td>
-				</tr>
-				<tr>
-					<th>Accuracy</th>
-					<td><input id="param_accuracy" type="text" size="10" value="300" /></td>
-				</tr>
-				<tr>
-					<th>From</th>
-					<td><input id="param_from" type="text" size="10" value="<?=date('Y-m-d', strtotime('-30 days'))?>" /></td>
-				</tr>
-				<tr>
-					<th>To</th>
-					<td><input id="param_to" type="text" size="10" value="<?=date('Y-m-d', strtotime('+1 day'))?>" /></td>
-				</tr>
-				<tr>
-					<th>Time From</th>
-					<td><input id="param_time_from" type="text" size="10" value="" /></td>
-				</tr>
-				<tr>
-					<th>Time To</th>
-					<td><input id="param_time_to" type="text" size="10" value="" /></td>
-				</tr>
-				<tr>
-					<th>Thinning</th>
-					<td><input id="param_thinning" type="text" size="10" value="" /></td>
-				</tr>
-			</table>
+		<div class="round sidebar-panel" id="sidebar_mapoptions">
+			<div class="panel-title">Map Options</div>
+			<div class="panel-content" style="display: none;">
+				<div id="loading"><div style="height: 16px; text-align: right; padding: 10px;"><img src="loading.gif" height="16" width="16" style="display: none;" /></div></div>
+				<table class="params">
+					<tr>
+						<td class="header" colspan="2">Geoloqi API <span class="help"><a href="http://geoloqi.org/API/location/history" target="_blank">help</a></span></td>
+					</tr>
+					<tr>
+						<th>Points</th>
+						<td><input id="param_count" type="text" size="10" value="200" /></td>
+					</tr>
+					<tr>
+						<th>Accuracy</th>
+						<td><input id="param_accuracy" type="text" size="10" value="300" /></td>
+					</tr>
+					<tr>
+						<th>From</th>
+						<td><input id="param_from" type="text" size="10" value="<?=date('Y-m-d', strtotime('-30 days'))?>" /></td>
+					</tr>
+					<tr>
+						<th>To</th>
+						<td><input id="param_to" type="text" size="10" value="<?=date('Y-m-d', strtotime('+1 day'))?>" /></td>
+					</tr>
+					<tr>
+						<th>Time From</th>
+						<td><input id="param_time_from" type="text" size="10" value="" /></td>
+					</tr>
+					<tr>
+						<th>Time To</th>
+						<td><input id="param_time_to" type="text" size="10" value="" /></td>
+					</tr>
+					<tr>
+						<th>Thinning</th>
+						<td><input id="param_thinning" type="text" size="10" value="" /></td>
+					</tr>
+				</table>
+	
+				<table class="params">
+					<tr>
+						<td class="header" colspan="2">Google Maps API <span class="help"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html" target="_blank">help</a></span></td>
+					</tr>
+					<tr>
+						<th>Stroke Weight</th>
+						<td><input id="stroke_weight" type="text" size="5" value="3" /></td>
+					</tr>
+					<tr>
+						<th>Stroke Opacity</th>
+						<td><input id="stroke_opacity" type="text" size="5" value="0.7" /></td>
+					</tr>
+					<tr>
+						<th>Stroke Color</th>
+						<td><input id="stroke_color" type="text" size="8" value="#000000" /></td>
+					</tr>
+				</table>
+			</div>
 		</div>
-		<div class="round sidebar-panel">
-			<table class="params">
-				<tr>
-					<td class="header" colspan="2">Google Maps API <span class="help"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html" target="_blank">help</a></span></td>
-				</tr>
-				<tr>
-					<th>Stroke Weight</th>
-					<td><input id="stroke_weight" type="text" size="5" value="3" /></td>
-				</tr>
-				<tr>
-					<th>Stroke Opacity</th>
-					<td><input id="stroke_opacity" type="text" size="5" value="0.7" /></td>
-				</tr>
-				<tr>
-					<th>Stroke Color</th>
-					<td><input id="stroke_color" type="text" size="8" value="#000000" /></td>
-				</tr>
-			</table>
-		</div>
-		-->
 
 		</td>
 		<td id="map-container">

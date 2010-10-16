@@ -2,15 +2,8 @@
 var geonote_marker;
 var geonote_circle;
 
-	function start_geonotes()
+	function sidebar_geonote_start()
 	{
-		if($(".sidebar-geonote").hasClass("active")){
-			close_geonote();
-			return;
-		}
-		
-		$(".sidebar-geonote").addClass("active");
-
 		var geonote_image = new google.maps.MarkerImage('/themes/standard/assets/images/chat.png',
 			new google.maps.Size(38, 33),
 			new google.maps.Point(0,0),
@@ -84,7 +77,7 @@ var geonote_circle;
 					alert("There was an error!");
 				}else{
 					$("#geonote_success").show();
-					close_geonote();
+					$("#sidebar_geonote").click();
 				}
 			}, "json");
 		});
@@ -94,9 +87,7 @@ var geonote_circle;
 		map.setZoom(15);
 	}
 	
-	function close_geonote(){
-		$("#geonote_prompt").hide();
-		$(".sidebar-geonote").removeClass("active");
+	function sidebar_geonote_end(){
 		geonote_circle.setMap();
 		geonote_marker.setMap();
 		$("#geonote_text").val("");

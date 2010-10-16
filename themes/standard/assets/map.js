@@ -59,6 +59,34 @@ $(function(){
 			receive_location(data);
 		});
 	}
+
+	/**
+	 * Collapsable sidebar panels
+	 */
+	$(function(){
+		$(".sidebar-panel .panel-title").hover(function(){
+			$(this).addClass("hover");
+		}, function(){
+			$(this).removeClass("hover");
+		});
+		$(".sidebar-panel .panel-title").click(function(){
+			if($(this).parent().hasClass("active")){
+				$(this).parent().removeClass("active");
+				$(this).removeClass("active");
+				$(this).siblings(".panel-content").hide();
+				var f = $(this).parent().attr("id") + "_end";
+				eval(f + "();");
+			}else{
+				$(this).parent().addClass("active");
+				$(this).addClass("active");
+				$(this).siblings(".panel-content").show();
+				var f = $(this).parent().attr("id") + "_start";
+				eval(f + "();");
+			}
+		});
+	});
+
+	
 });
 
 function resize_map(){
@@ -96,3 +124,14 @@ function receive_location(l){
 
 	last = l;
 }
+
+function sidebar_mapoptions_start(){
+	
+}
+
+function sidebar_mapoptions_end(){
+	
+}
+
+
+
