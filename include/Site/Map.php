@@ -19,16 +19,26 @@ class Site_Map extends Site
 			$last = $this->api->request('location/last?username=' . $username, FALSE, TRUE);
 		}
 
+		// If there was some error retrieving the user's profile or location (such as non-public location or invalid username), throw an error and stop
+		if(k($profile, 'error') == 'user_not_found')
+			$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user ' . $username . ' doesn\'t exist!');
+		elseif(k($profile, 'error') != NULL)
+			$this->error(HTTP_NOT_FOUND, $profile->error, $profile->error_description);
+		
+		if(k($last, 'error') == 'forbidden')
+			$this->error(HTTP_FORBIDDEN, 'Private Profile', 'Sorry, this user is not sharing their location publicly.');
+		elseif(k($last, 'error') != NULL)
+			$this->error(HTTP_NOT_FOUND, $last->error, $last->error_description);
+			
 		$this->data['last'] = $last;
 		
 		$this->data['name'] = $profile->name;
 		$this->data['username'] = $username;
 		$this->data['bio'] = $profile->bio;
 		$this->data['website'] = $profile->website;
-		$this->data['self_map'] = $username == $_SESSION['username']; // whether the user is looking at their own map
+		$this->data['self_map'] = $username == session('username'); // whether the user is looking at their own map
 		
-		// TODO: Configure this based on the user's privacy settings
-		$this->data['enable_geonotes'] = TRUE;
+		$this->data['enable_geonotes'] = ($this->data['self_map'] || $profile->public_geonotes);
 	}
 
 	public function create_geonote_ajax()
@@ -57,7 +67,7 @@ class Site_Map extends Site
 	
 	public function last_ajax()
 	{
-		$response = $this->api->request('location/last?username=' . get('username'), FALSE, !array_key_exists('username', $_SESSION));
+		$response = $this->api->request('location/last?username=' . get('username'), FALSE, TRUE); //!array_key_exists('username', $_SESSION));
 		return $response;
 	}
 }

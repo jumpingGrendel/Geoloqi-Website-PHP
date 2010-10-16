@@ -38,8 +38,9 @@ echo 'var username = "' . $username . '";' . "\n";
 			
 			<div id="profile-info" class="round sidebar-panel">
 				<div class="name"><?=$name?></div>
+				<div class="username"><?=$username?></div>
 				<div class="line website"><a href="<?=$website?>"><?=str_replace('http://', '', $website)?></a></div>
-				<div class="line bio"><span class="label">Bio</span> <?=$bio?></div>
+				<div class="line bio"><?=$bio?></div>
 			</div>
 <?php 
 		if($enable_geonotes)

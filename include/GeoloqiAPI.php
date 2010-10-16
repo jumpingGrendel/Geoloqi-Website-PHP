@@ -18,6 +18,11 @@ class GeoloqiAPI
 		die();
 	} 
 	
+	/**
+	 * Make a request to the Geoloqi API. If $doClientAuth is TRUE, then the request is made with only
+	 * the client credentials and no access token. This can only be used to access API methods that don't
+	 * require user-based access.
+	 */
 	public function request($method, $post=FALSE, $doClientAuth=FALSE)
 	{
 		ob_start();

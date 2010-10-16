@@ -110,6 +110,18 @@ class Site
 		}
 	}
 	
+	/**
+	 * The user just logged in, redirect them to the appropriate place depending on the state of their account
+	 */
+	protected function redirect_after_login()
+	{
+		if($_SESSION['user_profile']->phone == '')
+			header('Location: /settings/profile');
+		else
+			header('Location: /' . $_SESSION['username']);
+		die();
+	}
+	
 	protected function theme_file($filename)
 	{
 		return $this->theme . '/views/' . $filename;
@@ -171,6 +183,8 @@ class Site
 			include($this->theme_file('layouts/error.php'));
 			include($this->theme_file('layouts/footer.php'));
 		}
+		
+		die();
 	}
 
 	public function redirect($url)

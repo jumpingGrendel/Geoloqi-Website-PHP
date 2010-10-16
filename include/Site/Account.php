@@ -31,7 +31,7 @@ class Site_Account extends Site
 			}
 			$this->data['api_response'] = $response;
 			
-			$this->redirect('/' . $_SESSION['username']);
+			$this->redirect_after_login();
 		}
 	}
 	

@@ -56,8 +56,7 @@ class Site_Connect extends Site
 					
 					$this->data['error'] = FALSE;
 					
-					// TODO: What to do for brand new accounts?
-					$this->redirect('/settings/profile');
+					$this->redirect_after_login();
 				}
 				$this->data['api_response'] = $response;
 			}
@@ -68,7 +67,6 @@ class Site_Connect extends Site
 			$auth_url = $twitter->getAuthenticateUrl(null, array('oauth_callback' => 'http://' . $_SERVER['SERVER_NAME'] . '/connect/twitter'));
 			header('Location: ' . $auth_url);
 			die();
-			echo '<a href="' . $auth_url . '">twitter</a>';
 		}
 	}	
 }

@@ -44,8 +44,8 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Phone</div>
 		</td>
 		<td class="right">
-			<input type="text" name="phone" id="profile_phone" value="<?=$profile_phone?>" class="field" />
-			<div class="description">
+			<input type="text" name="phone" id="profile_phone" value="<?=$profile_phone?>" class="field<?=($profile_phone ? '' : ' highlight')?>" />
+			<div class="description<?=($profile_phone ? '' : ' highlight')?>">
 				Enter your cell phone number to receive Geonotes by SMS.
 			</div>
 		</td>

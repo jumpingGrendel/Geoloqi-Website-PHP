@@ -17,7 +17,14 @@ $(function(){
 			timezone: $("#profile_timezone").val()
 		}, function(data){
 			gb_update("Ok!");
-			setTimeout(gb_hide, 1500);
+			if($("#profile_phone").val() != ""){
+				$("#profile_phone").removeClass("highlight");
+				$("#profile_phone").siblings(".description").removeClass("highlight");
+			}else{
+				$("#profile_phone").addClass("highlight");
+				$("#profile_phone").siblings(".description").addClass("highlight");
+			}
+			setTimeout(gb_hide, 1200);
 		});
 	});
 });

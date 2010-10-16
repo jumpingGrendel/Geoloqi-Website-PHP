@@ -28,7 +28,7 @@ include($this->theme_file('settings/menu.php'));
 				<div class="description">
 					<select name="user_layer[<?=$layer->id?>]" class="field">
 						<option value="0" <?=($layer->public==0)?'selected="selected"':''?>>Private</option>
-						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->users->id)?'editable':'non editable' ?>)</option>
+						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->user->user_id)?'editable':'non editable' ?>)</option>
 					</select>
 					<input type="submit" value="Save" class="submit" id="btn_save" />
 				</div>

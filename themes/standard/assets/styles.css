@@ -120,6 +120,12 @@ img {
 	font-weight: bold;
 	color: #333;
 }
+#profile-info .username {
+	font-weight: bold;
+}
+#profile-info .bio {
+	font-style: italic;
+}
 
 .sidebar-geonote.active {
 	background-color: #c8e6f1;
@@ -216,6 +222,14 @@ img {
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
+.settings table input.highlight {
+	border: 2px #ffbd0c solid;
+	background-color: #ffc;
+}
+.settings table .description.highlight {
+	color: #f17700;
+}
+
 .settings table .submit {
 	border: 3px #666 solid;
 	font-size: 18px;
