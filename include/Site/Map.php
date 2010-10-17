@@ -74,12 +74,12 @@ class Site_Map extends Site
 
 	public function create_geonote_ajax()
 	{
-		$response = $this->api->request('geonote/create', array(
+		$response = $this->api->request('geonote/create?username=' . get('username'), array(
 			'latitude' => post('lat'),
 			'longitude' => post('lng'),
 			'radius' => post('radius'),
 			'text' => post('text')
-		));
+		), !array_key_exists('username', $_SESSION));
 		return $response;
 	}
 	
@@ -106,10 +106,11 @@ class Site_Map extends Site
 	
 	public function share_link_ajax()
 	{
-		return $this->api->request('link/create', array(
-			'date_from' => time(),
-			'date_to' => strtotime('+' . post('share_expiration') . ' minutes')
-		));
+		$data['date_from'] = time();
+		if(post('share_expiration'))
+			$data['date_to'] = strtotime('+' . post('share_expiration') . ' minutes');
+
+		return $this->api->request('link/create', $data);
 	}
 }
 ?>

@@ -67,7 +67,7 @@ var geonote_circle;
 		set_radius_checkboxes();
 
 		$("#geonote_create").unbind("click").bind("click", function(){
-			$.post("/map/create_geonote.ajax", {
+			$.post("/map/create_geonote.ajax?username=" + username, {
 				lat: geonote_marker.getPosition().lat(),
 				lng: geonote_marker.getPosition().lng(),
 				radius: geonote_circle.getRadius(),
