@@ -84,8 +84,12 @@ class Site_Settings extends Site
 	
 	public function share()
 	{
-		
-		
+		//$this->data['links'] = $this->api->request('');
+		$this->data['links'] = array(
+		array(array('aaron@parecki.com', '+1 (503) 555-5555'), '08/05/10', 15),
+		array(array('aaron@parecki.com', '+1 (503) 555-5555'), '08/05/10', 15),
+		array(array('aaron@parecki.com', '+1 (503) 555-5555'), '08/05/10', 15),
+		array(array('aaron@parecki.com', '+1 (503) 555-5555'), '08/05/10', 15));
 	}
 
 	public function layer()
