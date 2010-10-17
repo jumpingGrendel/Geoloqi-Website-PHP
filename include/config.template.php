@@ -12,7 +12,9 @@ define('GEOLOQI_API_BASEURL_SECURE', 'https://api.geoloqi.dev/1/');
  * Features in development
  */
 define('GEOLOQI_ENABLE_LAYERS', FALSE);
-define('GEOLOQI_ENABLE_SHARED', FALSE);
+define('GEOLOQI_ENABLE_SHARED_LIST', FALSE);
+define('GEOLOQI_ENABLE_SHARED_SEND', FALSE);
+define('GEOLOQI_ENABLE_MAPOPTIONS', FALSE);
 
 /**
  * Twitter client information

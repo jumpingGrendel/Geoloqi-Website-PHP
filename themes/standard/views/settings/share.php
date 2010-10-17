@@ -4,6 +4,10 @@ include($this->theme_file('settings/menu.php'));
 ?>
 
 <div class="settings-wrap"><div class="settings">
+<?php 
+if(GEOLOQI_ENABLE_SHARED_LIST)
+{
+?>
 	<div>
 		<table style="border-spacing: 0px; margin: 0; width: 100%">
 			<thead>
@@ -36,6 +40,15 @@ include($this->theme_file('settings/menu.php'));
 			</tbody>
 		</table>
 	</div>
+<?php 
+}
+else
+{
+?>
+	<div style="padding:20px;">Coming soon...</div>
+<?php 
+}
+?>
 </div></div>
 
 <?php 

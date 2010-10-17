@@ -101,7 +101,7 @@ $(function(){
 			}
 			$("#sidebar_sharelink .panel-title").click();
 			gb_show({
-				message: 'Link sent!<br /><input type="text" value="' + data.shortlink + '" /><br /><input type="button" value="Ok!" onclick="gb_hide()" />',
+				message: 'Link created!<br /><input type="text" value="' + data.shortlink + '" /><br /><input type="button" value="Ok!" onclick="gb_hide()" />',
 				height: 120
 			});
 		}, "json");
@@ -115,9 +115,12 @@ function resize_map(){
 	google.maps.event.trigger(map, 'resize');
 }
 
+var location_error = false;
+
 function receive_location(l){
 	if(typeof l.error != "undefined"){
-		if(GB_OPEN == false){
+		if(location_error == false){  // if there isn't already a location error on the screen
+			location_error = true;
 			var error_message;
 			if(l.error == "invalid_token"){
 				gb_show({
@@ -132,8 +135,9 @@ function receive_location(l){
 		}
 		return false;
 	}else{
-		if(GB_OPEN == true){
+		if(location_error == true){  // there was an error but there isn't anymore
 			gb_hide();
+			location_error = false;
 		}
 	}
 	

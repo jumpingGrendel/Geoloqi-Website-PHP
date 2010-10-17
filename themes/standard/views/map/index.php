@@ -80,6 +80,8 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 		// If the user is looking at their own map, give them more options
 		if($self_map)
 		{
+			if(GEOLOQI_ENABLE_MAPOPTIONS)
+			{
 ?>
 		<div class="round sidebar-panel" id="sidebar_mapoptions">
 			<div class="panel-title">Map Options</div>
@@ -138,12 +140,18 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 				</table>
 			</div>
 		</div><!-- map options -->
-		
+<?php 
+			}
+?>
 		<div class="round sidebar-panel" id="sidebar_sharelink">
 			<div class="panel-title">Share Link</div>
 			<div class="panel-content" style="display: none;">
 
-				<table>
+				<table style="width: 200px;">
+<?php 
+				if(GEOLOQI_ENABLE_SHARED_SEND)
+				{
+?>
 				<tr>
 					<td colspan="2">
 						Share with:<br />
@@ -151,6 +159,9 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 						<textarea id="share_with"></textarea>
 					</td>
 				</tr>
+<?php 
+				}
+?>
 				<tr>
 					<td>
 						Expire in:<br />
@@ -168,7 +179,7 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 						</select>
 					</td>
 					<td style="text-align: right; vertical-align: bottom;">
-						<input type="button" value="Send" class="submit" id="share_btn" />
+						<input type="button" value="Create" class="submit" id="share_btn" />
 					</td>
 				</tr>
 				</table>
