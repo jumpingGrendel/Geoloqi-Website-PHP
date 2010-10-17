@@ -25,11 +25,20 @@ $(function(){
 	google.maps.event.addListener(map, 'dragstart', function(){
 		autoPan = false;
 	});
+	
+	$(window).resize(resize_map);
 
 	if(self_map){
+		get_history();
+	}else{
+		get_single_point();
+	}
+
+	function get_history(){
 		$.getJSON("/map/history.ajax", {
 			count: 100,
-			thinning: thinning
+			thinning: thinning,
+			after: (last ? last.date : 0)
 		}, function(data){
 			autoPan = false;
 			for(var i in data){
@@ -39,29 +48,23 @@ $(function(){
 				
 				receive_location(data[i]);
 			}
-			setInterval(function(){
-				$.getJSON("/map/history.ajax", {
-					after: last.date
-				},
-				function(data){
-					for(var i in data){
-						var point = data[i];
-						receive_location(point);
-					}
-				});
-			}, 10000);
+			setTimeout(get_history, 10000);
 		});
-	}else{
+	}
+	
+	function get_single_point(){
 		$.getJSON("/map/last.ajax",{
-			username: username
+			username: username,
+			token: share_token
 		}, function(data){
 			autoPan = true;
 			receive_location(data);
+			setTimeout(get_single_point, 10000);
 		});
 	}
-
+	
 	/**
-	 * Collapsable sidebar panels
+	 * Collapsible sidebar panels
 	 */
 	$(function(){
 		$(".sidebar-panel .panel-title").hover(function(){
@@ -96,6 +99,27 @@ function resize_map(){
 }
 
 function receive_location(l){
+	if(typeof l.error != "undefined"){
+		if(GB_OPEN == false){
+			var error_message;
+			if(l.error == "invalid_token"){
+				gb_show({
+					height: 60,
+					message: "The shared link has expired!"
+				});
+			}else{
+				gb_show({
+					message: "There was an error!<br /><br />" + l.error + ": " + l.error_description
+				});
+			}
+		}
+		return false;
+	}else{
+		if(GB_OPEN == true){
+			gb_hide();
+		}
+	}
+	
 	newPosition = new google.maps.LatLng(l.location.position.latitude, l.location.position.longitude);
 	lastPosition = newPosition;
 	
@@ -134,4 +158,11 @@ function sidebar_mapoptions_end(){
 }
 
 
+function sidebar_sharelink_start(){
+	
+}
+
+function sidebar_sharelink_end(){
+	
+}
 

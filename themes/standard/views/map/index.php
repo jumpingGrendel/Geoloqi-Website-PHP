@@ -28,6 +28,7 @@ if($last)
 
 echo 'var self_map = ' . ($self_map ? 1 : 0) . ";\n";
 echo 'var username = "' . $username . '";' . "\n";
+echo 'var share_token = "' . $share_token . '";' . "\n";
 
 ?>
 </script>
@@ -52,7 +53,7 @@ echo 'var username = "' . $username . '";' . "\n";
 					<div id="geonote_prompt" style="margin-top: 10px;">
 					<div class="small">Leave a short note that will be sent to <?=$name?> at a specific location.</div>
 						<textarea id="geonote_text" maxlen="140"></textarea>
-						<input type="button" id="geonote_create" value="Create" />
+						<input type="button" id="geonote_create" value="Create" class="submit" />
 						<div style="font-size: 9pt;"><table cellpadding="0" cellspacing="0">
 							<tr>
 								<td>
@@ -75,8 +76,11 @@ echo 'var username = "' . $username . '";' . "\n";
 			</div>
 <?php 
 		}
+		
+		// If the user is looking at their own map, give them more options
+		if($self_map)
+		{
 ?>
-
 		<div class="round sidebar-panel" id="sidebar_mapoptions">
 			<div class="panel-title">Map Options</div>
 			<div class="panel-content" style="display: none;">
@@ -133,8 +137,47 @@ echo 'var username = "' . $username . '";' . "\n";
 					</tr>
 				</table>
 			</div>
-		</div>
+		</div><!-- map options -->
+		
+		<div class="round sidebar-panel" id="sidebar_sharelink">
+			<div class="panel-title">Share Link</div>
+			<div class="panel-content" style="display: none;">
 
+				<table>
+				<tr>
+					<td colspan="2">
+						Share with:<br />
+						<div class="small">Enter email addresses or mobile phone numbers, separated by commas.</div>
+						<textarea id="share_addresses"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Expire in:<br />
+						<select id="share_expiration">
+						<?php
+						$dt = array('10'=>'10 minutes', '20'=>'20 minutes', '30'=>'30 minutes', '60'=>'1 hour', '480'=>'8 hours', '0'=>'never');
+						foreach ($dt as $k=>$t) {
+							if ($k == $default_share_expiration) {
+								echo '<option value="'.$k.'" selected>'.$t.'</option>';
+							} else {
+								echo '<option value="'.$k.'">'.$t.'</option>';
+							}
+						}
+						?>
+						</select>
+					</td>
+					<td style="text-align: right; vertical-align: bottom;">
+						<input type="button" value="Send" class="submit" id="share_btn" />
+					</td>
+				</tr>
+				</table>
+
+			</div>
+		</div><!-- share link -->
+<?php 
+		} // end if user is looking at their own map
+?>
 		</td>
 		<td id="map-container">
 			<div id="map"></div>

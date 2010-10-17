@@ -5,14 +5,17 @@ RewriteRule ^$ index.php?controller=home&method=index [QSA,L]
 
 RewriteRule ^(settings|help)$ index.php?controller=$1&method=index [QSA,L]
 
+# AJAX controllers (i.e. geoloqi.com/settings/profile.ajax)
+RewriteRule ^(account|connect|map|settings|help)/([^/\.]+)\.ajax$ index.php?controller=$1&method=$2&mode=ajax [QSA,L]
+
+# All other pages (i.e. geoloqi.com/settings/profile)
+RewriteRule ^(account|connect|map|settings|help)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
+
 # User pages short form (geoloqi.com/aaronpk)
 RewriteRule ^([^/\.]+)$ index.php?controller=map&method=index&value=$1 [QSA,L]
 
-# AJAX controllers (i.e. geoloqi.com/settings/profile.ajax)
-RewriteRule ^([^/\.]+)/([^/\.]+)\.ajax$ index.php?controller=$1&method=$2&mode=ajax [QSA,L]
-
-# All other pages (i.e. geoloqi.com/settings/profile)
-RewriteRule ^([^/\.]+)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
+# Shared links
+RewriteRule ^([^/\.]+)/([a-zA-Z0-9_]{7})$ index.php?controller=map&method=index&value=$1&key=$2 [QSA,L]
 
 # Error handler
 ErrorDocument 404 /index.php?controller=error&method=error404

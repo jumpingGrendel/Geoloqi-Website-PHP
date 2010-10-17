@@ -1,8 +1,11 @@
 
 var GB_WIDTH = 400;
 var GB_HEIGHT = 200;
-	
+var GB_OPEN = false;
+
 function gb_show(opts){
+
+	GB_OPEN = true;
 	
 	var message = false;
 	var html = false;
@@ -40,6 +43,7 @@ function gb_update(message){
 }
 
 function gb_hide(){
+	GB_OPEN = false;
 	$("#GB_overlay").remove();
 	$("#GB_window").remove();
 }

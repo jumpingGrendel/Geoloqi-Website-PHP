@@ -5,7 +5,6 @@ include($this->theme_file('settings/menu.php'));
 
 <div class="settings-wrap"><div class="settings settings-columns">
 <?php 
-
 if(GEOLOQI_ENABLE_LAYERS)
 {
 ?>

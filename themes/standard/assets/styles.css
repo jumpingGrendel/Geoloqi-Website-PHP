@@ -136,6 +136,21 @@ img {
 	font-size: 0.8em;
 }
 
+.sidebar-panel textarea {
+	width: 200px;
+	margin: 0 auto;
+}
+
+.sidebar-panel .submit {
+	border: 2px #666 solid;
+	font-size: 12px;
+	padding: 2px 12px;
+	margin: 2px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+
 
 #profile-info .line {
 	margin-bottom: 4px;
@@ -227,7 +242,7 @@ img {
 	margin: 10px 50px;
 }
 .settings table .label {
-	font-size: 18pt;
+	font-size: 16pt;
 }
 .settings table .description {
 	color: #666;
