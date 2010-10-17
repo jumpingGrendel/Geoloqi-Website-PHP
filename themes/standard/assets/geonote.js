@@ -77,7 +77,7 @@ var geonote_circle;
 					alert("There was an error!");
 				}else{
 					$("#geonote_success").show();
-					$("#sidebar_geonote").click();
+					$("#sidebar_geonote .panel-title").click();
 				}
 			}, "json");
 		});

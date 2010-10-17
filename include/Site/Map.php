@@ -92,8 +92,7 @@ class Site_Map extends Site
 			if(get($p))
 				$params[$p] =  get($p);
 
-		$response = $this->api->request('location/history', $params);
-		return $response;
+		return $this->api->request('location/history', $params);
 	}
 	
 	public function last_ajax()
@@ -103,6 +102,14 @@ class Site_Map extends Site
 		else
 			$response = $this->api->request('location/last?username=' . get('username'), FALSE, !array_key_exists('username', $_SESSION));
 		return $response;
+	}
+	
+	public function share_link_ajax()
+	{
+		return $this->api->request('link/create', array(
+			'date_from' => time(),
+			'date_to' => strtotime('+' . post('share_expiration') . ' minutes')
+		));
 	}
 }
 ?>

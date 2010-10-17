@@ -148,7 +148,7 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 					<td colspan="2">
 						Share with:<br />
 						<div class="small">Enter email addresses or mobile phone numbers, separated by commas.</div>
-						<textarea id="share_addresses"></textarea>
+						<textarea id="share_with"></textarea>
 					</td>
 				</tr>
 				<tr>

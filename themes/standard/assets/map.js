@@ -89,6 +89,23 @@ $(function(){
 		});
 	});
 
+	$("#share_btn").click(function(){
+		$.post("/map/share_link.ajax",{
+			share_expiration: $("#share_expiration").val(),
+			share_with: $("#share_with").val()
+		}, function(data){
+			if(typeof data.error != "undefined"){
+				gb_show({message: "There was a problem creating the shared link!"});
+				setTimeout(gb_hide, 1000);
+				return false;
+			}
+			$("#sidebar_sharelink .panel-title").click();
+			gb_show({
+				message: 'Link sent!<br /><input type="text" value="' + data.shortlink + '" /><br /><input type="button" value="Ok!" onclick="gb_hide()" />',
+				height: 120
+			});
+		}, "json");
+	});
 	
 });
 
