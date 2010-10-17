@@ -37,6 +37,7 @@ class Site_Settings extends Site
 		$this->data['public_geonotes'] = $_SESSION['user_privacy']->public_geonotes;
 		$this->data['public_geonote_email'] = $_SESSION['user_privacy']->public_geonote_email;
 		$this->data['default_share_expiration'] = $_SESSION['user_privacy']->default_share_expiration;
+		$this->data['has_password'] = $_SESSION['user_privacy']->has_password;
 	}
 	
 	public function privacy_ajax()
@@ -49,6 +50,15 @@ class Site_Settings extends Site
 		));
 		$_SESSION['user_privacy'] = $this->api->request('account/privacy');
 		return $response;
+	}
+	
+	public function password_ajax()
+	{
+		return $this->api->request('account/password', array(
+			'current_password' => post('current_password'),
+			'new_password_1' => post('new_password_1'),
+			'new_password_2' => post('new_password_2')
+		));
 	}
 	
 	public function connections()
