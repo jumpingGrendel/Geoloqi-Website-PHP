@@ -56,7 +56,7 @@ class Site_Map extends Site
 		$this->data['last'] = $last;
 		
 		$this->data['name'] = $profile->name;
-		$this->data['username'] = $username;
+		$this->data['username'] = $profile->username;
 		$this->data['bio'] = $profile->bio;
 		$this->data['website'] = $profile->website;
 		

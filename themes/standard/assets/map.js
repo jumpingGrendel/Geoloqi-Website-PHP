@@ -40,12 +40,7 @@ $(function(){
 			thinning: thinning,
 			after: (last ? last.date : 0)
 		}, function(data){
-			autoPan = false;
 			for(var i in data){
-				// Turn on auto-pan on the last point so the map is centered
-				if(i == data.length - 1)
-					autoPan = true;
-				
 				receive_location(data[i]);
 			}
 			setTimeout(get_history, 10000);
@@ -57,7 +52,6 @@ $(function(){
 			username: username,
 			token: share_token
 		}, function(data){
-			autoPan = true;
 			receive_location(data);
 			setTimeout(get_single_point, 10000);
 		});

@@ -8,6 +8,9 @@ define('GEOLOQI_CLIENT_SECRET', '12345678123456781234567812345678');
 define('GEOLOQI_API_BASEURL', 'http://api.geoloqi.dev/1/');
 define('GEOLOQI_API_BASEURL_SECURE', 'https://api.geoloqi.dev/1/');
 
+define('WEBSITE_URL', 'http://geoloqi.com');
+define('WEBSITE_SHORTURL', 'http://loqi.me');
+
 /**
  * Features in development
  */

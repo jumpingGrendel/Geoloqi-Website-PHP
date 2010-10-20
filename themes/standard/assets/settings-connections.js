@@ -7,9 +7,7 @@ $(function(){
 			$("#request_access_token").hide();
 		}, "json");
 	});
-});
 
-$(function(){
 	$("#instamapper_save").click(function(){
 		gb_show({
 			message: "Saving...",
