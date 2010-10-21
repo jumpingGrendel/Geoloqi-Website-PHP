@@ -14,7 +14,8 @@ if(GEOLOQI_ENABLE_SHARED_LIST)
 			<thead>
 				<tr>
 					<th colspan="4">
-						<input type="button" class="submit" value="New Link" style="float: right" />
+						<div style="text-align: right">Create a new link from <a href="/me">your map</a>!</div>
+						<!-- <input type="button" class="submit" value="New Link" style="float: right" /> -->
 					</th>
 				</tr>
 			</thead>
@@ -34,6 +35,12 @@ if(GEOLOQI_ENABLE_SHARED_LIST)
 						echo '<td><input type="button" class="submit small stop-sharing" value="Stop Sharing" /><input type="hidden" class="token" value="' . $link->token . '" /></td>';
 					echo '</tr>';					
 				}
+				if(count($active_links) == 0)
+				{
+					echo '<tr>';
+						echo '<td colspan="3">There are currently no active shared links</td>';
+					echo '</tr>';
+				}
 			?>
 			<tr style="background-color: #CCC">
 				<td colspan="3" class="section-header">Expired Links</td>
@@ -43,12 +50,18 @@ if(GEOLOQI_ENABLE_SHARED_LIST)
 				{
 					echo '<tr>';
 						echo '<td>';
-							echo '<a href="' . $link->url . '">' . str_replace('http://', '', $link->url) . '</a><br />';
+							echo str_replace('http://', '', $link->url) . '<br />';
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
 						echo '<td>' . $link->range . '<br />' . $link->expires . '</td>';
 						echo '<td></td>';
 					echo '</tr>';					
+				}
+				if(count($expired_links) == 0)
+				{
+					echo '<tr>';
+						echo '<td colspan="3">There are currently no active shared links</td>';
+					echo '</tr>';
 				}
 			?>
 			</tbody>

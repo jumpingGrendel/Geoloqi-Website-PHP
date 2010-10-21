@@ -72,9 +72,11 @@ class Site_Settings extends Site
 	
 	public function connections_ajax()
 	{
+		// Set the instamapper key in the profile
 		$response = $this->api->request('account/profile', array(
 			'instamapper_key' => post('instamapper_key')
 		));
+		// Re-fetch the user's profile and store it in the session
 		$_SESSION['user_profile'] = $this->api->request('account/profile');
 		return $response;
 	}
@@ -105,7 +107,7 @@ class Site_Settings extends Site
 			// TODO: Handle the case where both a date range and time range are specified
 			// i.e. 6pm - 9pm from 10/1 through 10/30
 			
-			if($link->date_to)
+			if($link->date_from && $link->date_to)
 			{
 				$from = new DateTime($link->date_from, new DateTimeZone('UTC'));
 				$from->setTimeZone(new DateTimeZone($this->user->timezone));
@@ -141,14 +143,40 @@ class Site_Settings extends Site
 				$from->setTimeZone(new DateTimeZone($this->user->timezone));
 				$to = new DateTime('2000-01-01T' . $link->time_to, new DateTimeZone('UTC'));
 				$to->setTimeZone(new DateTimeZone($this->user->timezone));
+				$dateTo = new DateTime($link->date_to, new DateTimeZone('UTC'));
+				$dateTo->setTimeZone(new DateTimeZone($this->user->timezone));
+				$toYearPart = ($dateTo->format('Y') == date('Y') ? '' : '/Y');
 				
-				$data->range = $from->format('g:ia') . ' to ' . $to->format('g:ia') . ' every day';
+				$data->range = $from->format('g:ia') . ' to ' . $to->format('g:ia');
+				
+				// Links that were time-based that were manually expired will have a date_to set but no date_from set
+				if($link->date_to)
+					$data->range .= ' until ' . $dateTo->format('n/j' . $toYearPart);
+				else
+				{
+					$data->range .= ' every day';
+					$data->expires = 'Inactive';
+				}
 			}
 			$data->url = WEBSITE_URL . '/' . $this->user->username . '/' . $link->token;
 			$this->data[$category][] = $data;
 		}
 	}
 
+	public function share_ajax()
+	{
+		if(post('action') == 'expire')
+		{
+			$result = $this->api->request('link/expire', array('token'=>post('token')));
+			if(k($result, 'result') == 'ok')
+				return array('result'=>'ok', 'deleted'=>post('token'));
+			else
+				return $result;
+		}
+		else
+			return array('result'=>'null');
+	}
+	
 	public function layer()
 	{
 		$this->data['user_layers'] = $this->api->request('layer/list', array());		
