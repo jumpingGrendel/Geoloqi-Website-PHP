@@ -180,7 +180,7 @@ class Site
 				$this->data['debug_output'] = '';
 			extract($this->data);
 			include($this->theme_file('layouts/header.php'));
-			include($this->theme_file('layouts/error.php'));
+			include($this->theme_file('error/index.php'));
 			include($this->theme_file('layouts/footer.php'));
 		}
 		

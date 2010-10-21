@@ -1,4 +1,5 @@
 <?php 
+define('DEBUG_MODE', TRUE);
 
 /**
  * Client ID, secret, and URL for communicating with the API
@@ -9,7 +10,7 @@ define('GEOLOQI_API_BASEURL', 'http://api.geoloqi.dev/1/');
 define('GEOLOQI_API_BASEURL_SECURE', 'https://api.geoloqi.dev/1/');
 
 define('WEBSITE_URL', 'http://geoloqi.com');
-define('WEBSITE_SHORTURL', 'http://loqi.me');
+define('WEBSITE_SHORTURL', 'http://loqi.me'); // Set to FALSE to disable using short links
 
 /**
  * Features in development

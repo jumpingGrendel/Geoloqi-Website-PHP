@@ -10,11 +10,11 @@ class GeoloqiAPI
 		$this->_clientSecret = $clientSecret;
 	}
 	
-	protected function error()
+	protected function error($type)
 	{
 		// The server rejected our tokens, nothing we can do here. Log the user out and redirect to the home page.
 		session_destroy();
-		header('Location: /');
+		header('Location: /error?code=oauth_rejected_token_' . $type);
 		die();
 	} 
 	
@@ -94,29 +94,31 @@ class GeoloqiAPI
 		$headers = array();
 		$lines = explode("\n", $response);
 		$endHeaders = FALSE;
+		$newlines = 0;
 		while($endHeaders == FALSE && count($lines) > 0)
 		{
 			$line = array_shift($lines);
-			if(substr($line, 0, 1) == '{' || substr($line, 0, 1) == '[')
+			
+			if(trim($line) == '')
 			{
-				$endHeaders = TRUE;
-				array_unshift($lines, $line);
+				$newlines++;
+				if($newlines == 1)
+					$endHeaders = TRUE;
+				continue;
 			}
-			else
+			
+			$line = explode(': ', $line);
+			if(count($line) == 2)
 			{
-				$line = explode(': ', $line);
-				if(count($line) == 2)
-				{
-					list($k, $v) = $line;
-					$headers[trim($k)] = trim($v);
-				}
+				list($k, $v) = $line;
+				$headers[trim($k)] = trim($v);
 			}
 		}
-	
+
 		$body = implode("\n", $lines);
 		
 		$data = json_decode($body);
-	
+
 		echo "<b>JSON RESPONSE:</b>\n";
 		
 		if(is_object($data) && property_exists($data, 'debug_output'))
@@ -152,12 +154,13 @@ class GeoloqiAPI
 				}
 				else
 					// The server rejected the refresh token
-					$this->error();
+					$this->error('refresh');
 			}
 			else
 			{
-				// The server rejected the request, not because of an expired token. There's nothing more we can do
-				$this->error();
+				// The server rejected the request, but not because of an expired token. There's nothing more we can do
+				die('hi');
+				$this->error('unknown');
 			}
 		}
 		echo "\n";
@@ -165,7 +168,14 @@ class GeoloqiAPI
 		echo '</pre>';
 		$this->log(ob_get_clean());
 		
-		return $data;
+		if($data === null)
+		{
+			// If the API response could not be parsed as JSON, throw a hard error here and stop the script immediately
+			$GLOBALS['controller']->error(HTTP_SERVER_ERROR, 'Bad API Response', ($body == '' ? '[empty response]' : '<div style="font-size:9pt; font-family: courier new;">' . trim($body) . '</pre>'));
+			return $response;
+		}
+		else
+			return $data;
 	}
 	
 	protected function log($msg)

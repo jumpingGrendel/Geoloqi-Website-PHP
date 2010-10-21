@@ -89,7 +89,6 @@ class Site_Settings extends Site
 	public function share()
 	{
 		$links = $this->api->request('link/list');
-
 		$this->data['active_links'] = array();
 		$this->data['expired_links'] = array();
 		

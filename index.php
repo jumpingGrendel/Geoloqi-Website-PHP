@@ -1,6 +1,5 @@
 <?php 
 ini_set('error_reporting', E_ALL);
-define('DEBUG_MODE', TRUE);
 
 // Start buffering any output so we capture error messages and can output them in a nice format with the proper HTTP headers
 ob_start();
@@ -29,6 +28,7 @@ switch($controllerName)
 	case 'account':
 	case 'home':
 	case 'oauth':
+	case 'error':
 		require_once('Site/' . ucfirst($controllerName) . '.php');
 		$className = 'Site_' . ucfirst($controllerName);
 		$controller = new $className();
@@ -55,7 +55,17 @@ try
 }
 catch(Exception $e)
 {
-	$controller->error(HTTP_SERVER_ERROR, 'exception', 'Internal error: ' . $e->getMessage());
+	ob_start();
+	echo 'Internal Error:<br />';
+	echo '<p>' . $e->getMessage() . '</p>';
+	if(DEBUG_MODE)
+	{
+		echo '<div style="font-size:8pt; font-family: Courier New, courier, fixed-width; white-space: pre-wrap; word-wrap: break-word;">';
+			print_r($e);
+		echo '</div>';
+	}
+	$msg = ob_get_clean();
+	$controller->error(HTTP_SERVER_ERROR, 'Uncaught Exception', $msg);
 }
 
 ?>

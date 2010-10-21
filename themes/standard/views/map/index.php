@@ -20,9 +20,9 @@ if($last)
 	{
 		// If they're only tracking every 30 seconds or less, don't thin the data, otherwise set the thinning to 3
 		if(k($last->raw, 'tracking_limit'))
-			echo "\t" . 'thinning = ' . ($last->raw->tracking_limit > 30 ? '0' : '3') . ";\n";
+			echo "\t" . 'thinning = ' . ($last->raw->tracking_limit >= 30 ? '0' : '3') . ";\n";
 		elseif(k($last->raw, 'rate_limit'))
-			echo "\t" . 'thinning = ' . ($last->raw->rate_limit > 30 ? '0' : '3') . ";\n";	
+			echo "\t" . 'thinning = ' . ($last->raw->rate_limit >= 30 ? '0' : '3') . ";\n";
 	}
 }
 

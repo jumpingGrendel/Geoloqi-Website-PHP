@@ -41,10 +41,12 @@ class Site_Map extends Site
 				$last = $this->api->request('location/last?username=' . $username, FALSE, TRUE);
 			}
 		}
-		
+
 		// If there was some error retrieving the user's profile or location (such as non-public location or invalid username), throw an error and stop
 		if(k($profile, 'error') == 'user_not_found')
 			$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user "' . $username . '" doesn\'t exist!');
+		elseif(k($last, 'error') == 'no_recent_location')
+			$last = FALSE;
 		elseif(k($profile, 'error') != NULL)
 			$this->error(HTTP_NOT_FOUND, $profile->error, $profile->error_description);
 		
@@ -54,7 +56,7 @@ class Site_Map extends Site
 			$this->error(HTTP_NOT_FOUND, $last->error, $last->error_description);
 			
 		$this->data['last'] = $last;
-		
+
 		$this->data['name'] = $profile->name;
 		$this->data['username'] = $profile->username;
 		$this->data['bio'] = $profile->bio;
