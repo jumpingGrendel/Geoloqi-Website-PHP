@@ -61,6 +61,7 @@ class Site_Map extends Site
 		$this->data['username'] = $profile->username;
 		$this->data['bio'] = $profile->bio;
 		$this->data['website'] = $profile->website;
+		$this->data['profile_image'] = $profile->profile_image;
 		
 		// whether the user is looking at their own map
 		$this->data['self_map'] = $username == session('username');

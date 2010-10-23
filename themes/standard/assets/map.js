@@ -6,6 +6,7 @@ var thePath = false;
 var marker = false; // The marker of the user's location
 var autoPan = true; // pan the map when a new point is received
 var polyline;		// The line showing the user's history trail
+var updateLocation = true; // Whether to continue asking for location updates
 
 $(function(){
 	var latlng = new google.maps.LatLng(45.51, -122.63);
@@ -34,6 +35,45 @@ $(function(){
 		get_single_point();
 	}
 
+	setInterval(function(){
+		if(lastPosition){
+			var lastDate = new Date((last.date_ts+"000") * 1);
+			var hrs = lastDate.getHours();
+			hrs = (hrs < 10 ? "0" + hrs : hrs);
+			var mins = lastDate.getMinutes();
+			mins = (mins < 10 ? "0" + mins : mins);
+			var secs = lastDate.getSeconds();
+			secs = (secs < 10 ? "0" + secs : secs);
+			var dateFormatted = (lastDate.getMonth()+1) + "/" + lastDate.getDate() + "/" + lastDate.getFullYear() + " " + hrs + ":" + mins + ":" + secs;
+			
+			var now = new Date();
+			var diff = Math.round((now.getTime() - lastDate.getTime()) / 1000);
+			if(diff > 86400){
+				$("#profile-info .last-time .relative").hide();
+				$("#profile-info .last-time .absolute").show();
+			}else{
+				if(diff < 60){
+					diff = diff + " seconds ago";
+				}else if(diff < 60*60){
+					diffTxt = Math.floor(diff / 60) + "m ";
+					diffTxt += (diff % 60) + "s ago";
+					diff = diffTxt;
+				}else if(diff < 60*60*24){
+					diffTxt = Math.floor(diff / (60*60)) + "h ";
+					diffTxt += (Math.floor(diff / 60) % 60) + "m ago";
+					diff = diffTxt;
+				}
+			}
+			
+			$("#profile-info .last-time .relative").text(diff);
+			$("#profile-info .last-time .absolute").text(dateFormatted);
+		}
+	}, 1000);
+	
+	$("#profile-info .last-time .relative").mouseover(function(){
+		$("#profile-info .last-time .absolute").show();
+	});
+	
 	function get_history(){
 		$.getJSON("/map/history.ajax", {
 			count: 100,
@@ -43,7 +83,9 @@ $(function(){
 			for(var i in data){
 				receive_location(data[i]);
 			}
-			setTimeout(get_history, 10000);
+			if(updateLocation){
+				setTimeout(get_history, 10000);
+			}
 		});
 	}
 	
@@ -53,7 +95,9 @@ $(function(){
 			token: share_token
 		}, function(data){
 			receive_location(data);
-			setTimeout(get_single_point, 10000);
+			if(updateLocation){
+				setTimeout(get_single_point, 10000);
+			}
 		});
 	}
 	
@@ -121,6 +165,7 @@ function receive_location(l){
 					height: 60,
 					message: "The shared link has expired!"
 				});
+				updateLocation = false;
 			}else{
 				gb_show({
 					message: "There was an error!<br /><br />" + l.error + ": " + l.error_description
@@ -142,6 +187,9 @@ function receive_location(l){
 		map.panTo(newPosition);
 	}
 
+	$("#profile-info .last-lat").text(Math.round(l.location.position.latitude * 1000) / 1000);
+	$("#profile-info .last-lng").text(Math.round(l.location.position.longitude * 1000) / 1000);
+	
 	if(marker == false){
 		marker = new google.maps.Marker({
 			position: newPosition,

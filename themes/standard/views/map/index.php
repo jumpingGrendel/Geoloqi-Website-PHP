@@ -39,9 +39,25 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 			
 			<div id="profile-info" class="round sidebar-panel">
 				<div class="name"><?=$name?></div>
-				<div class="username"><?=$username?></div>
-				<div class="line website"><a href="<?=$website?>"><?=str_replace('http://', '', $website)?></a></div>
 				<div class="line bio"><?=$bio?></div>
+				<table>
+					<tr>
+						<td width="50">
+							<?= ($profile_image ? '<div class="pic"><img src="' . $profile_image . '" width="48" height="48" /></div>' : '') ?>
+						</td>
+						<td>
+							<div class="username"><?=$username?></div>
+							<div class="line website"><a href="<?=$website?>"><?=str_replace('http://', '', $website)?></a></div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="last-time"><div class="relative"></div><div class="absolute"></div></div>
+							<div class="last-lat"></div>
+							<div class="last-lng"></div>
+						</td>
+					</tr>
+				</table>
 			</div>
 <?php 
 		if($enable_geonotes)
@@ -57,11 +73,11 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 						<div style="font-size: 9pt;"><table cellpadding="0" cellspacing="0">
 							<tr>
 								<td>
-									<input type="radio" class="radius_size" name="radius_size" id="radius_size_120" value="120" /> Block
-									<input type="radio" class="radius_size" name="radius_size" id="radius_size_400" value="400" /> Area<br />
+									<input type="radio" class="radius_size" name="radius_size" id="radius_size_120" value="120" /> Block<br />
+									<input type="radio" class="radius_size" name="radius_size" id="radius_size_400" value="400" /> Area
 								</td>
 								<td>
-									<input type="radio" class="radius_size" name="radius_size" id="radius_size_1200" value="1200" /> Neighborhood
+									<input type="radio" class="radius_size" name="radius_size" id="radius_size_1200" value="1200" /> Neighborhood<br />
 									<input type="radio" class="radius_size" name="radius_size" id="radius_size_6000" value="6000" /> City
 								</td>
 								<td>

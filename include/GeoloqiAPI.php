@@ -181,9 +181,12 @@ class GeoloqiAPI
 	protected function log($msg)
 	{
 		static $fp = FALSE;
-		if($fp == FALSE)
-			$fp = fopen('api-log.htm', 'w');
-		fwrite($fp, $msg . "\n");
+		if(DEBUG_MODE)
+		{
+			if($fp == FALSE)
+				$fp = fopen('api-log.htm', 'w');
+			fwrite($fp, $msg . "\n");
+		}
 	}
 }
 ?>
