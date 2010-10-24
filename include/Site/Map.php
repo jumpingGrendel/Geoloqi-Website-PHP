@@ -112,12 +112,18 @@ class Site_Map extends Site
 			{
 				switch($p)
 				{
+					/*
 					// TODO: replate this with the user's timezone
 					case 'date_from':
 						$params[$p] = get($p) . 'T00:00:00-0700';
 						break;
 					case 'date_to':
 						$params[$p] = get($p) . 'T23:59:59-0700';
+						break;
+					*/
+					case 'time_from':
+					case 'time_to':
+						$params[$p] = get($p) . $this->user->timezone_offset;
 						break;
 					default:
 						$params[$p] = get($p);

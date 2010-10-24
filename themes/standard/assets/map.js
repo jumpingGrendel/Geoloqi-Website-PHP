@@ -83,7 +83,7 @@ $(function(){
 		$.getJSON("/map/history.ajax", {
 			count: 100,
 			thinning: thinning,
-			after: (last ? last.date : 0)
+			date_from: (last ? last.date : 0)
 		}, function(data){
 			for(var i in data){
 				receive_location(data[i]);

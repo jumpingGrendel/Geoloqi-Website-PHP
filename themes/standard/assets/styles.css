@@ -190,6 +190,17 @@ img {
 	display: none;
 }
 
+#history_params input {
+	border: 1px #333 solid;
+}
+#history_params input.warning {
+	background-color: #ffd5b6;
+}
+
+#history_loading {
+	padding: 10px;
+	float: right;
+}
 #history_loading div.loading {
 	background: url(images/history_loading.gif) no-repeat;
 }

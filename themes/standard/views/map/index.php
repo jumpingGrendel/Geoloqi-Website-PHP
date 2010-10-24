@@ -133,38 +133,35 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 		<div class="round sidebar-panel" id="sidebar_mapoptions">
 			<div class="panel-title">History</div>
 			<div class="panel-content" style="display: none;">
-				<div id="history_loading"><div style="height: 16px; width: 16px; text-align: right; padding: 10px;"></div></div>
+				<div id="history_loading"><div style="height: 16px; width: 16px;"></div></div>
 				<table id="history_params">
 					<tr>
-						<td class="header" colspan="2">History <span class="help"><a href="http://geoloqi.org/API/location/history" target="_blank">help</a></span></td>
-					</tr>
-					<tr>
 						<th>Points</th>
-						<td><input id="history_count" type="text" size="10" value="200" /></td>
+						<td><input id="history_count" type="text" size="10" value="200" title="Number of points to return" /></td>
 					</tr>
 					<tr>
 						<th>Accuracy</th>
-						<td><input id="history_accuracy" type="text" size="10" value="300" /></td>
+						<td><input id="history_accuracy" type="text" size="10" value="300" title="Ignore points less accurate than this, in meters" /></td>
 					</tr>
 					<tr>
 						<th>From</th>
-						<td><input id="history_from" type="text" size="10" value="<?=date('Y-m-d', strtotime('-7 days'))?>" /></td>
+						<td><input id="history_from" type="text" size="10" value="<?=date('Y-m-d', strtotime('-7 days'))?>" title="yyyy-mm-dd" /></td>
 					</tr>
 					<tr>
 						<th>To</th>
-						<td><input id="history_to" type="text" size="10" value="<?=date('Y-m-d', strtotime('+1 day'))?>" /></td>
+						<td><input id="history_to" type="text" size="10" value="<?=date('Y-m-d', strtotime('+1 day'))?>" title="yyyy-mm-dd" /></td>
 					</tr>
 					<tr>
 						<th>Time From</th>
-						<td><input id="history_time_from" type="text" size="10" value="" /></td>
+						<td><input id="history_time_from" type="text" size="10" value="" title="hh:mm" /></td>
 					</tr>
 					<tr>
 						<th>Time To</th>
-						<td><input id="history_time_to" type="text" size="10" value="" /></td>
+						<td><input id="history_time_to" type="text" size="10" value="" title="hh:mm" /></td>
 					</tr>
 					<tr>
 						<th>Thinning</th>
-						<td><input id="history_thinning" type="text" size="10" value="<?=$thinning?>" /></td>
+						<td><input id="history_thinning" type="text" size="10" value="<?=$thinning?>" title="Return only every nth point" /></td>
 					</tr>
 				</table>
 	
