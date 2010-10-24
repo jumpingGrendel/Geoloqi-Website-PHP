@@ -66,6 +66,21 @@ class Site_Map extends Site
 		// whether the user is looking at their own map
 		$this->data['self_map'] = $username == session('username');
 		
+		$this->data['thinning'] = 0;
+		if($this->data['last'])
+		{
+			//echo "\t" . 'last = ' . json_encode($last) . ';' . "\n";
+			// Set the 'thinning' value based on their rate_limit
+			if(k($this->data['last'], 'raw'))
+			{
+				// If they're only tracking every 30 seconds or less, don't thin the data, otherwise set the thinning to 3
+				if(k($this->data['last']->raw, 'tracking_limit'))
+					$this->data['thinning'] = ($this->data['last']->raw->tracking_limit >= 30 ? '0' : '3');
+				elseif(k($this->data['last']->raw, 'rate_limit'))
+					$this->data['thinning'] = ($this->data['last']->raw->rate_limit >= 30 ? '0' : '3');
+			}
+		}
+				
 		if(get('key'))
 			$this->data['share_token'] = get('key');
 		else
@@ -91,10 +106,26 @@ class Site_Map extends Site
 		$params = array();
 		$params['sort'] = 'desc';
 		
-		foreach(array('after', 'count', 'thinning') as $p)
+		foreach(array('date_from', 'date_to', 'time_from', 'time_to', 'accuracy', 'count', 'thinning') as $p)
+		{
 			if(get($p))
-				$params[$p] =  get($p);
-
+			{
+				switch($p)
+				{
+					// TODO: replate this with the user's timezone
+					case 'date_from':
+						$params[$p] = get($p) . 'T00:00:00-0700';
+						break;
+					case 'date_to':
+						$params[$p] = get($p) . 'T23:59:59-0700';
+						break;
+					default:
+						$params[$p] = get($p);
+						break;
+				}
+			}
+		}
+		
 		return $this->api->request('location/history', $params);
 	}
 	

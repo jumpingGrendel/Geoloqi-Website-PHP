@@ -190,6 +190,10 @@ img {
 	display: none;
 }
 
+#history_loading div.loading {
+	background: url(images/history_loading.gif) no-repeat;
+}
+
 #geonote_success {
 	text-align: center;
 	font-weight: bold;

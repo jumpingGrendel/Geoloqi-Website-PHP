@@ -159,7 +159,6 @@ class GeoloqiAPI
 			else
 			{
 				// The server rejected the request, but not because of an expired token. There's nothing more we can do
-				die('hi');
 				$this->error('unknown');
 			}
 		}
