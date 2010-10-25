@@ -61,7 +61,7 @@ class Site_Map extends Site
 		$this->data['username'] = $profile->username;
 		$this->data['bio'] = $profile->bio;
 		$this->data['website'] = $profile->website;
-		$this->data['profile_image'] = $profile->profile_image;
+		$this->data['profile_image'] = ($profile->profile_image ?: '/themes/standard/assets/images/profile-blank.png');
 		
 		// whether the user is looking at their own map
 		$this->data['self_map'] = $username == session('username');
@@ -112,15 +112,6 @@ class Site_Map extends Site
 			{
 				switch($p)
 				{
-					/*
-					// TODO: replate this with the user's timezone
-					case 'date_from':
-						$params[$p] = get($p) . 'T00:00:00-0700';
-						break;
-					case 'date_to':
-						$params[$p] = get($p) . 'T23:59:59-0700';
-						break;
-					*/
 					case 'time_from':
 					case 'time_to':
 						$params[$p] = get($p) . $this->user->timezone_offset;
@@ -150,7 +141,67 @@ class Site_Map extends Site
 		if(post('share_expiration'))
 			$data['date_to'] = strtotime('+' . post('share_expiration') . ' minutes');
 
-		return $this->api->request('link/create', $data);
+		$response = $this->api->request('link/create', $data);
+		
+		ob_start();
+?>
+		<div class="share_popup">
+			<div class="caption">Link created!</div>
+			<input type="text" value="<?=$response->shortlink?>" style="width: 160px;" /><br />
+			<div class="tweet_box">
+<?php 
+			if($this->user->twitter == '')
+			{
+				echo '<a href="/settings/connections">Connect your Twitter account</a> to send this link as a tweet!';
+			}
+			else
+			{
+?>
+				<div class="tweet_this">Tweet this:</div>
+				<textarea class="tweet_text">Heading out! Track me on @geoloqi: <?=$response->shortlink?></textarea><br />
+				<input type="button" value="Close" class="btn_close" />
+				<input type="button" value="Tweet" class="btn_tweet" />
+				<div class="tweet_count">140</div>
+<?php 
+			}
+?>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(".tweet_text").unbind("keyup").bind("keyup", function(){
+				var remaining = 140 - $(this).val().length;
+				$(".tweet_count").text(remaining);
+				if(remaining > 12){
+					$(".btn_tweet, .tweet_count").removeClass("warning").removeClass("disabled").addClass("ok");
+					$(".btn_tweet").removeAttr("disabled");
+				}else if(remaining >= 0){
+					$(".btn_tweet, .tweet_count").removeClass("disabled").removeClass("ok").addClass("warning");
+					$(".btn_tweet").removeAttr("disabled");
+				}else{
+					$(".btn_tweet, .tweet_count").removeClass("ok").removeClass("warning").addClass("disabled");
+					$(".btn_tweet").attr("disabled", "disabled");
+				}
+			}).keyup();
+			$(".btn_close").click(gb_hide);
+			$(".btn_tweet").click(function(){
+				var tweet_text = $(".tweet_text").val();
+				gb_update("Tweeting...");
+				$.post("/map/share_tweet.ajax",{
+					tweet: tweet_text
+				}, function(data){
+					gb_hide();
+				}, "json");
+			});
+		</script>
+<?php	
+		$response->html = ob_get_clean();
+		return $response;
+	}
+	
+	public function share_tweet_ajax()
+	{
+		$response = $this->api->request('link/tweet', array('text'=>post('tweet')));
+		return $response;
 	}
 }
 ?>

@@ -143,8 +143,8 @@ $(function(){
 			}
 			$("#sidebar_sharelink .panel-title").click();
 			gb_show({
-				message: 'Link created!<br /><input type="text" value="' + data.shortlink + '" /><br /><input type="button" value="Ok!" onclick="gb_hide()" />',
-				height: 120
+				message: data.html,
+				height: 170
 			});
 		}, "json");
 	});

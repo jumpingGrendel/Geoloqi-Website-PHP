@@ -190,10 +190,10 @@ img {
 	display: none;
 }
 
-#history_params input {
+.history_params input {
 	border: 1px #333 solid;
 }
-#history_params input.warning {
+.history_params input.warning {
 	background-color: #ffd5b6;
 }
 
@@ -386,6 +386,43 @@ img {
 .settings.tabular td {
 	padding: 6px;
 }
+
+
+.share_popup {
+	font-size: 10pt;
+}
+.share_popup .caption {
+	font-size: 13pt;
+}
+.share_popup .tweet_box {
+	width: 280px;
+	margin: 10px auto;
+}
+.share_popup .tweet_this {
+	text-align: left;
+}
+.share_popup textarea.tweet_text {
+	font-family: "Lucida Grande", verdana, arial, sans-serif;
+	font-size: 10pt;
+	width: 280px; 
+	height: 60px;
+}
+.share_popup .btn_close {
+	float: left;
+}
+.share_popup .btn_tweet {
+	float: right;
+}
+
+.share_popup .tweet_count {
+	font-size: 13pt;
+}
+.share_popup .tweet_count.warning {
+	color: #9f1919;
+}
+.share_popup .tweet_count.disabled {
+	color: #e72424;
+}	
 
 
 

@@ -21,7 +21,7 @@ var LQHistory = {
 		this.mapDragListener = google.maps.event.addListener(map, 'dragend', function(){
 			LQHistory.get_history();
 		});
-		$("#history_params input").change(function(){
+		$(".history_params input").change(function(){
 			if($(this).attr("id") == "history_count"){
 				if($(this).val() >= 2000){
 					$(this).addClass("warning");
@@ -36,7 +36,7 @@ var LQHistory = {
 	
 	stop: function(){
 		google.maps.event.removeListener(this.mapDragListener);
-		$("#history_params input").unbind("change");
+		$(".history_params input").unbind("change");
 		LQHistory.polyline.setMap(null);
 	},
 	

@@ -87,6 +87,7 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 			<div class="panel-title">Share Link</div>
 			<div class="panel-content" style="display: none;">
 
+				<div class="small" style="text-align: right"><a href="/settings/share">See all links</a></div>
 				<table style="width: 200px;">
 <?php 
 				if(GEOLOQI_ENABLE_SHARED_SEND)
@@ -107,7 +108,7 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 						Expire in:<br />
 						<select id="share_expiration">
 						<?php
-						$dt = array('10'=>'10 minutes', '20'=>'20 minutes', '30'=>'30 minutes', '60'=>'1 hour', '480'=>'8 hours', '0'=>'never');
+						$dt = array('10'=>'10 minutes', '30'=>'30 minutes', '60'=>'1 hour', '120'=>'2 hours', '480'=>'8 hours', '0'=>'never');
 						foreach ($dt as $k=>$t) {
 							if ($k == $default_share_expiration) {
 								echo '<option value="'.$k.'" selected>'.$t.'</option>';
@@ -134,7 +135,7 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 			<div class="panel-title">History</div>
 			<div class="panel-content" style="display: none;">
 				<div id="history_loading"><div style="height: 16px; width: 16px;"></div></div>
-				<table id="history_params">
+				<table class="history_params">
 					<tr>
 						<th>Points</th>
 						<td><input id="history_count" type="text" size="10" value="200" title="Number of points to return" /></td>
@@ -165,7 +166,7 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 					</tr>
 				</table>
 	
-				<table class="params">
+				<table class="history_params">
 					<tr>
 						<td class="header" colspan="2">Map Options <span class="help"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html" target="_blank">help</a></span></td>
 					</tr>
