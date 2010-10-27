@@ -5,6 +5,9 @@ RewriteRule ^$ index.php?controller=home&method=index [QSA,L]
 
 RewriteRule ^(settings|help)$ index.php?controller=$1&method=index [QSA,L]
 
+# Generic error page when we don't know what went wrong
+RewriteRule ^error$ index.php?controller=error&method=index [QSA,L]
+
 # AJAX controllers (i.e. geoloqi.com/settings/profile.ajax)
 RewriteRule ^(account|connect|map|settings|help)/([^/\.]+)\.ajax$ index.php?controller=$1&method=$2&mode=ajax [QSA,L]
 
@@ -18,4 +21,4 @@ RewriteRule ^([^/\.]+)$ index.php?controller=map&method=index&value=$1 [QSA,L]
 RewriteRule ^([^/\.]+)/([a-zA-Z0-9_]{7})$ index.php?controller=map&method=index&value=$1&key=$2 [QSA,L]
 
 # Error handler
-ErrorDocument 404 /index.php?controller=error&method=error404
+ErrorDocument 404 /index.php?controller=error&method=index

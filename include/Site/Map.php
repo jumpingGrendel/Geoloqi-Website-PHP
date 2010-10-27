@@ -41,10 +41,12 @@ class Site_Map extends Site
 				$last = $this->api->request('location/last?username=' . $username, FALSE, TRUE);
 			}
 		}
-		
+
 		// If there was some error retrieving the user's profile or location (such as non-public location or invalid username), throw an error and stop
 		if(k($profile, 'error') == 'user_not_found')
 			$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user "' . $username . '" doesn\'t exist!');
+		elseif(k($last, 'error') == 'no_recent_location')
+			$last = FALSE;
 		elseif(k($profile, 'error') != NULL)
 			$this->error(HTTP_NOT_FOUND, $profile->error, $profile->error_description);
 		
@@ -54,15 +56,31 @@ class Site_Map extends Site
 			$this->error(HTTP_NOT_FOUND, $last->error, $last->error_description);
 			
 		$this->data['last'] = $last;
-		
+
 		$this->data['name'] = $profile->name;
 		$this->data['username'] = $profile->username;
 		$this->data['bio'] = $profile->bio;
 		$this->data['website'] = $profile->website;
+		$this->data['profile_image'] = ($profile->profile_image ?: '/themes/standard/assets/images/profile-blank.png');
 		
 		// whether the user is looking at their own map
 		$this->data['self_map'] = $username == session('username');
 		
+		$this->data['thinning'] = 0;
+		if($this->data['last'])
+		{
+			//echo "\t" . 'last = ' . json_encode($last) . ';' . "\n";
+			// Set the 'thinning' value based on their rate_limit
+			if(k($this->data['last'], 'raw'))
+			{
+				// If they're only tracking every 30 seconds or less, don't thin the data, otherwise set the thinning to 3
+				if(k($this->data['last']->raw, 'tracking_limit'))
+					$this->data['thinning'] = ($this->data['last']->raw->tracking_limit >= 30 ? '0' : '3');
+				elseif(k($this->data['last']->raw, 'rate_limit'))
+					$this->data['thinning'] = ($this->data['last']->raw->rate_limit >= 30 ? '0' : '3');
+			}
+		}
+				
 		if(get('key'))
 			$this->data['share_token'] = get('key');
 		else
@@ -88,10 +106,23 @@ class Site_Map extends Site
 		$params = array();
 		$params['sort'] = 'desc';
 		
-		foreach(array('after', 'count', 'thinning') as $p)
+		foreach(array('date_from', 'date_to', 'time_from', 'time_to', 'accuracy', 'count', 'thinning') as $p)
+		{
 			if(get($p))
-				$params[$p] =  get($p);
-
+			{
+				switch($p)
+				{
+					case 'time_from':
+					case 'time_to':
+						$params[$p] = get($p) . $this->user->timezone_offset;
+						break;
+					default:
+						$params[$p] = get($p);
+						break;
+				}
+			}
+		}
+		
 		return $this->api->request('location/history', $params);
 	}
 	
@@ -110,7 +141,67 @@ class Site_Map extends Site
 		if(post('share_expiration'))
 			$data['date_to'] = strtotime('+' . post('share_expiration') . ' minutes');
 
-		return $this->api->request('link/create', $data);
+		$response = $this->api->request('link/create', $data);
+		
+		ob_start();
+?>
+		<div class="share_popup">
+			<div class="caption">Link created!</div>
+			<input type="text" value="<?=$response->shortlink?>" style="width: 160px;" /><br />
+			<div class="tweet_box">
+<?php 
+			if($this->user->twitter == '')
+			{
+				echo '<a href="/settings/connections">Connect your Twitter account</a> to send this link as a tweet!';
+			}
+			else
+			{
+?>
+				<div class="tweet_this">Tweet this:</div>
+				<textarea class="tweet_text">Heading out! Track me on @geoloqi: <?=$response->shortlink?></textarea><br />
+				<input type="button" value="Close" class="btn_close" />
+				<input type="button" value="Tweet" class="btn_tweet" />
+				<div class="tweet_count">140</div>
+<?php 
+			}
+?>
+			</div>
+		</div>
+		<script type="text/javascript">
+			$(".tweet_text").unbind("keyup").bind("keyup", function(){
+				var remaining = 140 - $(this).val().length;
+				$(".tweet_count").text(remaining);
+				if(remaining > 12){
+					$(".btn_tweet, .tweet_count").removeClass("warning").removeClass("disabled").addClass("ok");
+					$(".btn_tweet").removeAttr("disabled");
+				}else if(remaining >= 0){
+					$(".btn_tweet, .tweet_count").removeClass("disabled").removeClass("ok").addClass("warning");
+					$(".btn_tweet").removeAttr("disabled");
+				}else{
+					$(".btn_tweet, .tweet_count").removeClass("ok").removeClass("warning").addClass("disabled");
+					$(".btn_tweet").attr("disabled", "disabled");
+				}
+			}).keyup();
+			$(".btn_close").click(gb_hide);
+			$(".btn_tweet").click(function(){
+				var tweet_text = $(".tweet_text").val();
+				gb_update("Tweeting...");
+				$.post("/map/share_tweet.ajax",{
+					tweet: tweet_text
+				}, function(data){
+					gb_hide();
+				}, "json");
+			});
+		</script>
+<?php	
+		$response->html = ob_get_clean();
+		return $response;
+	}
+	
+	public function share_tweet_ajax()
+	{
+		$response = $this->api->request('link/tweet', array('text'=>post('tweet')));
+		return $response;
 	}
 }
 ?>

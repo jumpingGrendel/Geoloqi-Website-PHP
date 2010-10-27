@@ -89,7 +89,6 @@ class Site_Settings extends Site
 	public function share()
 	{
 		$links = $this->api->request('link/list');
-
 		$this->data['active_links'] = array();
 		$this->data['expired_links'] = array();
 		
@@ -135,7 +134,7 @@ class Site_Settings extends Site
 				$from->setTimeZone(new DateTimeZone($this->user->timezone));
 				$fromTimePart = $from->format('g:ia');
 				$data->range = 'since ' . $from->format('n/j' . $fromYearPart . ' g:ia');
-				$data->expires = '';
+				$data->expires = 'Never expires';
 			}
 			else
 			{
@@ -159,6 +158,7 @@ class Site_Settings extends Site
 				}
 			}
 			$data->url = WEBSITE_URL . '/' . $this->user->username . '/' . $link->token;
+			$data->short_url = (WEBSITE_SHORTURL ? WEBSITE_SHORTURL . '/' . $link->token : FALSE);
 			$this->data[$category][] = $data;
 		}
 	}

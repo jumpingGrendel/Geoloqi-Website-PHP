@@ -38,7 +38,7 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Default link expiration</div>
 			<select id="default_share_expiration">
 			<?php
-			$dt = array('10'=>'10 minutes', '20'=>'20 minutes', '30'=>'30 minutes', '60'=>'1 hour', '480'=>'8 hours', '0'=>'never');
+			$dt = array('10'=>'10 minutes', '30'=>'30 minutes', '60'=>'1 hour', '120'=>'2 hours', '480'=>'8 hours', '0'=>'never');
 			foreach ($dt as $k=>$t) {
 				if ($k == $default_share_expiration) {
 					echo '<option value="'.$k.'" selected>'.$t.'</option>';

@@ -5,10 +5,6 @@ include($this->theme_file('settings/menu.php'));
 ?>
 
 <div class="settings-wrap"><div class="settings tabular">
-<?php 
-if(GEOLOQI_ENABLE_SHARED_LIST)
-{
-?>
 	<div>
 		<table style="border-spacing: 0px; margin: 0; width: 100%">
 			<thead>
@@ -28,7 +24,7 @@ if(GEOLOQI_ENABLE_SHARED_LIST)
 				{
 					echo '<tr>';
 						echo '<td>';
-							echo '<a href="' . $link->url . '">' . str_replace('http://', '', $link->url) . '</a><br />';
+							echo '<a href="' . $link->url . '">' . str_replace('http://', '', ($link->short_url ? $link->short_url : $link->url)) . '</a><br />';
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
 						echo '<td>' . $link->range . '<br />' . $link->expires . '</td>';
@@ -50,7 +46,7 @@ if(GEOLOQI_ENABLE_SHARED_LIST)
 				{
 					echo '<tr>';
 						echo '<td>';
-							echo str_replace('http://', '', $link->url) . '<br />';
+							echo str_replace('http://', '', ($link->short_url ? $link->short_url : $link->url)) . '<br />';
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
 						echo '<td>' . $link->range . '<br />' . $link->expires . '</td>';
@@ -67,15 +63,6 @@ if(GEOLOQI_ENABLE_SHARED_LIST)
 			</tbody>
 		</table>
 	</div>
-<?php 
-}
-else
-{
-?>
-	<div style="padding:20px;">Coming soon...</div>
-<?php 
-}
-?>
 </div></div>
 
 <?php 

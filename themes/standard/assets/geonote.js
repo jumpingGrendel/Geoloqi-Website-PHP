@@ -4,6 +4,14 @@ var geonote_circle;
 
 	function sidebar_geonote_start()
 	{
+		// If the user hasn't logged any points yet, then lastPosition will be false. Use the center of the map in this case.
+		var geonote_position;
+		if(lastPosition){
+			geonote_position = lastPosition;
+		}else{
+			geonote_position = map.getCenter();
+		}
+		
 		var geonote_image = new google.maps.MarkerImage('/themes/standard/assets/images/chat.png',
 			new google.maps.Size(38, 33),
 			new google.maps.Point(0,0),
@@ -19,7 +27,7 @@ var geonote_circle;
 			map: map,
 			icon: geonote_image,
 			shadow: geonote_shadow,
-			position: lastPosition,
+			position: geonote_position,
 			draggable: true,
 			title: 'Geonote',
 		});

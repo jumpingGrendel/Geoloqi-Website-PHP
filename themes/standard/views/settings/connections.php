@@ -97,7 +97,7 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<div class="label">Instamapper API Key</div>
 			<div class="description">
-				You can connect a Boost Mobile phone or any device that runs Instamapper to Geoloqi.com by entering your Instamapper key. <a href="http://geoloqi.com/blog/2010/08/how-do-i-get-my-instamapper-device-and-api-key/" target="_blank">How?</a>
+				You can connect a Boost Mobile phone or any device that runs Instamapper to Geoloqi.com by entering your Instamapper key. As soon as you enter your key here, Geoloqi will begin importing your location. <a href="http://geoloqi.com/blog/2010/08/how-do-i-get-my-instamapper-device-and-api-key/" target="_blank">How?</a>
 			</div>
 		</td>
 		<td>
