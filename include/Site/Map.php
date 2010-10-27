@@ -142,7 +142,7 @@ class Site_Map extends Site
 			$data['date_to'] = strtotime('+' . post('share_expiration') . ' minutes');
 
 		$response = $this->api->request('link/create', $data);
-		
+
 		ob_start();
 ?>
 		<div class="share_popup">

@@ -27,6 +27,7 @@ switch($controllerName)
 	case 'settings':
 	case 'account':
 	case 'home':
+	case 'help':
 	case 'oauth':
 	case 'error':
 		require_once('Site/' . ucfirst($controllerName) . '.php');
