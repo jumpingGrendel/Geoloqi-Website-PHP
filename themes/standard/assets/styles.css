@@ -352,6 +352,9 @@ img {
 	padding: 6px;
 }
 
+.settings-layers select{
+	width:150px;
+}
 
 
 #GB_overlay {

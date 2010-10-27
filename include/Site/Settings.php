@@ -179,7 +179,24 @@ class Site_Settings extends Site
 	
 	public function layer()
 	{
-		$this->data['user_layers'] = $this->api->request('layer/list', array());		
+		$this->data['user_layers'] = $this->api->request('layer/list', array());
+		$this->data['layer_subscriptions'] = $this->api->request('layer/subscriptions', array());
+		$this->data['layers_near_you'] = $this->api->request('layer/nearyou', array());
+		$this->data['featured_layers'] = $this->api->request('layer/featured', array());
+	}
+
+	public function layer_ajax()
+	{
+		if(post('action') == 'save-privacy')
+		{
+			$result = $this->api->request('', array('token'=>post('token')));
+			if(k($result, 'result') == 'ok')
+				return array('result'=>'ok', 'deleted'=>post('token'));
+			else
+				return $result;
+		}
+		else
+			return array('result'=>'null');
 	}
 	
 }
