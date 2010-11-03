@@ -181,10 +181,11 @@ class Site_Settings extends Site
 	
 	public function layer()
 	{
-		$this->data['user_layers'] = $this->api->request('layer/list', array());
-		$this->data['layer_subscriptions'] = $this->api->request('layer/subscriptions', array());
-		$this->data['layers_near_you'] = $this->api->request('layer/nearyou', array());
-		$this->data['featured_layers'] = $this->api->request('layer/featured', array());
+		$this->data['user_id'] = session('user_profile')->user_id;
+		$this->data['user_layers'] = $this->api->request('layer/list');
+		$this->data['layer_subscriptions'] = $this->api->request('layer/subscriptions');
+		$this->data['layers_near_you'] = $this->api->request('layer/near_you');
+		$this->data['featured_layers'] = $this->api->request('layer/featured');
 	}
 
 	public function layer_ajax()

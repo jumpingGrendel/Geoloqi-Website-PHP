@@ -15,7 +15,7 @@ if(GEOLOQI_ENABLE_LAYERS)
 			<td colspan="2" style="text-align:right"><input type="button" class="submit" value="Add a New Layer" /></td>
 		</tr>
 		<tr style="text-align:left; background-color:#CCC;">
-			<th style="width:40px; text-align:center"><input type="checkbox" name="" value="" oncheck="$('your_layers').checked" /></th>
+			<th style="width:40px; text-align:center"></th>
 			<th>Your Layers</th>
 			<th></th>
 			<th style="width:100px;"></th>
@@ -33,9 +33,8 @@ if(GEOLOQI_ENABLE_LAYERS)
 				<div class="description">
 					<select name="user_layer[<?=$layer->id?>]" class="field" style="width:150px;">
 						<option value="0" <?=($layer->public==0)?'selected="selected"':''?>>Private</option>
-						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->users->id)?'editable':'non editable' ?>)</option>
+						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $user_id)?'editable':'non editable' ?>)</option>
 					</select>
-					<input type="button" value="Save" class="submit save-privacy" />
 				</div>
 			</td>
 			<td>
@@ -44,7 +43,7 @@ if(GEOLOQI_ENABLE_LAYERS)
 		</tr>
 		<? endforeach; ?>
 		<tr style="text-align:left; background-color:#CCC;">
-			<th style="width:40px; text-align:center"><input type="checkbox" name="" value="" /></th>
+			<th style="width:40px; text-align:center"></th>
 			<th style="width:50%">Subscriptions</th>
 			<th></th>
 			<th style="width:100px;"></th>
@@ -62,9 +61,8 @@ if(GEOLOQI_ENABLE_LAYERS)
 				<div class="description">
 					<select name="user_layer[<?=$layer->id?>]" class="field" style="width:150px">
 						<option value="0" <?=($layer->public==0)?'selected="selected"':''?>>Private</option>
-						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->users->id)?'editable':'non editable' ?>)</option>
+						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $user_id)?'editable':'non editable' ?>)</option>
 					</select>
-					<input type="submit" value="Save" class="submit" id="btn_save" />
 				</div>
 			</td>
 			<td>
@@ -73,7 +71,7 @@ if(GEOLOQI_ENABLE_LAYERS)
 		</tr>
 		<? endforeach; ?>
 		<tr style="text-align:left; background-color:#CCC;">
-			<th style="width:40px; text-align:center"><input type="checkbox" name="" value="" /></th>
+			<th style="width:40px; text-align:center"></th>
 			<th style="width:50%">New Layers Near You</th>
 			<th></th>
 			<th style="width:100px;"></th>
@@ -91,9 +89,8 @@ if(GEOLOQI_ENABLE_LAYERS)
 				<div class="description">
 					<select name="user_layer[<?=$layer->id?>]" class="field" style="width:150px">
 						<option value="0" <?=($layer->public==0)?'selected="selected"':''?>>Private</option>
-						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->users->id)?'editable':'non editable' ?>)</option>
+						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $user_id)?'editable':'non editable' ?>)</option>
 					</select>
-					<input type="submit" value="Save" class="submit" id="btn_save" />
 				</div>
 			</td>
 			<td>
@@ -102,7 +99,7 @@ if(GEOLOQI_ENABLE_LAYERS)
 		</tr>
 		<? endforeach; ?>
 		<tr style="text-align:left; background-color:#CCC;">
-			<th style="width:40px; text-align:center"><input type="checkbox" name="" value="" /></th>
+			<th style="width:40px; text-align:center"></th>
 			<th style="width:50%">Featured Layers</th>
 			<th></th>
 			<th style="width:100px;"></th>
@@ -120,9 +117,8 @@ if(GEOLOQI_ENABLE_LAYERS)
 				<div class="description">
 					<select name="user_layer[<?=$layer->id?>]" class="field" style="width:150px">
 						<option value="0" <?=($layer->public==0)?'selected="selected"':''?>>Private</option>
-						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $this->users->id)?'editable':'non editable' ?>)</option>
+						<option value="1" <?=($layer->public==1)?'selected="selected"':''?>>Public (<?=($layer->user_id == $user_id)?'editable':'non editable' ?>)</option>
 					</select>
-					<input type="submit" value="Save" class="submit" id="btn_save" />
 				</div>
 			</td>
 			<td>
