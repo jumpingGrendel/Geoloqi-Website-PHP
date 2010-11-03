@@ -72,13 +72,16 @@ var geonote_circle;
 			set_radius_checkboxes();
 		}).css({cursor: "pointer"});
 		
-		set_radius_checkboxes();
-
 		$("#geonote_create").unbind("click").bind("click", function(){
+			if($("#geonote_email").val() == $("#geonote_email").attr("title")){
+				$("#geonote_email").val("");
+			}
+			
 			$.post("/map/create_geonote.ajax?username=" + username, {
 				lat: geonote_marker.getPosition().lat(),
 				lng: geonote_marker.getPosition().lng(),
 				radius: geonote_circle.getRadius(),
+				email: $("#geonote_email").val(),
 				text: $("#geonote_text").val()
 			}, function(data){
 				if(data.result != "ok"){
@@ -86,10 +89,32 @@ var geonote_circle;
 				}else{
 					$("#geonote_success").show();
 					$("#sidebar_geonote .panel-title").click();
+					gb_show({message: "Your Geonote was sent!"});
+					setTimeout(gb_hide, 1000);
 				}
 			}, "json");
 		});
-	
+
+		$("#geonote_email").unbind("focus").bind("focus", function(){
+			if($(this).val() == $(this).attr("title")){
+				$(this).val("").css({color: "#000"});
+			}
+		}).unbind("change blur").bind("change blur", function(){
+			if($(this).val() == "" || $(this).val() == $(this).attr("title")){
+				$(this).val($(this).attr("title")).css({color: "#999"});
+			}
+		}).blur();
+		
+		$("#geonote_text").unbind("keyup").bind("keyup", function(){
+			if($(this).val() == ""){
+				$("#geonote_create").attr("disabled", "disabled");
+			}else{
+				$("#geonote_create").removeAttr("disabled");
+			}
+		});
+		
+		set_radius_checkboxes();
+
 		$("#geonote_success").hide();
 		$("#geonote_prompt").show();
 		map.setZoom(15);

@@ -15,6 +15,8 @@ echo 'var thinning = ' . $thinning . ";\n";
 echo 'var self_map = ' . ($self_map ? 1 : 0) . ";\n";
 echo 'var username = "' . $username . '";' . "\n";
 echo 'var share_token = "' . $share_token . '";' . "\n";
+echo 'var rough = ' . json_encode($rough) . ';' . "\n";
+echo 'var last = ' . json_encode($last) . ';' . "\n";
 
 ?>
 </script>
@@ -53,10 +55,18 @@ echo 'var share_token = "' . $share_token . '";' . "\n";
 				<div class="panel-title">Leave a Geonote</div>
 				<div class="panel-content" style="display: none;">
 					<div id="geonote_prompt" style="margin-top: 10px;">
-					<div class="small">Leave a short note that will be sent to <?=$name?> at a specific location.</div>
+					<div class="small">Leave a short note that will be sent to <?=$geonote_to?> at a specific location.</div>
+<?php 
+						if($enable_geonote_confirmation)
+						{
+?>
+						<input type="text" id="geonote_email" class="text" title="Your Email (optional)" value="<?=$geonote_from?>" /><br />
+<?php							
+						}
+?>					
 						<textarea id="geonote_text" maxlen="140"></textarea>
-						<input type="button" id="geonote_create" value="Create" class="submit" />
-						<div style="font-size: 9pt;"><table cellpadding="0" cellspacing="0">
+						<input type="button" id="geonote_create" value="Create" class="submit" disabled="disabled" />
+						<div style="font-size: 9pt;"><table cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td>
 									<input type="radio" class="radius_size" name="radius_size" id="radius_size_120" value="120" /> Block<br />

@@ -1,7 +1,6 @@
 
 var map; // The main map drawn on the screen
 var hiddenMap; // An invisible map used to stash objects if we want to hide them
-var last = false;
 var lastPosition = false;
 var thePath = false;
 var marker = false; // The marker of the user's location
@@ -10,13 +9,21 @@ var polyline;		// The line showing the user's history trail
 var updateLocation = true; // Whether to continue asking for location updates, set to false when a link expires
 var updateLocationTimer;   // The return value of the setTimeout doing location updates
 var location_error = false;  // Set to true when an error is received from the API
+var initial_zoom = 14;
 
 $(function(){
-	var latlng = new google.maps.LatLng(45.51, -122.63);
+	var latlng;
+	if(rough){
+		latlng = new google.maps.LatLng(rough.latitude, rough.longitude);
+		updateLocation = false;
+		initial_zoom = 13;
+	}else if(last){
+		latlng = new google.maps.LatLng(last.location.position.latitude, last.location.position.longitude);
+	}
 
 	// Set up the map
 	var myOptions = {
-		zoom: 14,
+		zoom: initial_zoom,
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false
@@ -35,7 +42,7 @@ $(function(){
 
 	if(self_map){
 		get_realtime_history();
-	}else{
+	}else if(last){
 		get_single_point();
 	}
 

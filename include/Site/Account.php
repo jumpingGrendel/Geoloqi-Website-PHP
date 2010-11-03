@@ -40,5 +40,26 @@ class Site_Account extends Site
 		session_destroy();
 		$this->redirect('/');
 	}
+	
+	public function unsubscribe()
+	{
+		if($this->post)
+		{
+			$this->api->request('user/unsubscribe', array(
+				'email' => post('unsubscribe_email'),
+				'referer' => session('unsubscribe_referer')
+			));
+			$this->data['confirmation'] = TRUE;
+		}
+		else
+		{
+			$_SESSION['unsubscribe_referer'] = k($_SERVER, 'HTTP_REFERER');
+			
+			if(get('key') && ($email=base64_decode(get('key'))))
+				$this->data['email'] = $email;
+			else
+				$this->data['email'] = '';
+		}
+	}
 }
 ?>

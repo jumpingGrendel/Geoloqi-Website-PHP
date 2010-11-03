@@ -136,7 +136,7 @@ img {
 	font-size: 0.8em;
 }
 
-.sidebar-panel textarea {
+.sidebar-panel textarea, .sidebar-panel input.text {
 	width: 200px;
 	margin: 0 auto;
 }
@@ -304,7 +304,7 @@ img {
 	color: #f17700;
 }
 
-.settings table .submit {
+.settings .submit {
 	border: 3px #666 solid;
 	font-size: 18px;
 	padding: 2px 18px;
@@ -312,7 +312,7 @@ img {
 	border-radius: 4px;
 }
 
-.settings table .submit.small {
+.settings .submit.small {
 	font-size: 14px;
 	padding: 2px 14px;
 }

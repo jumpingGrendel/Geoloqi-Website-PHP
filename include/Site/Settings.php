@@ -38,6 +38,7 @@ class Site_Settings extends Site
 		$this->data['public_location'] = $_SESSION['user_privacy']->public_location;
 		$this->data['public_geonotes'] = $_SESSION['user_privacy']->public_geonotes;
 		$this->data['public_geonote_email'] = $_SESSION['user_privacy']->public_geonote_email;
+		$this->data['email_geonotes'] = $_SESSION['user_privacy']->email_geonotes;
 		$this->data['default_share_expiration'] = $_SESSION['user_privacy']->default_share_expiration;
 		$this->data['has_password'] = $_SESSION['user_privacy']->has_password;
 	}
@@ -48,6 +49,7 @@ class Site_Settings extends Site
 			'public_location' => post('public_location'),
 			'public_geonotes' => post('public_geonotes'),
 			'public_geonote_email' => post('public_geonote_email'),
+			'email_geonotes' => post('email_geonotes'),
 			'default_share_expiration' => post('default_share_expiration')
 		));
 		$_SESSION['user_privacy'] = $this->api->request('account/privacy');

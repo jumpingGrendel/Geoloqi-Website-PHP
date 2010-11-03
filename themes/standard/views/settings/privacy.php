@@ -55,6 +55,13 @@ include($this->theme_file('settings/menu.php'));
 	</tr>
 	<tr>
 		<td colspan="2">
+			<div class="label">Send me an email when</div>
+			<input type="checkbox" id="email_geonotes" class="checkbox" <?= $email_geonotes ? 'checked' : '' ?> />
+			<div class="description">I pick up a Geonote</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
 			<input type="submit" value="Save" class="submit" id="btn_save" />
 		</td>
 	</tr>
