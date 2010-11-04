@@ -10,6 +10,7 @@ var updateLocation = true; // Whether to continue asking for location updates, s
 var updateLocationTimer;   // The return value of the setTimeout doing location updates
 var location_error = false;  // Set to true when an error is received from the API
 var initial_zoom = 14;
+var geonote_hash_triggered = false;
 
 $(function(){
 	var latlng;
@@ -98,6 +99,7 @@ $(function(){
 			if(updateLocation){
 				updateLocationTimer = setTimeout(get_realtime_history, 10000);
 			}
+			open_init_geonote_panel();
 		});
 	}
 	
@@ -110,6 +112,7 @@ $(function(){
 			if(updateLocation){
 				updateLocationTimer = setTimeout(get_single_point, 10000);
 			}
+			open_init_geonote_panel();
 		});
 	}
 	
@@ -155,6 +158,10 @@ $(function(){
 			});
 		}, "json");
 	});
+
+	if(rough){
+		open_init_geonote_panel();
+	}
 
 	function resize_map(){
 		$("#map-container").css("height", (window.innerHeight-$("#map-footer").height())+"px").css("width", (window.innerWidth-$("#sidebar").width())+"px");
@@ -248,5 +255,13 @@ $(function(){
 		
 	}
 
+	function open_init_geonote_panel(){
+		if(geonote_hash_triggered == false){
+			if(window.location.hash == "#geonote"){
+				$("#sidebar_geonote .panel-title").click();
+			}
+			geonote_hash_triggered = true;
+		}
+	}
 
 });
