@@ -473,12 +473,14 @@ img {
 	border: 1px #ccc solid;
 	padding: 0 15px;
 	height: 40px;
+	font-family: "Lucida Grande", verdana, arial, sans-serif;
 	font-size: 15pt;
 	text-shadow: 1px 1px 0 #FFFFFF;
 	color: #333;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	cursor: pointer;
+	text-decoration: none;
 }
 
 .btn:hover {

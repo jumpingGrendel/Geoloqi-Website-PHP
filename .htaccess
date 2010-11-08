@@ -9,10 +9,10 @@ RewriteRule ^(settings|help)$ index.php?controller=$1&method=index [QSA,L]
 RewriteRule ^error$ index.php?controller=error&method=index [QSA,L]
 
 # AJAX controllers (i.e. geoloqi.com/settings/profile.ajax)
-RewriteRule ^(account|connect|map|settings|help)/([^/\.]+)\.ajax$ index.php?controller=$1&method=$2&mode=ajax [QSA,L]
+RewriteRule ^(account|connect|map|settings|help|oauth)/([^/\.]+)\.ajax$ index.php?controller=$1&method=$2&mode=ajax [QSA,L]
 
 # All other pages (i.e. geoloqi.com/settings/profile)
-RewriteRule ^(account|connect|map|settings|help)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
+RewriteRule ^(account|connect|map|settings|help|oauth)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
 
 # User pages short form (geoloqi.com/aaronpk)
 RewriteRule ^([^/\.]+)$ index.php?controller=map&method=index&value=$1 [QSA,L]

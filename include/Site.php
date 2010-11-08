@@ -100,13 +100,16 @@ class Site
 			$this->user = $_SESSION['user_profile'];
 			$this->data['username'] = $_SESSION['username'];
 		}
-		else
+		if($this->force_login)
+			$this->redirect_if_not_logged_in();
+	}
+	
+	protected function redirect_if_not_logged_in()
+	{
+		if(!$this->data['logged_in'])
 		{
-			if($this->force_login)
-			{
-				header('Location: /');
-				die();
-			}
+			header('Location: /');
+			die();
 		}
 	}
 	

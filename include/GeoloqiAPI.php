@@ -166,6 +166,14 @@ class GeoloqiAPI
 
 		echo '</pre>';
 		$this->log(ob_get_clean());
+
+		// If the API responded with a 30x redirect header, redirect the browser
+		// This will probably only happen on 3rd party OAuth flows
+		if(k($headers, 'Location'))
+		{
+			header('Location: ' . $headers['Location']);
+			die();
+		}
 		
 		if($data === null)
 		{
