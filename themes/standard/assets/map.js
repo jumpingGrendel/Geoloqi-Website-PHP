@@ -86,13 +86,21 @@ $(function(){
 	$("#profile-info .last-time .relative").mouseover(function(){
 		$("#profile-info .last-time .absolute").show();
 	});
-	
+
+	var first_history = true;
 	function get_realtime_history(){
-		$.getJSON("/map/history.ajax", {
+		var params = {
 			count: 100,
-			thinning: thinning,
-			date_from: (last ? last.date : 0)
-		}, function(data){
+			thinning: thinning
+		};
+		if(first_history){
+			params.date_from = (last ? last.date : 0);
+		}else{
+			params.date_to = (last ? last.date : 0);
+			first_history = false;
+		}
+		$.getJSON("/map/history.ajax", params, 
+		function(data){
 			for(var i in data){
 				receive_location(data[i]);
 			}
