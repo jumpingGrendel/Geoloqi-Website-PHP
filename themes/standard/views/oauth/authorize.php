@@ -12,7 +12,7 @@ $this->head[] = '<link rel="stylesheet" type="text/css" href="' . $theme_root . 
 
 	<h2>An application would like to connect to your account</h2>
 
-	<p>The application <?=$application_name?> by <?=$requester_name?> would like to connect to your Geoloqi account.</p>
+	<p>The application <b><?=$application_name?></b> by <?=$requester_name?> would like to connect to your Geoloqi account.</p>
 	<p><b><?=$application_name?> wants to:</b></p>
 	
 	<ul>
@@ -27,7 +27,7 @@ $this->head[] = '<link rel="stylesheet" type="text/css" href="' . $theme_root . 
 	if($logged_in){
 	?>	
 		<div style="text-align: center;">
-			<h2>Allow <?=$application_name?> access?</h2>
+			<h3>Allow <?=$application_name?> access?</h3>
 		</div>
 		<div style="text-align: center;">
 			<input type="submit" name="accept" class="btn btn-cancel" value="Deny" />
@@ -37,7 +37,7 @@ $this->head[] = '<link rel="stylesheet" type="text/css" href="' . $theme_root . 
 	}else{
 	?>
 		<div style="text-align: center;">
-			<input type="submit" class="btn btn-ok" value="Log In" />
+			<input type="submit" name="accept" class="btn btn-ok" value="Log In" />
 		</div>
 	<?php 
 	}

@@ -118,7 +118,12 @@ class Site
 	 */
 	protected function redirect_after_login()
 	{
-		if($_SESSION['user_profile']->phone == '')
+		if(session('redirect_after_login'))
+		{
+			header('Location: ' . session('redirect_after_login'));
+			unset($_SESSION['redirect_after_login']);
+		}
+		elseif($_SESSION['user_profile']->phone == '')
 			header('Location: /settings/profile');
 		else
 			header('Location: /' . $_SESSION['username']);
