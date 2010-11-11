@@ -63,7 +63,7 @@ class Site_Oauth extends Site
 			#$this->data['scopes'][] = array('scope'=>'layer', 'description'=>'create layers in my account');
 			$this->data['scopes'][] = array('scope'=>'subscribe', 'description'=>'subscribe me to layers');
 			#$this->data['scopes'][] = array('scope'=>'update_profile', 'description'=>'update my profile information');
-			$this->data['scopes'][] = array('scope'=>'location_history', 'description'=>'read my entire location history');
+			#$this->data['scopes'][] = array('scope'=>'location_history', 'description'=>'read my entire location history');
 			#$this->data['scopes'][] = array('scope'=>'share', 'description'=>'create shared links to access my location');
 			$this->data['application_name'] = $client->application_name;
 			$this->data['requester_name'] = $client->requester_name;

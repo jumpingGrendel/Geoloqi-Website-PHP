@@ -79,7 +79,21 @@ include($this->theme_file('settings/menu.php'));
 		<td class="right">
 			<select id="profile_timezone" name="timezone" class="field">
 			<?php
-			$tz = array('America/Puerto_Rico', 'America/New_York', 'America/Chicago', 'America/Boise', 'America/Phoenix', 'America/Los_Angeles', 'America/Juneau', 'UTC');
+			$tz = array(
+				'America/Boise', 
+				'America/Chicago', 
+				'America/Juneau',
+				'America/Los_Angeles', 
+				'America/New_York', 
+				'America/Phoenix', 
+				'Europe/Berlin',
+				'Europe/Copenhagen',
+				'Europe/London',
+				'Europe/Madrid',
+				'Europe/Oslo',
+				'Europe/Paris',
+				'UTC'
+			);
 			foreach ($tz as $z) {
 				if ($z == $profile_timezone) {
 					echo '<option value="'.$z.'" selected>'.$z.'</option>';
