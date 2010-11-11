@@ -1,5 +1,6 @@
 <?php 
 require_once('Grammar.php');
+require_once('InstamapperClient.php');
 
 class Site_Settings extends Site
 {
@@ -67,20 +68,33 @@ class Site_Settings extends Site
 	
 	public function connections()
 	{
+		$response = $this->api->request('account/connections');
+		$this->data['connections'] = $response;
+		
 		$response = $this->api->request('account/permanent_token');
-		$this->data['instamapper_key'] = $_SESSION['user_profile']->instamapper_key;
 		$this->data['permanent_token'] = $response->access_token;
+		
+		$this->data['instamapper_devicekey'] = $_SESSION['user_profile']->instamapper_devicekey;
 	}
 	
 	public function connections_ajax()
 	{
+		// Log in to Instamapper and make a new device
+		$instamapper = new InstamapperClient();
+		$keys = $instamapper->add_device($this->user->username);
+		
+		if($keys == FALSE)
+			return array('error'=>'Error creating Instamapper device. Please contact us to help solve this.');
+		
 		// Set the instamapper key in the profile
 		$response = $this->api->request('account/profile', array(
-			'instamapper_key' => post('instamapper_key')
+			'instamapper_key' => $keys['api_key'],
+			'instamapper_devicekey' => $keys['device_key']
 		));
 		// Re-fetch the user's profile and store it in the session
 		$_SESSION['user_profile'] = $this->api->request('account/profile');
-		return $response;
+
+		return array('device_key' => $keys['device_key']);
 	}
 	
 	public function get_permanent_token_ajax()

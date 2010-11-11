@@ -23,6 +23,13 @@ define('GEOLOQI_ENABLE_SHARED_SEND', FALSE);
 define('GEOLOQI_ENABLE_MAPOPTIONS', FALSE);
 
 /**
+ * Enter your instamapper account here so the website can add devices to it
+ */
+define('INSTAMAPPER_USERNAME', '');
+define('INSTAMAPPER_PASSWORD', '');
+define('INSTAMAPPER_COOKIEFILE', '');
+
+/**
  * Twitter client information
  * Go to http://dev.twitter.com to set up your application
  */

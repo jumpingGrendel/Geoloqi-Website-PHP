@@ -8,18 +8,20 @@ $(function(){
 		}, "json");
 	});
 
-	$("#instamapper_save").click(function(){
+	$("#instamapper_create").click(function(){
 		gb_show({
-			message: "Saving...",
-			width: 300,
+			message: "Creating Device Key...",
+			width: 380,
 			height: 60
 		});
 		
 		$.post("/settings/connections.ajax", {
-			instamapper_key: $("#instamapper_key").val()
+			action: "create_instamapper"
 		}, function(data){
 			gb_update("Ok!");
 			setTimeout(gb_hide, 1500);
-		});
+			$("#instamapper_create").hide();
+			$("#instamapper_devicekey").val(data.device_key).show();
+		}, "json");
 	});
 });

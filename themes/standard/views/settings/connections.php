@@ -95,14 +95,16 @@ include($this->theme_file('settings/menu.php'));
 			<div class="app_icon"><img src="<?=$image_root?>apps/instamapper-geoloqi.png" width="64" height="64" /></div>
 		</td>
 		<td>
-			<div class="label">Instamapper API Key</div>
+			<div class="label">Instamapper Device Key</div>
 			<div class="description">
-				You can connect a Boost Mobile phone or any device that runs Instamapper to Geoloqi.com by entering your Instamapper key. As soon as you enter your key here, Geoloqi will begin importing your location. <a href="http://geoloqi.com/blog/2010/08/how-do-i-get-my-instamapper-device-and-api-key/" target="_blank">How?</a>
+				You can connect any phone that runs Instamapper to Geoloqi.com by creating an Instamapper device key. Once you create the key here, enter it into Instamapper on your phone.
 			</div>
 		</td>
 		<td>
-			<input type="text" id="instamapper_key" value="<?=$instamapper_key?>" class="text" />
-			<input type="button" class="submit" value="Save" id="instamapper_save" />
+<?php
+				echo '<input type="text" id="instamapper_devicekey" value="' . $instamapper_devicekey . '" class="text" style="' . ($instamapper_devicekey ? '' : 'display:none;') . '" />';
+				echo '<input type="button" class="submit" value="Create" id="instamapper_create" style="' . ($instamapper_devicekey ? 'display:none;' : '') . '" />';
+?>
 		</td>
 	</tr>
 	<!-- 
@@ -126,23 +128,29 @@ include($this->theme_file('settings/menu.php'));
 
 <div class="header">Applications</div>
 <table class="applications">
-	<!-- 
+<?php 
+	foreach($connections as $c):
+		$connected_date = new DateTime($c->date_approved);
+		$connected_date->setTimeZone(new DateTimeZone($this->user->timezone));
+?>
 	<tr>
 		<td>
-			<div class="app_icon"><img src="<?=$image_root?>apps/icecondor-geoloqi.png" width="64" height="64" /></div>
+			<!-- <div class="app_icon"><img src="<?=$image_root?>apps/geoloqi.png" width="64" height="64" /></div> -->
 		</td>
 		<td>
-			<div class="label">IceCondor</div>
-			<div class="author">by <a href="http://donpark.org/">Don Park</a></div>
+			<div class="label"><?=$c->application_name?></div>
+			<div class="author">by <a href="<?=$c->application_url?>"><?=$c->requester_name?></a></div>
 			<div class="description">
-				IceCondor is continuous location tracking. Publish your location on the web. Also follows people and events in real-time from multiple services. See demonstration video at http://icecondor.com
+				<?=$c->application_description?>
 			</div>
 			<div class="info">
-				<a href="">Remove</a> &#x00B7; <span class="connected">connected on August 12 6:05pm</span> &#x00B7; <span class="scopes">last location, geonotes, sharing</span>
+				<!-- <a href="">Remove</a> &#x00B7; --><span class="connected">connected on <?=$connected_date->format('F j, Y g:ia')?></span><!-- &#x00B7; <span class="scopes">last location, geonotes, sharing</span>-->
 			</div>
 		</td>
 	</tr>
-	-->
+<?php 
+	endforeach;
+?>
 	<tr>
 		<td colspan="2">
 			<div class="application-1">Don't see an app here that does what you want?</div>
