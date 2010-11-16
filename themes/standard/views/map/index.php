@@ -212,10 +212,10 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 				echo '<div id="map-disabled" style=""><div class="message">';
 					echo '<p>Oops! Looks like you haven\'t started tracking yet! Did you:</p>
 						<ul>
-							<li>Download the <a href="/app-download">Geoloqi app</a>?</li>
+							<li>Download the <a href="http://geoloqi.com/blog/app-download">Geoloqi app</a>?</li>
 							<li>or <a href="http://geoloqi.com/blog/2010/08/how-do-i-get-my-instamapper-device-and-api-key/">enter your Instamapper device key</a>?</li>
 							<li>Walk around the block?</li>
-							<li>Check out the <a href="/faq">FAQ</a> for more questions</li>
+							<li>Check out the <a href="http://geoloqi.com/blog/faq">FAQ</a> for more questions</li>
 						</ul>';
 				echo '</div></div>';
 			}
