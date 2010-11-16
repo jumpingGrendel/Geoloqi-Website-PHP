@@ -73,6 +73,30 @@ img {
 	margin-top: 0;
 }
 
+#map-disabled {
+	position: absolute;
+	top: 0;
+	background-color: #000; 
+	-moz-opacity: 0.7; 
+	opacity: 0.7;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+#map-disabled .message {
+	width: 500px;
+	margin: 0 auto;
+	font-size: 20pt;
+}
+#map-disabled .message ul {
+	text-align: left;
+	margin-left: 14px;
+	font-size: 15pt;
+}
+#map-disabled .message a {
+	color: #3190B5;
+}
+
 #sidebar {
 	width: 240px;
 	background-color: #ccc;
@@ -96,6 +120,7 @@ img {
 }
 #sidebar #geoloqi-logo {
 	position: relative;
+	display: block;
 	left: 0;
 	top: 0;
 	margin: 0 auto;

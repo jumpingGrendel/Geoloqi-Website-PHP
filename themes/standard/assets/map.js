@@ -6,20 +6,30 @@ var thePath = false;
 var marker = false; // The marker of the user's location
 var autoPan = true; // pan the map when a new point is received
 var polyline;		// The line showing the user's history trail
+var latlng;
 var updateLocation = true; // Whether to continue asking for location updates, set to false when a link expires
 var updateLocationTimer;   // The return value of the setTimeout doing location updates
 var location_error = false;  // Set to true when an error is received from the API
 var initial_zoom = 14;
 var geonote_hash_triggered = false;
+var first_history = true; // Only true before any history has loaded
 
 $(function(){
-	var latlng;
-	if(rough){
+	/**
+	 * Setup stage
+	 */
+	
+	// Set up the map center/zoom based on what mode we are looking at
+	if(rough && (typeof rough.error == "undefined")){
 		latlng = new google.maps.LatLng(rough.latitude, rough.longitude);
 		updateLocation = false;
 		initial_zoom = 13;
-	}else if(last){
+	}else if(last && (typeof last.error == "undefined")){
 		latlng = new google.maps.LatLng(last.location.position.latitude, last.location.position.longitude);
+	}else{
+		// There is no exact or rough location given. This can be for a number of reasons. Show a view of the earth. The error HTML will be drawn from index.php
+		latlng = new google.maps.LatLng(30, -30);
+		initial_zoom = 2;
 	}
 
 	// Set up the map
@@ -29,17 +39,22 @@ $(function(){
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		mapTypeControl: false
 	};
+	// Create the main map
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
+	// Create the hidden map in a secret div
 	hiddenMap = new google.maps.Map(document.getElementById("hiddenMap"), myOptions);
 	
-	resize_map();
-
 	// Dragging the map turns off auto-pan
 	google.maps.event.addListener(map, 'dragstart', function(){
 		autoPan = false;
 	});
-	
+
+	// Bind to the window resize event
 	$(window).resize(resize_map);
+
+	bind_sidebar_panels();
+	
+	resize_map();
 
 	if(self_map){
 		get_realtime_history();
@@ -48,133 +63,42 @@ $(function(){
 	}
 
 	// Updates the timestamp in the profile section continuously by monitoring the last point received 
-	setInterval(function(){
-		if(updateLocation && lastPosition){
-			var lastDate = new Date((last.date_ts+"000") * 1);
-			var hrs = lastDate.getHours();
-			hrs = (hrs < 10 ? "0" + hrs : hrs);
-			var mins = lastDate.getMinutes();
-			mins = (mins < 10 ? "0" + mins : mins);
-			var secs = lastDate.getSeconds();
-			secs = (secs < 10 ? "0" + secs : secs);
-			var dateFormatted = (lastDate.getMonth()+1) + "/" + lastDate.getDate() + "/" + lastDate.getFullYear() + " " + hrs + ":" + mins + ":" + secs;
-			
-			var now = new Date();
-			var diff = Math.round((now.getTime() - lastDate.getTime()) / 1000);
-			if(diff > 86400){
-				$("#profile-info .last-time .relative").hide();
-				$("#profile-info .last-time .absolute").show();
-			}else{
-				if(diff < 60){
-					diff = diff + " seconds ago";
-				}else if(diff < 60*60){
-					diffTxt = Math.floor(diff / 60) + "m ";
-					diffTxt += (diff % 60) + "s ago";
-					diff = diffTxt;
-				}else if(diff < 60*60*24){
-					diffTxt = Math.floor(diff / (60*60)) + "h ";
-					diffTxt += (Math.floor(diff / 60) % 60) + "m ago";
-					diff = diffTxt;
-				}
-			}
-			
-			$("#profile-info .last-time .relative").text(diff);
-			$("#profile-info .last-time .absolute").text(dateFormatted);
-		}
-	}, 1000);
-	
+	setInterval(update_profile_timestamp, 1000);
+
+	// Mouseover the timestamp in the profile to show the absolute timestamp
 	$("#profile-info .last-time .relative").mouseover(function(){
 		$("#profile-info .last-time .absolute").show();
 	});
 
-	var first_history = true;
-	function get_realtime_history(){
-		var params = {
-			count: 100,
-			thinning: thinning
-		};
-		if(first_history){
-			params.date_from = (last ? last.date : 0);
-		}else{
-			params.date_to = (last ? last.date : 0);
-			first_history = false;
-		}
-		$.getJSON("/map/history.ajax", params, 
-		function(data){
-			for(var i in data){
-				receive_location(data[i]);
-			}
-			if(updateLocation){
-				updateLocationTimer = setTimeout(get_realtime_history, 10000);
-			}
-			open_init_geonote_panel();
-		});
-	}
-	
-	function get_single_point(){
-		$.getJSON("/map/last.ajax",{
-			username: username,
-			token: share_token
-		}, function(data){
-			receive_location(data);
-			if(updateLocation){
-				updateLocationTimer = setTimeout(get_single_point, 10000);
-			}
-			open_init_geonote_panel();
-		});
-	}
-	
-	/**
-	 * Collapsible sidebar panels
-	 */
-	$(".sidebar-panel .panel-title").hover(function(){
-		$(this).addClass("hover");
-	}, function(){
-		$(this).removeClass("hover");
-	});
-	// A sidebar title was clicked, open or close the panel and run the corresponding function
-	$(".sidebar-panel .panel-title").click(function(){
-		if($(this).parent().hasClass("active")){
-			$(this).parent().removeClass("active");
-			$(this).removeClass("active");
-			$(this).siblings(".panel-content").hide();
-			var f = $(this).parent().attr("id") + "_end";
-			eval(f + "();");
-		}else{
-			$(this).parent().addClass("active");
-			$(this).addClass("active");
-			$(this).siblings(".panel-content").show();
-			var f = $(this).parent().attr("id") + "_start";
-			eval(f + "();");
-		}
-	});
-
-	$("#share_btn").click(function(){
-		$.post("/map/share_link.ajax",{
-			share_expiration: $("#share_expiration").val(),
-			share_with: $("#share_with").val()
-		}, function(data){
-			if(typeof data.error != "undefined"){
-				gb_show({message: "There was a problem creating the shared link!"});
-				setTimeout(gb_hide, 1000);
-				return false;
-			}
-			$("#sidebar_sharelink .panel-title").click();
-			gb_show({
-				message: data.html,
-				height: 170
-			});
-		}, "json");
-	});
-
+	// If there was a rough history value it means they are not looking at their own, so they are most likely
+	// looking at someone's map who would allow geonotes to be sent. This will open the sidebar panel if #geonote is in the URL.
 	if(rough){
 		open_init_geonote_panel();
 	}
+	
+	/** 
+	 * Setup complete. Now define a bunch of functions
+	 */
 
 	function resize_map(){
 		$("#map-container").css("height", (window.innerHeight-$("#map-footer").height())+"px").css("width", (window.innerWidth-$("#sidebar").width())+"px");
 		$("#map").css("height", "100%").css("width", "100%");
 		google.maps.event.trigger(map, 'resize');
+		resize_errormessage();
+	}
+	
+	function resize_errormessage(){
+		if($("#map-disabled").length){
+			$("#map-disabled").css("height", $("#map-container").height()).css("width", $("#map-container").width());
+			$("#map-disabled .message").css("margin-top", Math.round(($("#map-container").height() / 2) - ($("#map-disabled .message").height() / 2)));
+			//setTimeout(function(){
+				// Disable the sidebar dropdown panels. Needs to be done in a settimeout because the event hasn't been bound at this time yet.
+				// Kind of hacky, but shouldn't cause any confusion since it's unlikely they would have had a chance to click one yet anyway.
+				$(".sidebar-panel .panel-title").unbind("click mouseover mouseout");
+			//}, 1000);
+			updateLocation = false;
+			location_error = true;  // prevent the other greybox from popping up
+		}
 	}
 
 	function receive_location(l){
@@ -234,6 +158,42 @@ $(function(){
 		last = l;
 	}
 
+	function get_realtime_history(){
+		var params = {
+			count: 100,
+			thinning: thinning
+		};
+		if(first_history){
+			params.date_from = (last ? last.date : 0);
+		}else{
+			params.date_to = (last ? last.date : 0);
+			first_history = false;
+		}
+		$.getJSON("/map/history.ajax", params, 
+		function(data){
+			for(var i in data){
+				receive_location(data[i]);
+			}
+			if(updateLocation){
+				updateLocationTimer = setTimeout(get_realtime_history, 10000);
+			}
+			open_init_geonote_panel();
+		});
+	}
+	
+	function get_single_point(){
+		$.getJSON("/map/last.ajax",{
+			username: username,
+			token: share_token
+		}, function(data){
+			receive_location(data);
+			if(updateLocation){
+				updateLocationTimer = setTimeout(get_single_point, 10000);
+			}
+			open_init_geonote_panel();
+		});
+	}
+	
 	function sidebar_mapoptions_start(){
 		$("#profile-info .last-lat").hide();
 		$("#profile-info .last-lng").hide();
@@ -272,4 +232,83 @@ $(function(){
 		}
 	}
 
+	function bind_sidebar_panels(){
+		/**
+		 * Collapsible sidebar panels
+		 */
+		$(".sidebar-panel .panel-title").hover(function(){
+			$(this).addClass("hover");
+		}, function(){
+			$(this).removeClass("hover");
+		});
+		// A sidebar title was clicked, open or close the panel and run the corresponding function
+		$(".sidebar-panel .panel-title").click(function(){
+			if($(this).parent().hasClass("active")){
+				$(this).parent().removeClass("active");
+				$(this).removeClass("active");
+				$(this).siblings(".panel-content").hide();
+				var f = $(this).parent().attr("id") + "_end";
+				eval(f + "();");
+			}else{
+				$(this).parent().addClass("active");
+				$(this).addClass("active");
+				$(this).siblings(".panel-content").show();
+				var f = $(this).parent().attr("id") + "_start";
+				eval(f + "();");
+			}
+		});
+
+		$("#share_btn").click(function(){
+			$.post("/map/share_link.ajax",{
+				share_expiration: $("#share_expiration").val(),
+				share_with: $("#share_with").val()
+			}, function(data){
+				if(typeof data.error != "undefined"){
+					gb_show({message: "There was a problem creating the shared link!"});
+					setTimeout(gb_hide, 1000);
+					return false;
+				}
+				$("#sidebar_sharelink .panel-title").click();
+				gb_show({
+					message: data.html,
+					height: 170
+				});
+			}, "json");
+		});
+	}
+	
+	function update_profile_timestamp(){
+		if(updateLocation && lastPosition){
+			var lastDate = new Date((last.date_ts+"000") * 1);
+			var hrs = lastDate.getHours();
+			hrs = (hrs < 10 ? "0" + hrs : hrs);
+			var mins = lastDate.getMinutes();
+			mins = (mins < 10 ? "0" + mins : mins);
+			var secs = lastDate.getSeconds();
+			secs = (secs < 10 ? "0" + secs : secs);
+			var dateFormatted = (lastDate.getMonth()+1) + "/" + lastDate.getDate() + "/" + lastDate.getFullYear() + " " + hrs + ":" + mins + ":" + secs;
+			
+			var now = new Date();
+			var diff = Math.round((now.getTime() - lastDate.getTime()) / 1000);
+			if(diff > 86400){
+				$("#profile-info .last-time .relative").hide();
+				$("#profile-info .last-time .absolute").show();
+			}else{
+				if(diff < 60){
+					diff = diff + " seconds ago";
+				}else if(diff < 60*60){
+					diffTxt = Math.floor(diff / 60) + "m ";
+					diffTxt += (diff % 60) + "s ago";
+					diff = diffTxt;
+				}else if(diff < 60*60*24){
+					diffTxt = Math.floor(diff / (60*60)) + "h ";
+					diffTxt += (Math.floor(diff / 60) % 60) + "m ago";
+					diff = diffTxt;
+				}
+			}
+			
+			$("#profile-info .last-time .relative").text(diff);
+			$("#profile-info .last-time .absolute").text(dateFormatted);
+		}
+	}
 });

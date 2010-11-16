@@ -64,12 +64,15 @@ class Site_Map extends Site
 		if(k($profile, 'error') != NULL)
 			$this->error(HTTP_NOT_FOUND, $profile->error, $profile->error_description);
 
-		if($last && k($last, 'error') != NULL)
-			$this->error(HTTP_NOT_FOUND, $last->error, $last->error_description);
+		// Commented these out to allow the error message to pass through to the javascript
+		#if($rough && k($rough, 'error') != NULL)
+		#	$rough = FALSE;
+		#	$this->error(HTTP_NOT_FOUND, $rough->error, $rough->error_description);
 
-		if($rough && k($rough, 'error') != NULL)
-			$this->error(HTTP_NOT_FOUND, $rough->error, $rough->error_description);
-			
+		#if($last && k($last, 'error') != NULL)
+		#	$last = FALSE;
+		#	$this->error(HTTP_NOT_FOUND, $last->error, $last->error_description);
+
 		$this->data['last'] = $last;
 		$this->data['rough'] = $rough;
 		
@@ -109,6 +112,8 @@ class Site_Map extends Site
 		else
 			$this->data['share_token'] = '';
 		
+		$this->data['public_geonotes'] = $profile->public_geonotes;
+		$this->data['public_location'] = $profile->public_location;
 		$this->data['enable_geonotes'] = ($this->data['self_map'] || $profile->public_geonotes);
 		$this->data['enable_geonote_confirmation'] = (!$this->data['self_map'] && $profile->public_geonote_email);
 		$this->data['default_share_expiration'] = ($this->data['self_map'] ? $_SESSION['user_privacy']->default_share_expiration : 0);

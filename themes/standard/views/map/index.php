@@ -17,13 +17,15 @@ echo 'var username = "' . $username . '";' . "\n";
 echo 'var share_token = "' . $share_token . '";' . "\n";
 echo 'var rough = ' . json_encode($rough) . ';' . "\n";
 echo 'var last = ' . json_encode($last) . ';' . "\n";
+echo 'var public_geonotes = ' . ($public_geonotes ? 1 : 0) . ';' . "\n";
+echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 
 ?>
 </script>
 <table cellspacing="0" cellpadding="0" id="map-page">
 	<tr>
 		<td id="sidebar">
-			<div id="sidebar-logo"><div id="geoloqi-logo"></div></div>
+			<div id="sidebar-logo"><a id="geoloqi-logo" href="/settings"></a></div>
 			
 			<div id="profile-info" class="round sidebar-panel">
 				<div class="name"><?=$name?></div>
@@ -203,6 +205,39 @@ echo 'var last = ' . json_encode($last) . ';' . "\n";
 		</td>
 		<td id="map-container">
 			<div id="map"></div>
+<?php 
+			// If the user is looking at their own map, and there is no recent location, show a friendly error
+			if($self_map && ($last == FALSE || k($last, 'error')))
+			{
+				echo '<div id="map-disabled" style=""><div class="message">';
+					echo '<p>Oops! Looks like you haven\'t started tracking yet! Did you:</p>
+						<ul>
+							<li>Download the <a href="/app-download">Geoloqi app</a>?</li>
+							<li>or <a href="http://geoloqi.com/blog/2010/08/how-do-i-get-my-instamapper-device-and-api-key/">enter your Instamapper device key</a>?</li>
+							<li>Walk around the block?</li>
+							<li>Check out the <a href="/faq">FAQ</a> for more questions</li>
+						</ul>';
+				echo '</div></div>';
+			}
+			// When looking at someone else's map, a number of errors can occur
+			if(!$self_map)
+			{
+				// If they are sharing their location publicly and there was an error, or if they allow public geonotes and there was an error 
+				if(k($last, 'error') == 'no_recent_location' || k($rough, 'error') == 'no_recent_location')
+				{
+					echo '<div id="map-disabled" style=""><div class="message">';
+						echo 'This user hasn\'t logged any points yet.';
+					echo '</div></div>';
+				}
+				elseif(($e=k($last, 'error_description')) || ($e=k($rough, 'error_description')))
+				{
+					// This should catch unexpected errors
+					echo '<div id="map-disabled" style=""><div class="message">';
+						echo 'Oops! ' . $e;
+					echo '</div></div>';
+				}
+			}
+?>
 		</td>
 	</tr>
 	<tr>
