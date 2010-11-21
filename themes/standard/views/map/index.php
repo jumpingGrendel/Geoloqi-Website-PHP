@@ -116,11 +116,27 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 				}
 ?>
 				<tr>
+					<td colspan="2">
+						<div class="small">Description:</div>
+						<input type="text" id="share_description" />
+					</td>
+				</tr>
+				<tr>
 					<td>
-						Expire in:<br />
+						<div class="small">Expire in:</div>
 						<select id="share_expiration">
 						<?php
-						$dt = array('10'=>'10 minutes', '30'=>'30 minutes', '60'=>'1 hour', '120'=>'2 hours', '480'=>'8 hours', '0'=>'never');
+						$dt = array(
+							'10'=>'10 minutes',
+							'20'=>'20 minutes', 
+							'30'=>'30 minutes', 
+							'60'=>'1 hour', 
+							'120'=>'2 hours', 
+							'480'=>'8 hours',
+							'1440'=>'24 hours',
+							'5760'=>'4 days',
+							'10080'=>'7 days',
+							'0'=>'no time limit');
 						foreach ($dt as $k=>$t) {
 							if ($k == $default_share_expiration) {
 								echo '<option value="'.$k.'" selected>'.$t.'</option>';

@@ -171,6 +171,7 @@ class Site_Map extends Site
 		$data['date_from'] = time();
 		if(post('share_expiration'))
 			$data['date_to'] = strtotime('+' . post('share_expiration') . ' minutes');
+		$data['description'] = post('share_description');
 
 		$response = $this->api->request('link/create', $data);
 

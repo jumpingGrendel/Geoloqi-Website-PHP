@@ -261,6 +261,7 @@ $(function(){
 		$("#share_btn").click(function(){
 			$.post("/map/share_link.ajax",{
 				share_expiration: $("#share_expiration").val(),
+				share_description: $("#share_description").val(),
 				share_with: $("#share_with").val()
 			}, function(data){
 				if(typeof data.error != "undefined"){

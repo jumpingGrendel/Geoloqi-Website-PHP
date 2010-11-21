@@ -24,6 +24,7 @@ include($this->theme_file('settings/menu.php'));
 				{
 					echo '<tr>';
 						echo '<td>';
+							echo ($link->description ? $link->description . '<br />' : '');
 							echo '<a href="' . $link->url . '">' . str_replace('http://', '', ($link->short_url ? $link->short_url : $link->url)) . '</a><br />';
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
@@ -46,6 +47,7 @@ include($this->theme_file('settings/menu.php'));
 				{
 					echo '<tr>';
 						echo '<td>';
+							echo ($link->description ? $link->description . '<br />' : '');
 							echo str_replace('http://', '', ($link->short_url ? $link->short_url : $link->url)) . '<br />';
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
