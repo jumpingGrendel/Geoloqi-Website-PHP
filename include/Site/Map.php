@@ -139,8 +139,9 @@ class Site_Map extends Site
 	{
 		$params = array();
 		$params['sort'] = 'desc';
+		$params['geometry'] = 'rectangle';
 		
-		foreach(array('date_from', 'date_to', 'time_from', 'time_to', 'accuracy', 'count', 'thinning') as $p)
+		foreach(array('sw', 'ne', 'date_from', 'date_to', 'time_from', 'time_to', 'accuracy', 'count', 'thinning') as $p)
 		{
 			if(get($p))
 			{
