@@ -47,7 +47,10 @@ class Site_Map extends Site
 				
 				if(k($profile, 'error') == 'user_not_found')
 					$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user "' . $username . '" doesn\'t exist!');
-					
+				
+				if(k($profile, 'error'))
+					$this->error(HTTP_SERVER_ERROR, $profile->error, 'There was an error');
+				
 				// If the user's location is public, fetch the exact location
 				if($profile->public_location)
 					$last = $this->api->request('location/last?username=' . $username, FALSE, TRUE);
