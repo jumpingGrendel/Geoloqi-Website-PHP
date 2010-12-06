@@ -164,10 +164,10 @@ $(function(){
 			thinning: thinning
 		};
 		if(first_history){
-			params.date_from = (last ? last.date : 0);
-		}else{
 			params.date_to = (last ? last.date : 0);
 			first_history = false;
+		}else{
+			params.date_from = (last ? last.date : 0);
 		}
 		$.getJSON("/map/history.ajax", params, 
 		function(data){
