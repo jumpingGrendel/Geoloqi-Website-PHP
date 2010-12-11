@@ -83,7 +83,8 @@ var LQHistory = {
 			params.thinning = $("#history_thinning").val();
 		}
 		
-		$.getJSON("/map/history.ajax", params, function(data){
+		$.getJSON("/map/history.ajax", params, function(response){
+			var data = response.points;
 			var path = new google.maps.MVCArray();
 
 			// Remove the old polyline and make a new one

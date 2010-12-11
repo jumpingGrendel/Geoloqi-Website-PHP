@@ -125,7 +125,7 @@ $(function(){
 				location_error = false;
 			}
 		}
-		
+
 		newPosition = new google.maps.LatLng(l.location.position.latitude, l.location.position.longitude);
 		lastPosition = newPosition;
 		
@@ -170,7 +170,8 @@ $(function(){
 			params.date_from = (last ? last.date : 0);
 		}
 		$.getJSON("/map/history.ajax", params, 
-		function(data){
+		function(response){
+			var data = response.points;
 			for(var i in data){
 				receive_location(data[i]);
 			}
