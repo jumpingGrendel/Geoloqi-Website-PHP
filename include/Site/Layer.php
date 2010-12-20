@@ -15,6 +15,7 @@ class Site_Layer extends Site
 			$response = $this->api->request('layer/info/' . $id . '?count_valid_places=1', FALSE, TRUE);
 		}
 		$this->data['layer'] = $response;
+		$this->data['description'] = (property_exists($response, 'description') ? $response->description : '');
 	}
 }
 ?>

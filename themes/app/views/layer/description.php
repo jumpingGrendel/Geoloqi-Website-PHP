@@ -1,5 +1,5 @@
 <div>
-	<?= $layer->description ?>
+	<?= $description ?>
 	
 	<?php /*pa($layer);*/ ?>
 </div>
