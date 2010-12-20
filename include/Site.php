@@ -86,6 +86,8 @@ class Site
 		
 		if(substr($_SERVER['SERVER_NAME'], 0, 2) == 'm.')
 			$this->theme = 'mobile';
+		elseif(substr($_SERVER['SERVER_NAME'], 0, 2) == 'a.')
+			$this->theme = 'app';
 		else
 			$this->theme = 'standard';
 
