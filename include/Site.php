@@ -114,6 +114,28 @@ class Site
 			die();
 		}
 	}
+
+	protected function redirect_if_already_logged_in()
+	{
+		if($this->data['logged_in'])
+		{
+			header('Location: /' . $this->user->username);
+			die();
+		}
+	}
+	
+	/**
+	 * After setting the OAuth tokens after logging in, this method is called to set up the necessary class variables
+	 */ 
+	protected function did_log_in()
+	{
+		$profile = $this->api->request('account/profile');
+		$_SESSION['user_profile'] = $profile;
+		$_SESSION['username'] = $profile->username;
+
+		$privacy = $this->api->request('account/privacy');
+		$_SESSION['user_privacy'] = $privacy;
+	}
 	
 	/**
 	 * The user just logged in, redirect them to the appropriate place depending on the state of their account

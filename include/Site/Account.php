@@ -24,14 +24,16 @@ class Site_Account extends Site
 				$_SESSION['oauth_token'] = $response->access_token;
 				$_SESSION['refresh_token'] = $response->refresh_token;
 				
-				$response = $this->api->request('account/profile');
-				$_SESSION['user_profile'] = $response;
-				$_SESSION['username'] = $response->username;
-				$this->data['username'] = $_SESSION['username'];
+				$this->did_log_in();
 			}
 			$this->data['api_response'] = $response;
-			
-			$this->redirect_after_login();
+
+			if($this->data['error'] == FALSE)
+				$this->redirect_after_login();
+		}
+		else
+		{
+			$this->redirect_if_already_logged_in();
 		}
 	}
 	

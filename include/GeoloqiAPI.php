@@ -49,9 +49,9 @@ class GeoloqiAPI
 				// Pass the OAuth token in the HTTP headers
 				$httpHeader[] = 'Authorization: OAuth ' . $_SESSION['oauth_token'];
 			}
-			else
-				// We don't have an access token in the session, bye!
-				$this->error();
+			//else
+				// We don't have an access token in the session, try without the token
+				//$this->error();
 					
 			$baseURL = GEOLOQI_API_BASEURL;
 		}

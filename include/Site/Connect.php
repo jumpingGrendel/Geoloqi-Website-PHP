@@ -48,13 +48,7 @@ class Site_Connect extends Site
 						$_SESSION['oauth_token'] = $response->access_token;
 						$_SESSION['refresh_token'] = $response->refresh_token;
 						
-						// TODO: This might be a redundant extra HTTP request
-						$profile = $this->api->request('account/profile');
-						
-						$_SESSION['user_profile'] = $profile;
-						$_SESSION['username'] = $profile->username;
-						$privacy = $this->api->request('account/privacy');
-						$_SESSION['user_privacy'] = $privacy;
+						$this->did_log_in();
 						
 						$this->data['error'] = FALSE;
 						

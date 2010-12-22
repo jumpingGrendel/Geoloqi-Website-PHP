@@ -5,6 +5,8 @@ RewriteRule ^$ index.php?controller=home&method=index [QSA,L]
 
 RewriteRule ^(settings|help)$ index.php?controller=$1&method=index [QSA,L]
 
+RewriteRule ^(login)$ /account/login [R=permanent,L]
+
 # Generic error page when we don't know what went wrong
 RewriteRule ^error$ index.php?controller=error&method=index [QSA,L]
 
