@@ -32,21 +32,8 @@ img {
 }
 
 #map-profile {
-	padding-top: 3px;
-}
-
-#map-header .right {
-	padding-top: 5px;
-	float: right;
-	margin-right: 20px;
-}
-
-#map-header .phones {
-	margin-right: 10px;
-}
-
-#map-header .profile_info {
-	margin-left: 15px;
+	padding: 3px 15px 0 15px;
+	border-bottom: 3px #333 solid;
 }
 
 #map-footer {

@@ -20,16 +20,16 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 <div id="map-header">
 	<div id="geoloqi-header"><div class="logo"></div></div>
 	<div id="map-profile">
-		<?php if($phone_digits) { ?>
-		<div class="phones">
-			<div class="right"><a href="sms:<?=$phone_digits?>"><img src="<?=$theme_root?>images/08-chat.png" width="24" height="22" /></a></div>
-			<div class="right"><a href="tel:<?=$phone_digits?>"><img src="<?=$theme_root?>images/75-phone.png" width="24" height="24" /></a></div>
-		</div>
-		<?php } ?>
-		<div class="profile_info">
-			<img src="<?=$profile_image?>" width="32" height="32" />
-			<span class="username"><?=$username?></span>
-		</div>
+		<table cellspacing="0" cellpadding="0" width="100%"><tr>
+			<td width="36"><img src="<?=$profile_image?>" width="32" height="32" /></td>
+			<td><span class="username"><?=$username?></span></td>
+			<td width="48"><?php if($phone_digits) { ?>
+				<a href="sms:<?=$phone_digits?>"><img src="<?=$theme_root?>images/08-chat.png" width="24" height="22" /></a>
+			<?php } ?></td>
+			<td width="48"><?php if($phone_digits) { ?>
+				<a href="tel:<?=$phone_digits?>"><img src="<?=$theme_root?>images/75-phone.png" width="24" height="24" /></a>
+			<?php } ?></td>
+		</tr></table>
 	</div>
 </div>
 
