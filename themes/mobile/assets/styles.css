@@ -53,3 +53,6 @@ img {
 	text-align: center;
 	font-size: 10pt;
 }
+#map-footer div {
+	padding: 6px 0;
+}

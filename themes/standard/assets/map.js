@@ -41,9 +41,12 @@ $(function(){
 	};
 	// Create the main map
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
-	// Create the hidden map in a secret div
-	hiddenMap = new google.maps.Map(document.getElementById("hiddenMap"), myOptions);
 	
+	if(document.getElementById("hiddenMap")) {
+		// Create the hidden map in a secret div
+		hiddenMap = new google.maps.Map(document.getElementById("hiddenMap"), myOptions);
+	}
+		
 	// Dragging the map turns off auto-pan
 	google.maps.event.addListener(map, 'dragstart', function(){
 		autoPan = false;
@@ -81,8 +84,12 @@ $(function(){
 	 */
 
 	function resize_map(){
-		$("#map-container").css("height", (window.innerHeight-$("#map-footer").height())+"px").css("width", (window.innerWidth-$("#sidebar").width())+"px");
-		$("#map").css("height", "100%").css("width", "100%");
+		if($("#sidebar").width() > 0){
+			$("#map-container").css("height", (window.innerHeight - $("#map-footer").height()) + "px").css("width", (window.innerWidth - $("#sidebar").width()) + "px");
+			$("#map").css("height", "100%").css("width", "100%");
+		}else{
+			$("#map").css("height", (window.innerHeight - $("#map-footer").height() - $("#map-header").height()) + "px").css("width", (window.innerWidth) + "px");
+		}
 		google.maps.event.trigger(map, 'resize');
 		resize_errormessage();
 	}

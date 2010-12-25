@@ -1,7 +1,21 @@
 <?php 
 $this->head[] = '<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>';
-$this->head[] = '<script type="text/javascript" src="' . $theme_root . 'map.js"></script>';
+$this->head[] = '<script type="text/javascript" src="/themes/standard/assets/map.js"></script>';
 ?>
+<script type="text/javascript">
+<?php 
+
+echo 'var thinning = ' . $thinning . ";\n";
+echo 'var self_map = ' . ($self_map ? 1 : 0) . ";\n";
+echo 'var username = "' . $username . '";' . "\n";
+echo 'var share_token = "' . $share_token . '";' . "\n";
+echo 'var rough = ' . json_encode($rough) . ';' . "\n";
+echo 'var last = ' . json_encode($last) . ';' . "\n";
+echo 'var public_geonotes = ' . ($public_geonotes ? 1 : 0) . ';' . "\n";
+echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
+
+?>
+</script>
 
 <div id="map-header">
 	<div id="geoloqi-header"><div class="logo"></div></div>
@@ -22,5 +36,5 @@ $this->head[] = '<script type="text/javascript" src="' . $theme_root . 'map.js">
 <div id="map"></div>
 
 <div id="map-footer">
-	Download <a href="http://geoloqi.com">Geoloqi</a> for your phone!
+	<div>Download <a href="http://geoloqi.com">Geoloqi</a> for your phone!</div>
 </div>
