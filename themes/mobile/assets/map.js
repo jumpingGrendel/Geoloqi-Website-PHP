@@ -11,6 +11,11 @@ $(function(){
     map = new google.maps.Map(document.getElementById("map"), myOptions);
     
     resize_map();
+	
+	$(window).bind("resize", function(){
+		resize_map();
+	});
+	
 });
 
 function resize_map(){

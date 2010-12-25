@@ -15,3 +15,41 @@ a:hover {
 img {
 	border: 0;
 }
+
+#geoloqi-header {
+	background: #000; /* for non-css3 browsers */
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#585858', endColorstr='#000'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#585858), to(#000)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #585858,  #000); /* for firefox 3.6+ */
+	height: 40px;
+}
+
+#geoloqi-header .logo {
+	background: url(images/title-bar-logo.png) center no-repeat;
+	height: 40px;
+	width: 125px;
+	margin: 0 auto;
+}
+
+#map-profile {
+	padding-top: 3px;
+}
+
+#map-header .right {
+	padding-top: 5px;
+	float: right;
+	margin-right: 20px;
+}
+
+#map-header .phones {
+	margin-right: 10px;
+}
+
+#map-header .profile_info {
+	margin-left: 15px;
+}
+
+#map-footer {
+	text-align: center;
+	font-size: 10pt;
+}

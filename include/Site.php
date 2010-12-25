@@ -84,7 +84,7 @@ class Site
 		$this->method = $method;
 		$this->is_ajax = $is_ajax;
 		
-		if(substr($_SERVER['SERVER_NAME'], 0, 2) == 'm.')
+		if(substr($_SERVER['SERVER_NAME'], 0, 2) == 'm.' || $_SERVER['SERVER_NAME'] == '192.168.0.74')
 			$this->theme = 'mobile';
 		elseif(substr($_SERVER['SERVER_NAME'], 0, 2) == 'a.')
 			$this->theme = 'app';

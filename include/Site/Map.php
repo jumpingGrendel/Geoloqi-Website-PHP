@@ -1,4 +1,6 @@
 <?php 
+require_once('Regex.php');
+
 class Site_Map extends Site
 {
 	protected $force_login = FALSE;
@@ -82,6 +84,8 @@ class Site_Map extends Site
 		$this->data['name'] = $profile->name;
 		$this->data['username'] = $profile->username;
 		$this->data['bio'] = $profile->bio;
+		$this->data['phone'] = Regex_Phone::getFormatted(k($profile, 'phone'));
+		$this->data['phone_digits'] = Regex_Phone::getDigits(k($profile, 'phone'));
 		$this->data['website'] = $profile->website;
 		$this->data['profile_image'] = ($profile->profile_image ?: '/themes/standard/assets/images/profile-blank.png');
 		
