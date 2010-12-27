@@ -18,6 +18,7 @@ class Site_Settings extends Site
 		$this->data['profile_phone'] = $this->user->phone;
 		$this->data['profile_website'] = $this->user->website;
 		$this->data['profile_timezone'] = $this->user->timezone;
+		$this->get_last_location();
 	}
 	
 	public function profile_ajax()
@@ -42,6 +43,7 @@ class Site_Settings extends Site
 		$this->data['email_geonotes'] = $_SESSION['user_privacy']->email_geonotes;
 		$this->data['default_share_expiration'] = $_SESSION['user_privacy']->default_share_expiration;
 		$this->data['has_password'] = $_SESSION['user_privacy']->has_password;
+		$this->get_last_location();
 	}
 	
 	public function privacy_ajax()
@@ -216,5 +218,10 @@ class Site_Settings extends Site
 			return array('result'=>'null');
 	}
 	
+	protected function get_last_location()
+	{
+		$last = $this->api->request('location/last');
+		$this->data['last_location'] = $last;
+	}
 }
 ?>
