@@ -294,11 +294,11 @@ img {
 
 
 .settings-wrap {
-	padding-top: 10px;
 	padding-bottom: 30px;
+	margin-top: 10px;
 }
 .settings table {
-	margin: 10px 50px;
+	margin: 10px 40px;
 }
 .settings table .label {
 	font-size: 16pt;
@@ -523,3 +523,18 @@ img {
 }	
 
 
+#right_panel {
+	background: #F7FBFD; 
+	border-left: 1px #D7ECF5 solid;
+	vertical-align: top;
+	-moz-border-radius-bottomright: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.tipoftheday {
+	margin: 10px;
+	padding: 5px 10px;
+	border-bottom: #7EC3DE 1px dotted;
+	border-top: #7EC3DE 1px dotted;
+	background: #E9F5F9;
+}

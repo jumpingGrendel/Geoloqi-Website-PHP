@@ -4,9 +4,10 @@ include($this->theme_file('layouts/site_header.php'));
 include($this->theme_file('settings/menu.php'));
 ?>
 
-<div class="settings-wrap"><div class="settings settings-stacked">
+<table cellpadding="0" cellspacing="0" border="0"><tr>
+<td>
 
-<?php include($this->theme_file('layouts/right_panel.php')); ?>
+<div class="settings-wrap"><div class="settings settings-stacked">
 
 <table>
 	<tr>
@@ -103,6 +104,14 @@ include($this->theme_file('settings/menu.php'));
 	
 </table>
 </div></div>
+
+</td>
+<td width="340" id="right_panel">
+	<?php include($this->theme_file('layouts/right_panel.php')); ?>
+</td>
+
+</tr></table>
+
 
 <?php 
 include($this->theme_file('layouts/site_footer.php'));

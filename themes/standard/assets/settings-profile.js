@@ -27,4 +27,6 @@ $(function(){
 			setTimeout(gb_hide, 1200);
 		});
 	});
+	
+	$("#right_panel").css({height: $("#inner").height()+"px"});
 });

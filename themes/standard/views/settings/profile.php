@@ -4,10 +4,10 @@ include($this->theme_file('layouts/site_header.php'));
 include($this->theme_file('settings/menu.php'));
 ?>
 
+<table cellpadding="0" cellspacing="0" border="0"><tr>
+<td>
+
 <div class="settings-wrap"><div class="settings settings-columns">
-
-<?php include($this->theme_file('layouts/right_panel.php')); ?>
-
 <table>
 	<tr>
 		<td class="left">
@@ -118,6 +118,13 @@ include($this->theme_file('settings/menu.php'));
 	</tr>
 </table>
 </div></div>
+
+</td>
+<td width="340" id="right_panel">
+	<?php include($this->theme_file('layouts/right_panel.php')); ?>
+</td>
+
+</tr></table>
 
 <?php 
 include($this->theme_file('layouts/site_footer.php'));
