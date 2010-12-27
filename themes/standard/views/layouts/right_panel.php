@@ -5,10 +5,26 @@
 		$position = $last_location->location->position;
 		
 		$staticmap = 'http://maps.google.com/maps/api/staticmap?center=' . $position->latitude . ',+' . $position->longitude . '&size=320x240&sensor=false&markers=color:blue|size:small|' . $position->latitude . ',+' . $position->longitude;
-		echo '<a href="/' . $username . '"><img src="' . $staticmap . '" width="320" height="240" style="border:1px #7EC3DE solid;" /></a>';
-		
-		pa($position);
-	
+?>
+		<a href="/<?=$username?>"><img src="<?=$staticmap?>" width="320" height="240" style="border:1px #7EC3DE solid;" /></a>
+
+		<table style="width: 320px;">
+		<tr>
+			<td>
+				<div style="font-size: 8pt; float: right;">
+					<?php
+					$date = new DateTime($last_location->date, new DateTimeZone('UTC'));
+					echo $date->format('M j, Y g:ia');
+					?>
+				</div>
+				<div style="color: #179bef; font-weight: bold;">
+					<?=round($position->latitude, 4) . ', ' . round($position->longitude, 4)?>
+				</div>
+				<?=Geonames::getNearestIntersectionWithCity($position->latitude, $position->longitude)?>
+			</td>
+		</tr>
+		</table>
+<?php
 	}
 	else
 	{
