@@ -35,7 +35,7 @@
 			<table>
 			<tr>
 				<td><a href=""><img src="<?=$theme_root?>images/geoloqi_available_on_the_app_store.png" width="150" /></a></td>
-				<td style="font-size: 8pt;">Available for iPhone 3GS<br />and iPhone 4 only</td>
+				<td style="font-size: 8pt; padding-left: 15px;">Available for iPhone 3GS<br />and iPhone 4 only.</td>
 			</tr>
 			<tr>
 				<td><br /></td>
@@ -45,13 +45,14 @@
 					<a href="/help/76/how-do-i-use-geoloqi-with-my-palm-phone" style="margin: 8px;"><img src="<?=$theme_root?>images/palm-icon-small.png" /></a>
 					<a href="/help/74/how-do-i-use-geoloqi-with-my-android-phone" style="margin: 8px;"><img src="<?=$theme_root?>images/android-logo-40px.png" width="47" /></a>
 					<br />
+					<br />
 					<a href="/help/78/how-do-i-use-geoloqi-with-my-blackberry" style="margin: 8px;"><img src="<?=$theme_root?>images/blackberry-logo-small.png" /></a>
 					<a href="/help/80/how-do-i-use-geoloqi-with-my-boost-mobile-phone" style="margin: 8px;"><img src="<?=$theme_root?>images/boost-mobile-icon-small.png" /></a>
 				</td>
-				<td style="font-size: 8pt;">
+				<td style="font-size: 8pt; padding-left: 15px;">
 					The Android and Palm versions are currently in development.<br />
 					<br />
-					In the mean time, you can download <a href="/help/category/apps">Instamapper</a> and create a device key on your <a href="/settings/connections">Connections</a> tab.
+					In the meantime, you can download <a href="/help/category/apps">Instamapper</a> and create a device key on your <a href="/settings/connections">Connections</a> tab.
 				</td>
 			</tr>
 			</table>
