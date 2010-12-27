@@ -5,6 +5,9 @@ include($this->theme_file('settings/menu.php'));
 ?>
 
 <div class="settings-wrap"><div class="settings settings-columns">
+
+<?php include($this->theme_file('layouts/right_panel.php')); ?>
+
 <table>
 	<tr>
 		<td class="left">

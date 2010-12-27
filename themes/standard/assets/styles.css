@@ -298,7 +298,6 @@ img {
 	padding-bottom: 30px;
 }
 .settings table {
-	width: 660px;
 	margin: 10px 50px;
 }
 .settings table .label {
@@ -311,8 +310,7 @@ img {
 	vertical-align: top;
 }
 .settings table .left {
-	width: 150px;
-	padding-right: 20px;
+	width: 130px;
 }
 .settings table input.field, .settings table textarea.field, .settings table select.field {
 	width: 250px;
