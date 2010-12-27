@@ -36,4 +36,14 @@ define('INSTAMAPPER_COOKIEFILE', '');
 define('TWITTER_CONSUMER_KEY', '');
 define('TWITTER_CONSUMER_SECRET', '');
 
+// Memcached settings. The API will work fine without memcached but will perform significantly better with it enabled.
+define('MEMCACHE_ENABLED', FALSE);
+// Prefix all memcached keys with this string
+define('MEMCACHE_KEY_PREFIX', 'geoloqi_web');
+$MEMCACHE_SERVERS = array();
+$MEMCACHE_SERVERS[] = array(
+	'host' => 'localhost',
+	'port' => '11211'
+);
+
 ?>

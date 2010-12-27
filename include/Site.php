@@ -314,5 +314,10 @@ class Site
 		}
 		return $n;
 	}
+	
+	public static function mcKey($class, $identifier)
+	{
+		return MEMCACHE_KEY_PREFIX . '::' . $class . ':' . $identifier;
+	}	
 }
 ?>

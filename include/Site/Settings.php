@@ -1,6 +1,7 @@
 <?php 
 require_once('Grammar.php');
 require_once('InstamapperClient.php');
+require_once('Geonames.php');
 
 class Site_Settings extends Site
 {

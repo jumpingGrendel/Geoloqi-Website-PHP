@@ -99,6 +99,47 @@ function db()
 }
 
 /**
+ * Returns a handle to the Memcache object
+ */
+function mc()
+{
+	/*
+	 * If the constant was not defined in the config class, then PHP will treat it as a string which will
+	 * be evaluated as 'true' causing this mc() function to be run. Since we don't want to use Memcache
+	 * unless it is explicitly enabled in the config file, return a "NullMemcache" object which will throw
+	 * an error no matter what method is called on it.
+	 */
+	if(!defined('MEMCACHE_ENABLED') || !MEMCACHE_ENABLED)
+		return new NullMemcache;
+	
+	static $memcache;
+	if(!isset($memcache))
+	{
+		if(!class_exists('Memcache'))
+			die('Class Memcache was not found. Disable Memcache in the config file or install Memcache.');
+		
+		$memcache = new Memcache;
+		foreach($GLOBALS['MEMCACHE_SERVERS'] as $m)
+			$memcache->addServer($m['host'], $m['port']);
+	}
+	
+	return $memcache;
+}
+
+class NullMemcache
+{
+	public function __call($method, $params)
+	{
+		die('Attempted to use Memcache but it has not been configured properly.');
+	}
+	
+	public function set($method, $params)
+	{
+		return null;
+	}
+}
+
+/**
  * For HTML formatting arrays for debugging
  */
 function pa($a)
