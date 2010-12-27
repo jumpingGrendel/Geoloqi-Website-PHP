@@ -127,25 +127,24 @@ include($this->theme_file('settings/menu.php'));
 	{
 	?>
 	<tr>
-		<td><div class="label">Current Password</div></td>
+		<td><div class="label small">Current Password</div></td>
 		<td><input type="password" class="field" id="current_password" /></td>
 	</tr>
 	<?php 
 	}
 	?>
 	<tr>
-		<td><div class="label">New Password</div></td>
+		<td><div class="label small">New<br />Password</div></td>
 		<td><input type="password" class="field" id="new_password_1" /></td>
 	</tr>
 	<tr>
-		<td width="270"><div class="label">Confirm Password</div></td>
+		<td><div class="label small">Confirm Password</div></td>
 		<td><input type="password" class="field" id="new_password_2" /></td>
 	</tr>
 	<tr>
-		<td>
+		<td colspan="2">
 			<input type="submit" value="Change Password" class="submit" id="btn_changepassword" />
-		</td>
-		<td>
+
 			<div id="password_response"></div>
 		</td>
 	</tr>

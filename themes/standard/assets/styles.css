@@ -303,6 +303,9 @@ img {
 .settings table .label {
 	font-size: 16pt;
 }
+.settings table .label.small {
+	font-size: 13pt;
+}
 .settings table .description {
 	color: #666;
 }
@@ -313,7 +316,7 @@ img {
 	width: 130px;
 }
 .settings table input.field, .settings table textarea.field, .settings table select.field {
-	width: 250px;
+	width: 320px;
 	border: 2px #999 solid;
 	padding: 3px;
 	-moz-border-radius: 4px;
