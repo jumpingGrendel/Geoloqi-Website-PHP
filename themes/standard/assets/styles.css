@@ -414,6 +414,10 @@ img {
 	width:150px;
 }
 
+#password_response.error {
+	color: #f17700;
+}
+
 .share_popup {
 	font-size: 10pt;
 }

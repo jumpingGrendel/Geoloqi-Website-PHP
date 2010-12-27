@@ -18,6 +18,7 @@ class Site_Settings extends Site
 		$this->data['profile_phone'] = $this->user->phone;
 		$this->data['profile_website'] = $this->user->website;
 		$this->data['profile_timezone'] = $this->user->timezone;
+		$this->data['has_password'] = $_SESSION['user_privacy']->has_password;
 		$this->get_last_location();
 	}
 	
@@ -42,7 +43,6 @@ class Site_Settings extends Site
 		$this->data['public_geonote_email'] = $_SESSION['user_privacy']->public_geonote_email;
 		$this->data['email_geonotes'] = $_SESSION['user_privacy']->email_geonotes;
 		$this->data['default_share_expiration'] = $_SESSION['user_privacy']->default_share_expiration;
-		$this->data['has_password'] = $_SESSION['user_privacy']->has_password;
 		$this->get_last_location();
 	}
 	

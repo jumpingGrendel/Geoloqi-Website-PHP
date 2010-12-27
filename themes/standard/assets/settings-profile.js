@@ -28,5 +28,18 @@ $(function(){
 		});
 	});
 	
-	$("#right_panel").css({height: $("#inner").height()+"px"});
+	$("#btn_changepassword").click(function(){
+		$("#password_response").text("");
+		$.post("/settings/password.ajax", {
+			current_password: $("#current_password").val(),
+			new_password_1: $("#new_password_1").val(),
+			new_password_2: $("#new_password_2").val()
+		}, function(data){
+			if(typeof data.error != "undefined"){
+				$("#password_response").text(data.error_description).addClass("error");
+			}else{
+				$("#password_response").text("Password set successfully!").removeClass("error");
+			}
+		}, "json");
+	});	
 });
