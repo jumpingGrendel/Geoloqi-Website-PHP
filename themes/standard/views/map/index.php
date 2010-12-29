@@ -174,19 +174,19 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 					</tr>
 					<tr>
 						<th>From</th>
-						<td><input id="history_from" type="text" size="10" value="<?=date('Y-m-d', strtotime('-7 days'))?>" title="yyyy-mm-dd" /></td>
+						<td><input id="history_from" type="text" size="10" value="<?=date('Y-m-d', strtotime('-7 days'))?>" placeholder="yyyy-mm-dd" title="yyyy-mm-dd" /></td>
 					</tr>
 					<tr>
 						<th>To</th>
-						<td><input id="history_to" type="text" size="10" value="<?=date('Y-m-d', strtotime('+1 day'))?>" title="yyyy-mm-dd" /></td>
+						<td><input id="history_to" type="text" size="10" value="<?=date('Y-m-d', strtotime('+1 day'))?>" placeholder="yyyy-mm-dd" title="yyyy-mm-dd" /></td>
 					</tr>
 					<tr>
 						<th>Time From</th>
-						<td><input id="history_time_from" type="text" size="10" value="" title="hh:mm" /></td>
+						<td><input id="history_time_from" type="text" size="10" value="" placeholder="hh:mm" title="hh:mm" /></td>
 					</tr>
 					<tr>
 						<th>Time To</th>
-						<td><input id="history_time_to" type="text" size="10" value="" title="hh:mm" /></td>
+						<td><input id="history_time_to" type="text" size="10" value="" placeholder="hh:mm" title="hh:mm" /></td>
 					</tr>
 					<tr>
 						<th>Thinning</th>

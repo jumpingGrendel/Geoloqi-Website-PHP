@@ -58,7 +58,7 @@ include($this->theme_file('settings/menu.php'));
 				if(count($expired_links) == 0)
 				{
 					echo '<tr>';
-						echo '<td colspan="3">There are currently no active shared links</td>';
+						echo '<td colspan="3">There are currently no expired shared links</td>';
 					echo '</tr>';
 				}
 			?>
