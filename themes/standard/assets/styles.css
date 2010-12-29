@@ -217,6 +217,7 @@ img {
 
 .history_params input {
 	border: 1px #333 solid;
+	width: 100px;
 }
 .history_params input.warning {
 	background-color: #ffd5b6;
