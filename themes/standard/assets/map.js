@@ -206,6 +206,7 @@ $(function(){
 		$("#profile-info .last-lat").hide();
 		$("#profile-info .last-lng").hide();
 		$("#profile-info .last-time").hide();
+		$("#sidebar_mapoptions .help").show();
 		updateLocation = false;
 		clearInterval(updateLocationTimer);
 		thePath.setMap(hiddenMap);
@@ -216,6 +217,7 @@ $(function(){
 		$("#profile-info .last-lat").show();
 		$("#profile-info .last-lng").show();
 		$("#profile-info .last-time").show();
+		$("#sidebar_mapoptions .help").hide();
 		updateLocation = true;
 		thePath.setMap(map);
 		get_realtime_history();

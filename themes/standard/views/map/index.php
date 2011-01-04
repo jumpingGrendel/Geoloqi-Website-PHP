@@ -160,7 +160,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 			{
 ?>
 		<div class="round sidebar-panel" id="sidebar_mapoptions">
-			<div class="panel-title">History</div>
+			<div class="panel-title">History <span class="small help" style="float: right; display: none;"><a href="http://geoloqi.com/help/156/what-is-history-and-how-does-it-work" target="_blank">What's this?</a></span></div>
 			<div class="panel-content" style="display: none;">
 				<div id="history_loading"><div style="height: 16px; width: 16px;"></div></div>
 				<table class="history_params">
@@ -196,7 +196,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 	
 				<table class="history_params">
 					<tr>
-						<td class="header" colspan="2">Map Options <span class="help"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html" target="_blank">help</a></span></td>
+						<td class="header" colspan="2">Map Options <span class="help small"><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html" target="_blank">Google Maps API</a></span></td>
 					</tr>
 					<tr>
 						<th>Stroke Weight</th>
