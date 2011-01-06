@@ -20,7 +20,8 @@
 				<div style="color: #179bef; font-weight: bold;">
 					<?=round($position->latitude, 4) . ', ' . round($position->longitude, 4)?>
 				</div>
-				<?=Geonames::getNearestIntersectionWithCity($position->latitude, $position->longitude)?>
+				<div id="nearest_intersection"></div>
+				<div id="last_location" style="display:none;"><?=$position->latitude . ',' . $position->longitude?></div>
 			</td>
 		</tr>
 		</table>

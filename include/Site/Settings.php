@@ -224,5 +224,15 @@ class Site_Settings extends Site
 		$last = $this->api->request('location/last');
 		$this->data['last_location'] = $last;
 	}
+	
+	public function nearest_intersection_ajax()
+	{
+		$coords = explode(',', post('coords'));
+		$text = Geonames::getNearestIntersectionWithCity($coords[0], $coords[1]);
+		if($text)
+			return array('name' => $text);
+		else
+			return array('error' => 'GeoNames Error');
+	}
 }
 ?>
