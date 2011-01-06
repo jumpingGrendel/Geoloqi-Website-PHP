@@ -203,18 +203,15 @@ img {
 	font-weight: bold;
 }
 #profile-info .last-time {
-	float: right;
-	text-align: right;
 	width: 130px;
 }
 #profile-info .last-time .relative {
-	cursor: pointer;
+
 }
 #profile-info .last-time .absolute {
 	font-size: 80%;
 	display: none;
 }
-
 .history_params input {
 	border: 1px #333 solid;
 	width: 100px;

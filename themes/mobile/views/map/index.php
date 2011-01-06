@@ -19,10 +19,16 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 
 <div id="map-header">
 	<div id="geoloqi-header"><div class="logo"></div></div>
-	<div id="map-profile">
+	<div id="profile-info">
 		<table cellspacing="0" cellpadding="0" width="100%"><tr>
 			<td width="36"><img src="<?=$profile_image?>" width="32" height="32" /></td>
-			<td><span class="username"><?=$username?></span></td>
+			<td>
+				<span class="username"><?=$username?></span>
+				<div>
+					<div class="last-time" style="font-size: 8pt; float: left;"><div class="relative"></div><div class="absolute"></div></div>
+					<div class="last-speed" style="font-size: 8pt; float: left; padding-left: 10px;"></div>
+				</div>
+			</td>
 			<td width="48"><?php if($phone_digits) { ?>
 				<a href="sms:<?=$phone_digits?>"><img src="<?=$theme_root?>images/08-chat.png" width="24" height="22" /></a>
 			<?php } ?></td>

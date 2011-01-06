@@ -41,11 +41,16 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<div class="last-time"><div class="relative"></div><div class="absolute"></div></div>
-							<div class="last-lat"></div>
-							<div class="last-lng"></div>
-						</td>
+						<td colspan="2"><table><tr>
+							<td width="70">
+								<div class="last-lat"></div>
+								<div class="last-lng"></div>
+							</td>
+							<td style="text-align: right;">
+								<div class="last-time"><div class="relative"></div><div class="absolute"></div></div>
+								<div class="last-speed"></div>
+							</td>
+						</tr></table></td>
 					</tr>
 				</table>
 			</div>

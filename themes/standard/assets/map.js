@@ -68,11 +68,6 @@ $(function(){
 	// Updates the timestamp in the profile section continuously by monitoring the last point received 
 	setInterval(update_profile_timestamp, 1000);
 
-	// Mouseover the timestamp in the profile to show the absolute timestamp
-	$("#profile-info .last-time .relative").mouseover(function(){
-		$("#profile-info .last-time .absolute").show();
-	});
-
 	// If there was a rough history value it means they are not looking at their own, so they are most likely
 	// looking at someone's map who would allow geonotes to be sent. This will open the sidebar panel if #geonote is in the URL.
 	if(rough){
@@ -316,10 +311,13 @@ $(function(){
 					diffTxt += (Math.floor(diff / 60) % 60) + "m ago";
 					diff = diffTxt;
 				}
+				$("#profile-info .last-time .relative").show();
+				$("#profile-info .last-time .absolute").hide();
 			}
 			
 			$("#profile-info .last-time .relative").text(diff);
 			$("#profile-info .last-time .absolute").text(dateFormatted);
+			$("#profile-info .last-speed").text(last.location.position.speed + " km/h");
 		}
 	}
 });
