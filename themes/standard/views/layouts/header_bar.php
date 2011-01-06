@@ -6,7 +6,7 @@ if($logged_in)
 	<ul>
 		<li><a href="/<?=session('username')?>">Map</a></li>
 		<li><a href="/settings">Settings</a></li>
-		<li><a href="/help">Help</a></li>
+		<li><a href="http://geoloqi.com/help/">Help</a></li>
 		<li><a href="/account/logout">Sign Out</a></li>
 	</ul>
 	<div style="clear:both"></div>
