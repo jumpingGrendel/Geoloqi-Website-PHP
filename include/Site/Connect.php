@@ -47,6 +47,7 @@ class Site_Connect extends Site
 					{
 						$_SESSION['oauth_token'] = $response->access_token;
 						$_SESSION['refresh_token'] = $response->refresh_token;
+						$_SESSION['twitter_auth'] = TRUE;
 						
 						$this->did_log_in();
 						

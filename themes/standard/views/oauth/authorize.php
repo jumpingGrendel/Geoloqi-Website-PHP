@@ -48,7 +48,7 @@ $this->head[] = '<link rel="stylesheet" type="text/css" href="' . $theme_root . 
 	<?php } ?>
 </form>
 
-</div></div>
-</div>
+</div></div><!-- in, authorize -->
+</div><!-- authorize-wrap -->
 
-</div>
+</div><!-- authorize-page -->
