@@ -1,3 +1,8 @@
+
+<div style="width: 30px; height: 104px; position: fixed; right: 0; top: 240px; border-left: 3px #444 solid; border-bottom: 3px #444 solid; border-top: 3px #444 solid;">
+	<a href="http://geoloqi.com/help/" target="_blank"><img src="/images/feedback-tab.png" width="30" height="104"</a>	
+</div>
+
 <?php 
 if(GEOLOQI_GA_ID){
 ?>
