@@ -126,28 +126,31 @@ include($this->theme_file('settings/menu.php'));
 	if($has_password)
 	{
 	?>
-	<tr>
+	<tr class="password_field">
 		<td><div class="label small">Current Password</div></td>
 		<td><input type="password" class="field" id="current_password" /></td>
 	</tr>
 	<?php 
 	}
 	?>
-	<tr>
+	<tr class="password_field">
 		<td><div class="label small">New<br />Password</div></td>
 		<td><input type="password" class="field" id="new_password_1" /></td>
 	</tr>
-	<tr>
+	<tr class="password_field">
 		<td><div class="label small">Confirm Password</div></td>
 		<td><input type="password" class="field" id="new_password_2" /></td>
 	</tr>
-	<tr>
+	<tr class="password_field">
 		<td colspan="2">
 			<input type="submit" value="Change Password" class="submit" id="btn_changepassword" />
-
-			<div id="password_response"></div>
 		</td>
 	</tr>
+	<tr>
+		<td colspan="2">
+			<div id="password_response"></div>
+		</td>
+	</tr>	
 </table>
 </div></div>
 

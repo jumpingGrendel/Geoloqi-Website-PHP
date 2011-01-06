@@ -62,11 +62,13 @@ class Site_Settings extends Site
 	
 	public function password_ajax()
 	{
-		return $this->api->request('account/password', array(
+		$response = $this->api->request('account/password', array(
 			'current_password' => post('current_password'),
 			'new_password_1' => post('new_password_1'),
 			'new_password_2' => post('new_password_2')
 		));
+		$_SESSION['user_privacy'] = $this->api->request('account/privacy');
+		return $response;
 	}
 	
 	public function connections()

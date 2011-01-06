@@ -49,6 +49,7 @@ $(function(){
 				$("#password_response").text(data.error_description).addClass("error");
 			}else{
 				$("#password_response").text("Password set successfully!").removeClass("error");
+				$(".password_field").hide();
 			}
 		}, "json");
 	});	

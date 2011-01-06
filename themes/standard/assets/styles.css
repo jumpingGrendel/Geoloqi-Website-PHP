@@ -421,6 +421,10 @@ img {
 #password_response.error {
 	color: #f17700;
 }
+#password_response {
+	font-size: 18pt;
+	color: #84B16B;
+}
 
 .share_popup {
 	font-size: 10pt;
