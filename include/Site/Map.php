@@ -90,7 +90,7 @@ class Site_Map extends Site
 		$this->data['profile_image'] = ($profile->profile_image ?: '/themes/standard/assets/images/profile-blank.png');
 		
 		// whether the user is looking at their own map
-		$this->data['self_map'] = $username == session('username');
+		$this->data['self_map'] = get('key') == FALSE && $username == session('username');
 		
 		if($this->data['self_map'])
 			$this->data['geonote_to'] = 'you';

@@ -151,10 +151,18 @@ class Site_Settings extends Site
 			elseif($link->date_to == '' && $link->time_from == '' && $link->time_to == '')
 			{
 				// Never expires!
-				$from = new DateTime($link->date_from, new DateTimeZone('UTC'));
-				$from->setTimeZone(new DateTimeZone($this->user->timezone));
-				$fromTimePart = $from->format('g:ia');
-				$data->range = 'since ' . $from->format('n/j' . $fromYearPart . ' g:ia');
+				if($link->date_from == '')
+				{
+					$data->range = '';
+				}
+				else
+				{
+					$from = new DateTime($link->date_from, new DateTimeZone('UTC'));
+					$from->setTimeZone(new DateTimeZone($this->user->timezone));
+					$fromTimePart = $from->format('g:ia');
+					$fromYearPart = ($from->format('Y') == date('Y') ? '' : '/Y');
+					$data->range = 'since ' . $from->format('n/j' . $fromYearPart . ' g:ia');
+				}
 				$data->expires = 'Never expires';
 			}
 			else
