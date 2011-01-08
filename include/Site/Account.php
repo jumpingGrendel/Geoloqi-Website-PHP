@@ -40,7 +40,20 @@ class Site_Account extends Site
 	public function logout()
 	{
 		session_destroy();
-		$this->redirect('/');
+		if(!session('twitter_auth'))
+			header('Location: /');
+	}
+	
+	public function setup()
+	{
+		if($this->post)
+		{
+			
+		}
+		else
+		{
+			
+		}
 	}
 	
 	public function unsubscribe()

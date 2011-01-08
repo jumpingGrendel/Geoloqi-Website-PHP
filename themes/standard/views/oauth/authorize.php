@@ -3,7 +3,7 @@ $this->head[] = '<link rel="stylesheet" type="text/css" href="' . $theme_root . 
 ?>
 <div id="authorize-page">
 
-<div id="geoloqi-logo"></div>
+<div id="loqisaur-logo"></div>
 
 <div id="authorize-wrap">
 <div id="authorize" class="round"><div class="in">

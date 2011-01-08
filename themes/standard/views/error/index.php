@@ -10,7 +10,7 @@ include($this->theme_file('layouts/site_header.php'));
 		<img src="<?=$theme_root?>images/loqisaur-error.png" />
 	</div>
 	
-	<div style="padding: 10px; color: #900; font-size: 14pt;">Error code: <?=$error_code . ' ' . $error?></div>
+	<div style="padding: 10px; color: #900; font-size: 14pt;"><?=$error_code . ': ' . $error?></div>
 	
 	<div style="padding-bottom: 10px; color: #600; font-size: 10pt;"><?=$error_description?></div>
 	
