@@ -21,6 +21,7 @@ class Site_Error extends Site
 				break;
 		}
 
+		$this->data['error_code'] = get('code');
 		$this->data['debug_output'] = '';
 	}
 }

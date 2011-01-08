@@ -77,7 +77,7 @@ class Site_Settings extends Site
 		$this->data['connections'] = $response;
 		
 		$response = $this->api->request('account/permanent_token');
-		$this->data['permanent_token'] = $response->access_token;
+		$this->data['permanent_token'] = k($response, 'access_token');
 		
 		$this->data['instamapper_devicekey'] = $_SESSION['user_profile']->instamapper_devicekey;
 	}

@@ -205,6 +205,7 @@ class Site
 			echo json_encode($response);
 		else
 		{
+			$this->data['error_code'] = $code;
 			$this->data['error_description'] = $response['error_description'];
 			if(DEBUG_MODE && $output)
 				$this->data['debug_output'] = $response['debug_output'];

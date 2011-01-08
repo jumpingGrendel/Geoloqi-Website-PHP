@@ -34,11 +34,25 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<div class="label">Foursquare</div>
 			<div class="description">
-				Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places.
+				<b>Coming soon!</b> Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places.
 			</div>
 		</td>
 		<td>
-			<input type="button" class="submit" value="Connect" />
+			<!-- <input type="button" class="submit" value="Connect" /> -->
+		</td>
+	</tr>
+	<tr class="coming-soon">
+		<td>
+			<div class="app_icon"><img src="<?=$image_root?>apps/gowalla-geoloqi.png" width="64" height="64" /></div>
+		</td>
+		<td>
+			<div class="label">Gowalla</div>
+			<div class="description">
+				<b>Coming soon!</b> Connect your Twitter account to log in via Twitter, update your Geoloqi location via Twitter, or share your location via Twitter.
+			</div>
+		</td>
+		<td>
+			<!-- <input type="button" class="submit" value="Connect" /> -->
 		</td>
 	</tr>
 	<!-- 
@@ -50,20 +64,6 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Facebook</div>
 			<div class="description">
 				Connect your Facebook account to log in via Twitter, update your Geoloqi location via Facebook, or share your location via Facebook.
-			</div>
-		</td>
-		<td>
-			<input type="button" class="submit" value="Connect" />
-		</td>
-	</tr>
-	<tr class="coming-soon">
-		<td>
-			<div class="app_icon"><img src="<?=$image_root?>apps/gowalla-geoloqi.png" width="64" height="64" /></div>
-		</td>
-		<td>
-			<div class="label">Gowalla</div>
-			<div class="description">
-				Connect your Twitter account to log in via Twitter, update your Geoloqi location via Twitter, or share your location via Twitter.
 			</div>
 		</td>
 		<td>
@@ -107,23 +107,6 @@ include($this->theme_file('settings/menu.php'));
 ?>
 		</td>
 	</tr>
-	<!-- 
-	<tr class="coming-soon">
-		<td>
-			<div class="app_icon"><img src="<?=$image_root?>apps/trackr-geoloqi.png" width="64" height="64" /></div>
-		</td>
-		<td>
-			<div class="label">Trackr! Username</div>
-			<div class="description">
-				You can import your location data from Trackr! into Geoloqi by entering your username. You will also need to make your location public on Trackr.eu. 
-			</div>
-		</td>
-		<td>
-			<input type="text" id="" value="" class="text" />
-			<input type="button" class="submit" value="Save" />
-		</td>
-	</tr>
-	-->
 </table>
 
 <div class="header">Applications</div>
