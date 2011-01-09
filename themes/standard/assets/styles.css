@@ -212,7 +212,7 @@ img {
 	font-weight: bold;
 }
 #profile-info .last-time {
-	width: 130px;
+	width: 120px;
 }
 #profile-info .last-time .relative {
 
@@ -430,6 +430,12 @@ img {
 #password_response {
 	font-size: 18pt;
 	color: #84B16B;
+}
+
+.error-message {
+	color: #900; 
+	font-size: 14pt;
+	text-align: center;
 }
 
 .share_popup {

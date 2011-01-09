@@ -42,7 +42,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 					</tr>
 					<tr>
 						<td colspan="2"><table><tr>
-							<td width="70">
+							<td width="80">
 								<div class="last-lat"></div>
 								<div class="last-lng"></div>
 							</td>
