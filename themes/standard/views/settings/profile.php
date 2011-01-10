@@ -42,7 +42,7 @@ include($this->theme_file('settings/menu.php'));
 		<td class="right">
 			<input type="text" name="email" id="profile_email" value="<?=$profile_email?>" class="field" />
 			<div class="description">
-				You'll need a valid email email address to use Geoloqi. We use your email address to get in contact with you.
+				You'll need a valid email email address to use Geoloqi. You can <a href="/settings/privacy#email">adjust your email preferences</a>.
 			</div>
 		</td>
 	</tr>
@@ -51,10 +51,12 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Phone</div>
 		</td>
 		<td class="right">
-			<input type="text" name="phone" id="profile_phone" value="<?=$profile_phone?>" class="field<?=($profile_phone ? '' : ' highlight')?>" />
-			<div class="description<?=($profile_phone ? '' : ' highlight')?>">
-				Enter your cell phone number to receive Geonotes by SMS.
-			</div>
+			<input type="text" name="phone" id="profile_phone" value="<?=$profile_phone?>" class="field<?=($profile_phone || $has_push_token ? '' : ' highlight')?>" />
+			<?php if($profile_phone == '' && !$has_push_token) { ?>
+				<div class="description highlight">
+					Enter your cell phone number to receive Geonotes by SMS.
+				</div>
+			<?php } ?>
 		</td>
 	</tr>
 	<tr>
