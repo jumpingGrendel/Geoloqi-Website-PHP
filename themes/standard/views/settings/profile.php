@@ -140,7 +140,7 @@ include($this->theme_file('settings/menu.php'));
 	}
 	?>
 	<tr class="password_field">
-		<td><div class="label small">New<br />Password</div></td>
+		<td><div class="label small">Create<br />Password</div></td>
 		<td><input type="password" class="field" id="new_password_1" /></td>
 	</tr>
 	<tr class="password_field">
