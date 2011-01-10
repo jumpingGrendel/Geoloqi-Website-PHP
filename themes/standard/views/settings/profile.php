@@ -52,7 +52,7 @@ include($this->theme_file('settings/menu.php'));
 		</td>
 		<td class="right">
 			<input type="text" name="phone" id="profile_phone" value="<?=$profile_phone?>" class="field<?=($profile_phone || $has_push_token ? '' : ' highlight')?>" />
-			<?php if($profile_phone == '' && !$has_push_token) { ?>
+				<?php if($profile_phone == '' && !$has_push_token) { ?>
 				<div class="description highlight">
 					Enter your cell phone number to receive Geonotes by SMS.
 				</div>
