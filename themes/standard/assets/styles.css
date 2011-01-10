@@ -546,6 +546,10 @@ img {
 	border: 1px #000033 solid;
 }	
 
+a.btn  {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
 
 #right_panel {
 	background: #F7FBFD; 

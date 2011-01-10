@@ -19,6 +19,8 @@ class Site_Settings extends Site
 		$this->data['profile_phone'] = $this->user->phone;
 		$this->data['profile_website'] = $this->user->website;
 		$this->data['profile_timezone'] = $this->user->timezone;
+		$this->data['is_anonymous'] = $this->user->is_anonymous;
+		$this->data['has_custom_username'] = $this->user->has_custom_username;
 		$this->data['has_password'] = $_SESSION['user_privacy']->has_password;
 		$this->get_last_location();
 	}

@@ -24,4 +24,13 @@ $(function(){
 			$("#instamapper_devicekey").val(data.device_key).show();
 		}, "json");
 	});
+	
+	$(".connect-button").click(function(){
+		gb_show({
+			message: "Connecting...",
+			width: 300,
+			height: 60
+		});
+	});
+	
 });

@@ -53,4 +53,12 @@ $(function(){
 			}
 		}, "json");
 	});	
+	
+	$("#connect_twitter").click(function(){
+		gb_show({
+			message: "Connecting to Twitter...",
+			width: 400,
+			height: 60
+		});
+	});
 });

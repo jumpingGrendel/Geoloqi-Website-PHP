@@ -21,7 +21,7 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<?php 
 				if($_SESSION['user_profile']->twitter == '')
-					echo '<input type="button" class="submit" value="Connect" />';
+					echo '<a href="/connect/twitter" class="btn connect-button" id="connect_twitter"><span>Connect</span></a>';
 				else
 					echo 'Connected: <div class="connection-username"><a href="http://twitter.com/' . $_SESSION['user_profile']->twitter . '">@' . $_SESSION['user_profile']->twitter . '</a></div>';
 			?>

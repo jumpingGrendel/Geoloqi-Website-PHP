@@ -36,7 +36,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 							<?= ($profile_image ? '<div class="pic"><img src="' . $profile_image . '" width="48" height="48" /></div>' : '') ?>
 						</td>
 						<td>
-							<div class="username"><?=$display_username?></div>
+							<div class="username"><?=($has_custom_username ? $username : '')?></div>
 							<div class="line website"><a href="<?=$website?>"><?=str_replace('http://', '', $website)?></a></div>
 						</td>
 					</tr>

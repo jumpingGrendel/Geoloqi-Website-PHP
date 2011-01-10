@@ -88,6 +88,8 @@ class Site_Map extends Site
 		$this->data['phone_digits'] = Regex_Phone::getDigits(k($profile, 'phone'));
 		$this->data['website'] = $profile->website;
 		$this->data['profile_image'] = ($profile->profile_image ?: '/themes/standard/assets/images/profile-blank.png');
+		$this->data['is_anonymous'] = $profile->is_anonymous;
+		$this->data['has_custom_username'] = $profile->has_custom_username;
 		
 		// whether the user is looking at their own map
 		$this->data['self_map'] = get('key') == FALSE && $username == session('username');
