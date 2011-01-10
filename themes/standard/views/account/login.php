@@ -33,16 +33,16 @@ else
 <div class="settings">
 <table class="form">
 	<tr>
-		<td><div class="label">Username</div></td>
-		<td><input type="text" name="username" id="username" class="field" /></td>
+		<td class="left"><div class="label">Email</div></td>
+		<td class="right"><input type="text" name="username" id="username" class="text" /></td>
 	</tr>
 	<tr>
-		<td><div class="label">Password</div></td>
-		<td><input type="password" name="password" id="password" class="field" /></td>
+		<td class="left"><div class="label">Password</div></td>
+		<td class="right"><input type="password" name="password" id="password" class="text" /></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td><input type="submit" class="submit" value="Log In" /></td>
+		<td><input type="submit" class="btn btn-ok" value="Log In" /></td>
 	</tr>
 </table>
 </div>

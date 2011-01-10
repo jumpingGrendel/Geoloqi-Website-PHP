@@ -40,7 +40,61 @@ class Site_Account extends Site
 	public function logout()
 	{
 		session_destroy();
-		$this->redirect('/');
+		if(!session('twitter_auth'))
+			header('Location: /');
+	}
+	
+	public function setup()
+	{
+		if($this->post)
+		{
+			// Make API call
+			$response = $this->api->request('user/setup', array(
+				'key' => post('key'),
+				'password1' => post('password1'),
+				'password2' => post('password2'),
+				'phone' => post('phone')
+			), TRUE);
+
+			if(property_exists($response, 'error'))
+			{
+				$this->data['error'] = $response->error;
+				$this->data['error_description'] = (property_exists($response, 'error_description') ? $response->error_description : $response->error);
+				$this->data['api_response'] = $response;
+			}
+			else
+			{
+				$username = $response->username;
+				
+				$response = $this->api->request('oauth/token', array(
+					'grant_type' => 'password',
+					'username' => $username,
+					'password' => post('password1')
+				));
+		
+				if(property_exists($response, 'error'))
+				{
+					$this->data['error'] = TRUE;
+					$this->data['error_description'] = (property_exists($response, 'error_description') ? $response->error_description : $response->error);
+				}
+				else
+				{
+					$this->data['error'] = FALSE;
+					$_SESSION['oauth_token'] = $response->access_token;
+					$_SESSION['refresh_token'] = $response->refresh_token;
+	
+					$this->did_log_in();
+				}
+				$this->data['api_response'] = $response;
+	
+				if($this->data['error'] == FALSE)
+					$this->redirect_after_login();
+			}
+		}
+		else
+		{
+			$this->data['key'] = get('value');
+		}
 	}
 	
 	public function unsubscribe()

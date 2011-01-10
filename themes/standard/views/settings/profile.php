@@ -14,9 +14,13 @@ include($this->theme_file('settings/menu.php'));
 			<div class="label">Username</div>
 		</td>
 		<td class="right">
-			<?=$profile_username?>
 			<div class="description">
-				Your Geoloqi profile is located at <a href="http://<?=$_SERVER['SERVER_NAME'] . '/' . $profile_username?>"><?=$_SERVER['SERVER_NAME'] . '/' . $profile_username?></a>. Your username cannot be changed.
+				<?php if($has_custom_username) { ?>
+					Your Geoloqi profile is located at <a href="http://<?=$_SERVER['SERVER_NAME'] . '/' . $profile_username?>"><?=$_SERVER['SERVER_NAME'] . '/' . $profile_username?></a>
+				<?php } else { ?>
+					<div style="float: right;"><a href="/connect/twitter" class="btn" id="connect_twitter"><span>Connect</span></a></div>
+					To set your username, connect your account to Twitter.
+				<?php } ?>
 			</div>
 		</td>
 	</tr>

@@ -25,7 +25,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 <table cellspacing="0" cellpadding="0" id="map-page">
 	<tr>
 		<td id="sidebar">
-			<div id="sidebar-logo"><a id="geoloqi-logo" href="/settings"></a></div>
+			<div id="sidebar-logo"><a id="loqisaur-logo" href="/settings"></a></div>
 			
 			<div id="profile-info" class="round sidebar-panel">
 				<div class="name"><?=$name?></div>
@@ -36,13 +36,13 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 							<?= ($profile_image ? '<div class="pic"><img src="' . $profile_image . '" width="48" height="48" /></div>' : '') ?>
 						</td>
 						<td>
-							<div class="username"><?=$username?></div>
+							<div class="username"><?=($has_custom_username ? $username : '')?></div>
 							<div class="line website"><a href="<?=$website?>"><?=str_replace('http://', '', $website)?></a></div>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2"><table><tr>
-							<td width="70">
+							<td width="80">
 								<div class="last-lat"></div>
 								<div class="last-lng"></div>
 							</td>

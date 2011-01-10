@@ -114,11 +114,20 @@ img {
 	height: 51px;
 }
 
+#loqisaur-logo {
+	position: absolute;
+	top: 10px;
+	left: 0px;
+	background: url(images/geoloqi-logo.png) no-repeat;
+	width: 196px;
+	height: 50px;
+}
+
 #sidebar-logo {
 	padding: 6px 0;
 	background-color: #777;
 }
-#sidebar #geoloqi-logo {
+#sidebar #loqisaur-logo {
 	position: relative;
 	display: block;
 	left: 0;
@@ -203,7 +212,7 @@ img {
 	font-weight: bold;
 }
 #profile-info .last-time {
-	width: 130px;
+	width: 120px;
 }
 #profile-info .last-time .relative {
 
@@ -423,6 +432,12 @@ img {
 	color: #84B16B;
 }
 
+.error-message {
+	color: #900; 
+	font-size: 14pt;
+	text-align: center;
+}
+
 .share_popup {
 	font-size: 10pt;
 }
@@ -531,6 +546,10 @@ img {
 	border: 1px #000033 solid;
 }	
 
+a.btn  {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
 
 #right_panel {
 	background: #F7FBFD; 
