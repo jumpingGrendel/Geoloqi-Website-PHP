@@ -101,6 +101,10 @@ include($this->theme_file('settings/menu.php'));
 				'Europe/Madrid',
 				'Europe/Oslo',
 				'Europe/Paris',
+				'Asia/Bangkok',
+				'Asia/Dubai',
+				'Asia/Qatar',
+				'Asia/Tokyo',
 				'UTC'
 			);
 			foreach ($tz as $z) {

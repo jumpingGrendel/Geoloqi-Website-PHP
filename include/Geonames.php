@@ -20,7 +20,7 @@ class Geonames
 
 			$json = json_decode($json);
 
-			if(MEMCACHE_ENABLED)
+			if(MEMCACHE_ENABLED && $mcKey)
 				mc()->set($mcKey, $json, 3600);
 		}
 
