@@ -475,6 +475,22 @@ img {
 }	
 
 
+#sidebar_shareinfo .shared_message {
+	background: url(images/quote-mark-24.png) no-repeat;
+	padding-left: 32px;
+	font-size: 12pt;
+}
+#sidebar_shareinfo .says {
+	font-size: 8pt; 
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+#sidebar_shareinfo .share_countdown {
+	text-align: right;
+	font-size: 9pt;
+	margin-top: 10px;
+}
+
 
 #GB_overlay {
 	z-index: 200;

@@ -314,10 +314,35 @@ $(function(){
 				$("#profile-info .last-time .relative").show();
 				$("#profile-info .last-time .absolute").hide();
 			}
-			
 			$("#profile-info .last-time .relative").text(diff);
 			$("#profile-info .last-time .absolute").text(dateFormatted);
+			
 			$("#profile-info .last-speed").text(last.location.position.speed + " km/h");
+			
+			if(share_expires){
+				var now = new Date();
+				var diffTxt = "Expires in ";
+				var diff = Math.round((new Date(share_expires).getTime() - now.getTime()) / 1000);
+				if(diff > 86400){
+					$(".share_countdown .relative").hide();
+					$(".share_countdown .absolute").show();
+				}else{
+					if(diff < 0){
+						diffTxt = "Expired!";
+					}else if(diff < 60){
+						diffTxt += diff + " seconds";
+					}else if(diff < 60*60){
+						diffTxt += Math.floor(diff / 60) + "m ";
+						diffTxt += (diff % 60) + "s";
+					}else if(diff < 60*60*24){
+						diffTxt += Math.floor(diff / (60*60)) + "h ";
+						diffTxt += (Math.floor(diff / 60) % 60) + "m";
+					}
+					$(".share_countdown .relative").show();
+					$(".share_countdown .absolute").hide();
+				}
+				$(".share_countdown .relative").text(diffTxt);
+			}
 		}
 	}
 });

@@ -15,6 +15,7 @@ echo 'var thinning = ' . $thinning . ";\n";
 echo 'var self_map = ' . ($self_map ? 1 : 0) . ";\n";
 echo 'var username = "' . $username . '";' . "\n";
 echo 'var share_token = "' . $share_token . '";' . "\n";
+echo 'var share_expires = ' . ($share_info ? strtotime($share_info->date_to) . '000' : 'false') . ";\n";
 echo 'var rough = ' . json_encode($rough) . ';' . "\n";
 echo 'var last = ' . json_encode($last) . ';' . "\n";
 echo 'var public_geonotes = ' . ($public_geonotes ? 1 : 0) . ';' . "\n";
@@ -55,6 +56,27 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 				</table>
 			</div>
 <?php 
+		if($share_info)
+		{
+?>		
+			<div class="round sidebar-panel" id="sidebar_shareinfo">
+				<div class="panel-content">
+					<?php
+					if($share_info->description)
+					{ 
+						echo '<div class="says">spampk says:</div>';
+						echo '<div class="shared_message">' . $share_info->description . '</div>';
+					}
+					?>
+					<div class="share_countdown">
+						<span class="relative"></span>
+						<span class="absolute"><?=($share_info->date_to ? date('n/d/Y g:ia', strtotime($share_info->date_to)) : 'This link will never expire')?></span>
+					</div>
+				</div>
+			</div>
+<?php	
+		}
+
 		if($enable_geonotes)
 		{
 ?>

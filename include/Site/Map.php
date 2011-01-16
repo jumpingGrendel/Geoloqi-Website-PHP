@@ -19,20 +19,24 @@ class Site_Map extends Site
 
 		$last = FALSE;
 		$rough = FALSE;
+		$this->data['share_info'] = FALSE;
 		
 		// If there is a shared link token present, then make the API calls using the share endpoints
 		if(get('key'))
 		{
-			$profile = $this->api->request('share/profile?geoloqi_token=' . get('key'), FALSE, TRUE);
+			$linkInfo = $this->api->request('share/info?geoloqi_token=' . get('key'), FALSE, TRUE);
 
-			if(k($profile, 'error') == 'user_not_found')
+			if(k($linkInfo, 'error') == 'user_not_found')
 				$this->error(HTTP_NOT_FOUND, 'Not Found', 'Sorry, the user "' . $username . '" doesn\'t exist!');
 			
-			$last = $this->api->request('share/last?geoloqi_token=' . get('key'), FALSE, TRUE);
-
 			// TODO: Make a nicer error message when a link has expireed
-			if(k($profile, 'error') == 'invalid_token')
+			if(k($linkInfo, 'error') == 'invalid_token')
 				$this->error(HTTP_OK, 'Expired', 'The shared link has expired!');
+
+			$profile = $linkInfo->profile;
+			$this->data['share_info'] = $linkInfo->share;
+			
+			$last = $this->api->request('share/last?geoloqi_token=' . get('key'), FALSE, TRUE);
 		}
 		else
 		{
