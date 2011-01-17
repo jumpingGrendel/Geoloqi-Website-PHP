@@ -1,7 +1,11 @@
 
 body {
     width: 320px;
+	padding: 0;
+	margin: 0;
     font: 12pt Helvetica, sans-serif;
-	background: #fff;
+	color: white;
+	text-shadow: #222 0 -2px;
+	background: #374047 url(images/backgroundTexture.png) repeat;
 }
 
