@@ -2,6 +2,7 @@
 require_once('EpiCurl.php');
 require_once('EpiOAuth.php');
 require_once('EpiTwitter.php');
+require_once('Facebook.php');
 
 class Site_Post extends Site 
 {
@@ -79,4 +80,48 @@ class Site_Post extends Site
 			$this->error(HTTP_FORBIDDEN, 'access_denied', 'You must visit this page from within the app!'); 
 		}
 	}
+	
+		
+	public function facebook_connect()
+	{
+		$facebook = new Facebook(FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, 'http://' . $_SERVER['SERVER_NAME'] . '/post/facebook_connect');
+	
+		if($facebook->isCallback())
+		{
+			if($facebook->callback())
+			{
+				// $me = $facebook->graph('me');
+				
+				$response = $this->api->request('connect/facebook', array(
+					'facebook_token' => $facebook->accessToken
+				));
+				
+				if(property_exists($response, 'id'))
+				{
+					$this->data['id'] = $response->id;
+					$this->data['name'] = $response->name;
+				}
+				else
+				{
+					$this->error(HTTP_SERVER_ERROR, $response->error, k($response, 'error_description'));
+				}
+				
+				//pa($me);
+			}
+			else
+			{
+				$this->error(HTTP_SERVER_ERROR, 'facebook_error', 'Unable to get an access token from Facebook');
+			}
+		}
+		else
+		{
+			// The first visit from the mobile app will include an oauth_token from Geoloqi
+			if(get('oauth_token'))
+				$_SESSION['oauth_token'] = get('oauth_token');
+
+			header('Location: ' . $facebook->authorizeURL(array('email','user_mobile_phone','publish_stream','offline_access','publish_checkins'), 'wap'));
+			die();
+		}	
+	}
+	
 }
