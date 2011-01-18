@@ -158,6 +158,12 @@ class Site
 	{
 		return $this->theme . '/views/' . $filename;
 	}
+
+	protected function include_file($filename)
+	{
+		extract($this->data);
+		include($this->theme_file($filename));
+	}
 	
 	public function render($method, $params=FALSE)
 	{

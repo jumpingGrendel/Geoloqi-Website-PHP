@@ -1,0 +1,10 @@
+
+body {
+    width: 320px;
+	padding: 12px;
+	margin: 0;
+    font: 12pt Helvetica, sans-serif;
+	color: #222;
+	text-shadow: #ddd 0 2px;
+	background: #ccc; 
+}
