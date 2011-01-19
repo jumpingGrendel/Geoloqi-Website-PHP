@@ -5,6 +5,6 @@ body {
 	margin: 0;
     font: 12pt Helvetica, sans-serif;
 	color: #222;
-	text-shadow: #ddd 0 2px;
+	text-shadow: #ddd 0 1px;
 	background: #ccc; 
 }

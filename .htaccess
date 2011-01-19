@@ -14,7 +14,7 @@ RewriteRule ^error$ index.php?controller=error&method=index [QSA,L]
 RewriteRule ^(account|connect|map|settings|help|oauth)/([^/\.]+)\.ajax$ index.php?controller=$1&method=$2&mode=ajax [QSA,L]
 
 # All other pages (i.e. geoloqi.com/settings/profile)
-RewriteRule ^(account|connect|map|settings|help|oauth|post)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
+RewriteRule ^(about|account|connect|map|settings|help|oauth|post)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
 
 RewriteRule ^(account)/([^/\.]+)/([^/\.]+)$ index.php?controller=$1&method=$2&value=$3 [QSA,L]
 

@@ -22,6 +22,7 @@ if(get('mode') == 'ajax')
 
 switch($controllerName)
 {
+	case 'about':
 	case 'connect':
 	case 'map':
 	case 'settings':
