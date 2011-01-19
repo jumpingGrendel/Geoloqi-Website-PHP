@@ -247,5 +247,10 @@ class Site_Settings extends Site
 		else
 			return array('error' => 'GeoNames Error');
 	}
+	
+	public function app_tour()
+	{
+	
+	}
 }
 ?>

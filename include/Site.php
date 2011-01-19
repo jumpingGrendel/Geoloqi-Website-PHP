@@ -239,6 +239,30 @@ class Site
 		die();
 	}
 	
+	public function get_from_wiki($page_name)
+	{
+		$mcKey = 'geoloqi.org/wiki/' . $page_name;
+
+		if(MEMCACHE_ENABLED && ($data=mc()->get($mcKey)) != FALSE)
+			$html = $data;
+		else
+		{
+			$html = file_get_contents('http://geoloqi.org/iPhone_App_Tour');
+			
+			$start = strpos($html, '<!-- start content -->');
+			$end = strpos($html, '<div class="printfooter">');
+			
+			$html = substr($html, $start, $end-$start);
+		
+			$html = str_replace('src="/wiki/', 'src="http://geoloqi.org/wiki/', $html);
+			
+			if(MEMCACHE_ENABLED && $mcKey)
+				mc()->set($mcKey, $html, 600);
+		}
+		
+		return '<div style="margin: 30px;" class="mw">' . $html  . '</div>';
+	}
+	
 	/**
 	 * Translate HTTP codes into their corresponding string representations
 	 */

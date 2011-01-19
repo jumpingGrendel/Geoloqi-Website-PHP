@@ -1,0 +1,35 @@
+.mw div.tleft {
+	border-width:0.5em 1.4em 0.8em 0;
+	clear:left;
+	float:left;
+	margin-right:0.5em;
+}
+.mw div.thumbinner {
+	background-color:#F9F9F9;
+	border:1px solid #CCCCCC;
+	font-size:94%;
+	overflow:hidden;
+	padding:3px !important;
+	text-align:center;
+}
+.mw div.thumb {
+	border-color:white;
+	border-style:solid;
+	margin-bottom:0.5em;
+}
+.mw h1, .mw h2, .mw h3, .mw h4, .mw h5, .mw h6 {
+	background:none repeat scroll 0 0 transparent;
+	border-bottom:1px solid #AAAAAA;
+	color:black;
+	font-weight:normal;
+	margin:0;
+	padding-bottom:0.17em;
+	padding-top:0.5em;
+}
+.mw h3, .mw h4, .mw h5, .mw h6 {
+	border-bottom:medium none;
+	font-weight:bold;
+}
+.mw .internal {
+	display: none;
+}
