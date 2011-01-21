@@ -8,7 +8,7 @@ class Site_Map extends Site
 	public function index($username)
 	{
 		// Redirect 'me' to the current logged-in user
-		if($username == 'me')
+		if($username == 'me' || $username == 'map')
 		{
 			if(session('username'))
 				header('Location: /' . session('username'));
