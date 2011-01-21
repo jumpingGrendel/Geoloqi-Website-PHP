@@ -64,7 +64,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 					<?php
 					if($share_info->description)
 					{ 
-						echo '<div class="says">spampk says:</div>';
+						echo '<div class="says">' . $username . ' says:</div>';
 						echo '<div class="shared_message">' . $share_info->description . '</div>';
 					}
 					?>
