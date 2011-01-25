@@ -119,7 +119,7 @@ class Site_Post extends Site
 			if(get('oauth_token'))
 				$_SESSION['oauth_token'] = get('oauth_token');
 
-			header('Location: ' . $facebook->authorizeURL(array('email','user_mobile_phone','publish_stream','offline_access','publish_checkins'), 'wap'));
+			header('Location: ' . $facebook->authorizeURL(array('email', /* 'user_mobile_phone', */ 'publish_stream','offline_access','publish_checkins'), 'wap'));
 			die();
 		}	
 	}
