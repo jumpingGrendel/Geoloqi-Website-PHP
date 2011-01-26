@@ -4,9 +4,17 @@ ini_set('error_reporting', E_ALL);
 // Start buffering any output so we capture error messages and can output them in a nice format with the proper HTTP headers
 ob_start();
 
+/**
+ * Check for the required config.php file 
+ */
+if(!file_exists(dirname(__FILE__) . '/include/config.php'))
+{
+	die('Setup not complete: Copy config.template.php to config.php and modify the configuration settings to match your environment.');
+}
+
 session_start();
 
-require_once('inc.php');
+require_once('functions.php');
 require_once('config.php');
 require_once('GeoloqiAPI.php');
 require_once('Site.php');
