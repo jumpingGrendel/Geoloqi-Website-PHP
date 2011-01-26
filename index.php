@@ -4,8 +4,6 @@ ini_set('error_reporting', E_ALL);
 // Start buffering any output so we capture error messages and can output them in a nice format with the proper HTTP headers
 ob_start();
 
-set_include_path(dirname(__FILE__) . '/include' . PATH_SEPARATOR . dirname(__FILE__) . '/themes' . PATH_SEPARATOR . get_include_path());
-
 session_start();
 
 require_once('inc.php');

@@ -1,3 +1,6 @@
+# Set PHP's include path to the following, either in this .htaccess file or in the main Apache config
+# .:/geoloqi.com/include:/geoloqi.com/themes:/common.geoloqi.com/include
+
 RewriteEngine on
 
 # Home page
