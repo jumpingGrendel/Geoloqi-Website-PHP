@@ -194,7 +194,7 @@ class Site
 		}
 	}
 
-	public function error($code, $error, $msg)
+	public function error($code, $error, $msg, $view='index')
 	{
 		header('HTTP/1.1 ' . $code . ' ' . $this->_codeString($code));
 		
@@ -219,7 +219,7 @@ class Site
 				$this->data['debug_output'] = '';
 			extract($this->data);
 			include($this->theme_file('layouts/header.php'));
-			include($this->theme_file('error/index.php'));
+			include($this->theme_file('error/' . $view . '.php'));
 			include($this->theme_file('layouts/footer.php'));
 		}
 		

@@ -31,7 +31,7 @@ class Site_Map extends Site
 			
 			// TODO: Make a nicer error message when a link has expireed
 			if(k($linkInfo, 'error') == 'invalid_token')
-				$this->error(HTTP_OK, 'Expired', 'The shared link has expired!');
+				$this->error(HTTP_OK, 'Expired', 'The shared link has expired!', 'expired_link');
 
 			$profile = $linkInfo->profile;
 			$this->data['share_info'] = $linkInfo->share;
