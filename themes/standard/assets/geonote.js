@@ -12,15 +12,15 @@ var geonote_circle;
 			geonote_position = map.getCenter();
 		}
 		
-		var geonote_image = new google.maps.MarkerImage('/themes/standard/assets/images/chat.png',
-			new google.maps.Size(38, 33),
+		var geonote_image = new google.maps.MarkerImage('/themes/standard/assets/images/07-map-marker.png',
+			new google.maps.Size(18, 28),
 			new google.maps.Point(0,0),
-			new google.maps.Point(9, 31));
+			new google.maps.Point(9, 26));
 
-		var geonote_shadow = new google.maps.MarkerImage('/themes/standard/assets/images/chat-shadow.png',
-			new google.maps.Size(55, 33),
+		var geonote_shadow = new google.maps.MarkerImage('/themes/standard/assets/images/07-map-marker-shadow.png',
+			new google.maps.Size(26, 22),
 			new google.maps.Point(0,0),
-			new google.maps.Point(9, 33));
+			new google.maps.Point(2, 22));
 
 	    // Create the marker at the last known location
 		geonote_marker = new google.maps.Marker({
