@@ -35,7 +35,7 @@
 			<h2 style="text-align:center;">Download the app!</h2>
 			<table>
 			<tr>
-				<td><!-- <a href=""> --><img src="<?=$theme_root?>images/geoloqi_available_on_the_app_store.png" width="150" /><!-- </a> --></td>
+				<td><a href="http://itunes.apple.com/us/app/geoloqi/id415603875"><img src="<?=$theme_root?>images/geoloqi_available_on_the_app_store.png" width="150" /></a></td>
 				<td style="font-size: 8pt; padding-left: 15px;"><b>Coming Soon!</b> Available for iPhone 3GS and iPhone 4 only.</td>
 			</tr>
 			<tr>
