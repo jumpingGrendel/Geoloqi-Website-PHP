@@ -6,6 +6,11 @@ $this->head[] = '<script type="text/javascript" src="' . $theme_root . 'map-hist
 if($enable_geonotes)
 	$this->head[] = '<script type="text/javascript" src="' . $theme_root . 'geonote.js"></script>';
 
+if($share_token)
+{
+	$this->head[] = '';
+}
+
 include($this->theme_file('layouts/header_bar.php'));
 ?>
 <script type="text/javascript">

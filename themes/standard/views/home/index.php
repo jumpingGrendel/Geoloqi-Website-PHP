@@ -18,19 +18,16 @@ $this->head[] = '<link rel="stylesheet" href="' . $theme_root . 'home.css" type=
 <div id="mid">
 	<div class="content">
 	
-		<div style="padding-top: 10px; font-size: 12pt; width: 220px; margin: 0 auto;">
-			<!-- 
-			<form action="/account/login" method="post">
-				<input type="text" id="login_username" name="username" value="aaronpk" /><br />
-				<input type="password" id="login_password" name="password" value="1234" /><br />
-				<input type="submit" value="Log In" />
-			</form>
-			-->
-			<a href="/connect/twitter"><img src="<?=$theme_root?>images/log-in-with-twitter-button.png" /></a>
-		</div>
-
-		<div style="margin-left: 300px; padding-top: 20px; width: 340px; position: relative;">
-
+		<div style="font-size: 12pt; width: 420px; margin: 0 auto; padding-top: 16px;">
+			<table><tr>
+			<td width="280" style="text-align: center;">
+				<div style="font-size: 10pt;">Signed up from the phone?</div>
+				<div style="font-size: 18pt;"><a href="/account/login">Log in</a></div>
+			</td>
+			<td width="140">
+				<a href="/connect/twitter"><img src="<?=$theme_root?>images/sign-in-with-twitter-l.png" /></a>
+			</td>
+			</tr></table>
 		</div>
 	
 	</div>

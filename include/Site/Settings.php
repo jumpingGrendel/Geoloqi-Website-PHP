@@ -240,8 +240,12 @@ class Site_Settings extends Site
 	
 	public function nearest_intersection_ajax()
 	{
-		$coords = explode(',', post('coords'));
-		$text = Geonames::getNearestIntersectionWithCity($coords[0], $coords[1]);
+		$coords = explode(',', request('coords'));
+
+		if(count($coords) != 2)
+			return array('error' => 'Invalid Input');
+		
+		$text = Geonames::getNearestIntersectionWithCity(trim($coords[0]), trim($coords[1]));
 		if($text)
 			return array('name' => $text);
 		else
