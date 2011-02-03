@@ -22,10 +22,10 @@ $this->head[] = '<link rel="stylesheet" href="' . $theme_root . 'home.css" type=
 			<table><tr>
 			<td width="280" style="text-align: center;">
 				<div style="font-size: 10pt;">Signed up from the phone?</div>
-				<div style="font-size: 18pt;"><a href="/account/login">Log in</a></div>
+				<div style="font-size: 18pt;"><a href="/account/login">Sign in</a></div>
 			</td>
 			<td width="140">
-				<a href="/connect/twitter"><img src="<?=$theme_root?>images/sign-in-with-twitter-l.png" /></a>
+				<a href="/connect/twitter"><img src="<?=$theme_root?>images/log-in-with-twitter-button.png" /></a>
 			</td>
 			</tr></table>
 		</div>
