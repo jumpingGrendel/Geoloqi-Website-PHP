@@ -44,6 +44,13 @@ define('TWITTER_CONSUMER_SECRET', '');
 define('FACEBOOK_APP_ID', '');
 define('FACEBOOK_APP_SECRET', '');
 
+/** 
+ * Foursquare app information
+ * See http://developer.foursquare.com/docs/oauth.html for more information
+ */
+define('FOURSQUARE_CLIENT_ID', '');
+define('FOURSQUARE_CLIENT_SECRET', '');
+
 // Memcached settings. The API will work fine without memcached but will perform significantly better with it enabled.
 define('MEMCACHE_ENABLED', FALSE);
 // Prefix all memcached keys with this string
