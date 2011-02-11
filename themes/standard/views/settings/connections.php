@@ -46,6 +46,32 @@ include($this->theme_file('settings/menu.php'));
 			?>
 		</td>
 	</tr>
+	<?php
+	if(k($_SESSION['user_profile'], 'facebook_id'))
+	{
+	?>
+	<tr>
+		<td>
+			<div class="app_icon"><img src="<?=$image_root?>apps/facebook-geoloqi.png" width="64" height="64" /></div>
+		</td>
+		<td>
+			<div class="label">Facebook</div>
+			<div class="description">
+				Connect your Facebook account to share your location with your Facebook friends.
+			</div>
+		</td>
+		<td>
+			<?php
+				if(k($_SESSION['user_profile'], 'facebook_id') == '')
+					echo '<a href="/connect/facebook" class="btn connect-button" id="connect_facebook"><span>Connect</span></a>';
+				else
+					echo 'Connected: <div class="connection-username"><a href="http://facebook.com/profile.php?id=' . $_SESSION['user_profile']->facebook_id . '">View Profile</a></div>';
+			?>
+		</td>
+	</tr>
+	<?php
+	}
+	?>
 	<tr class="coming-soon">
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/gowalla-geoloqi.png" width="64" height="64" /></div>
@@ -53,7 +79,7 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<div class="label">Gowalla</div>
 			<div class="description">
-				<b>Coming soon!</b> Connect your Twitter account to log in via Twitter, update your Geoloqi location via Twitter, or share your location via Twitter.
+				<b>Coming soon!</b> Connect your Gowalla account to automatically check in on Gowalla when you are nearby your favorite places.
 			</div>
 		</td>
 		<td>
