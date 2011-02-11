@@ -52,7 +52,8 @@ include($this->theme_file('settings/menu.php'));
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
 						echo '<td>' . $link->range . '<br />' . $link->expires . '</td>';
-						echo '<td></td>';
+						if(strtotime($link->date_from) < time())
+							echo '<td><input type="button" class="submit small start-sharing" value="Activate" /><input type="hidden" class="token" value="' . $link->token . '" /></td>';
 					echo '</tr>';					
 				}
 				if(count($expired_links) == 0)
