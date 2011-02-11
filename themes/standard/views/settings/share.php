@@ -40,7 +40,7 @@ include($this->theme_file('settings/menu.php'));
 				}
 			?>
 			<tr style="background-color: #CCC">
-				<td colspan="3" class="section-header">Expired Links</td>
+				<td colspan="3" class="section-header">Inactive Links</td>
 			</tr>
 			<?php
 				foreach($expired_links as $link) 
@@ -52,7 +52,8 @@ include($this->theme_file('settings/menu.php'));
 							echo ($link->share_with ? 'Shared with: ' . $link->share_with : '');
 						echo '</td>';
 						echo '<td>' . $link->range . '<br />' . $link->expires . '</td>';
-						if(strtotime($link->date_from) < time())
+						if(($link->date_to == '' && $link->date_from == '') 
+							|| (strtotime($link->date_from) < time() && strtotime($link->date_to) > time()))
 							echo '<td><input type="button" class="submit small start-sharing" value="Activate" /><input type="hidden" class="token" value="' . $link->token . '" /></td>';
 					echo '</tr>';					
 				}

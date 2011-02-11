@@ -201,9 +201,17 @@ class Site_Settings extends Site
 	{
 		if(post('action') == 'expire')
 		{
-			$result = $this->api->request('link/expire', array('token'=>post('token')));
+			$result = $this->api->request('link/deactivate', array('token'=>post('token')));
 			if(k($result, 'result') == 'ok')
 				return array('result'=>'ok', 'deleted'=>post('token'));
+			else
+				return $result;
+		}
+		elseif(post('action') == 'activate')
+		{
+			$result = $this->api->request('link/activate', array('token'=>post('token')));
+			if(k($result, 'result') == 'ok')
+				return array('result'=>'ok', 'activated'=>post('token'));
 			else
 				return $result;
 		}
