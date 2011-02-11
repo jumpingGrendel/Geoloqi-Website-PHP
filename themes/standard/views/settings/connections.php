@@ -18,7 +18,7 @@ include($this->theme_file('settings/menu.php'));
 				Connect your Twitter account to log in via Twitter, update your Geoloqi location via Twitter, or share your location via Twitter.
 			</div>
 		</td>
-		<td>
+		<td width="140">
 			<?php 
 				if($_SESSION['user_profile']->twitter == '')
 					echo '<a href="/connect/twitter" class="btn connect-button" id="connect_twitter"><span>Connect</span></a>';
@@ -27,18 +27,23 @@ include($this->theme_file('settings/menu.php'));
 			?>
 		</td>
 	</tr>
-	<tr class="coming-soon">
+	<tr>
 		<td>
 			<div class="app_icon"><img src="<?=$image_root?>apps/foursquare-geoloqi.png" width="64" height="64" /></div>
 		</td>
 		<td>
 			<div class="label">Foursquare</div>
 			<div class="description">
-				<b>Coming soon!</b> Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places.
+				Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places.
 			</div>
 		</td>
 		<td>
-			<!-- <input type="button" class="submit" value="Connect" /> -->
+			<?php
+				if(k($_SESSION['user_profile'], 'foursquare_id') == '')
+					echo '<a href="/connect/foursquare" class="btn connect-button" id="connect_foursquare"><span>Connect</span></a>';
+				else
+					echo 'Connected: <div class="connection-username"><a href="http://foursquare.com/user/' . $_SESSION['user_profile']->foursquare_id . '">View Profile</a></div>';
+			?>
 		</td>
 	</tr>
 	<tr class="coming-soon">

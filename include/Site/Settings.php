@@ -118,12 +118,12 @@ class Site_Settings extends Site
 		
 		foreach($links as $link)
 		{
-			$category = $link->active ? 'active_links' : 'expired_links';
+			$category = $link->currently_active ? 'active_links' : 'expired_links';
 			
 			$data = $link;
 			
 			if(strtotime($link->date_to) < time())
-				$data->expires = 'Expired ' . (strtotime($link->date_to) > time() - 60000 ? Grammar::timeAgoInWords($link->date_to) : '');
+				$data->expires = 'Inactive ' . (strtotime($link->date_to) > time() - 60000 ? Grammar::timeAgoInWords($link->date_to) : '');
 			else
 				$data->expires = 'Expires in ' . (strtotime($link->date_to) > time() - 60000 ? Grammar::timeAgoInWords($link->date_to, 'n/j/Y', 'now', TRUE) : '');
 			
@@ -189,6 +189,8 @@ class Site_Settings extends Site
 					$data->expires = 'Inactive';
 				}
 			}
+			$data->date_from = $link->date_from;
+			$data->date_to = $link->date_to;
 			$data->url = WEBSITE_URL . '/' . $this->user->username . '/' . $link->token;
 			$data->short_url = (WEBSITE_SHORTURL ? WEBSITE_SHORTURL . '/' . $link->token : FALSE);
 			$this->data[$category][] = $data;

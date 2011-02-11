@@ -111,6 +111,12 @@ class Site_Connect extends Site
 	
 	public function foursquare()
 	{
+		if(!session('username'))
+		{
+			header('Location: /');
+			die();
+		}
+		
 		$foursquare = new Foursquare(FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET, 'http://' . $_SERVER['SERVER_NAME'] . '/connect/foursquare');
 	
 		if($foursquare->isCallback())
@@ -124,18 +130,19 @@ class Site_Connect extends Site
 				if(property_exists($response, 'id'))
 				{
 					$this->data['id'] = $response->id;
-					$this->data['username'] = $response->username;
+					$_SESSION['user_profile']->foursquare_id = $response->id;
 				}
 				else
 				{
 					$this->error(HTTP_SERVER_ERROR, $response->error, k($response, 'error_description'));
 				}
-				
-				//pa($me);
+
+				header('Location: /settings/connections');
+				die();
 			}
 			else
 			{
-				$this->error(HTTP_SERVER_ERROR, 'foursquare_error', 'Unable to get an access token from Foursquare');
+				$this->error(HTTP_SERVER_ERROR, 'foursquare_error', 'Unable to get an access token from Foursquare.');
 			}
 		}
 		else
@@ -144,7 +151,7 @@ class Site_Connect extends Site
 			if(get('oauth_token'))
 				$_SESSION['oauth_token'] = get('oauth_token');
 
-			header('Location: ' . $foursquare->authorizeURL('touch'));
+			header('Location: ' . $foursquare->authorizeURL());
 			die();
 		}	
 	}
