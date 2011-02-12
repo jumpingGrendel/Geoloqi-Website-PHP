@@ -41,7 +41,7 @@ class Site_Account extends Site
 	{
 		session_destroy();
 		if(!session('twitter_auth'))
-			header('Location: /');
+			redirect('/', 'Logged out');
 	}
 	
 	public function setup()

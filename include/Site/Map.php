@@ -11,9 +11,9 @@ class Site_Map extends Site
 		if($username == 'me' || $username == 'map')
 		{
 			if(session('username'))
-				header('Location: /' . session('username'));
+				redirect('/' . session('username'));
 			else
-				header('Location: /');
+				redirect('/');
 			die();
 		}
 

@@ -165,6 +165,34 @@ class Site
 		include($this->theme_file($filename));
 	}
 	
+	protected function log_in_from_token($token_name='oauth_token')
+	{
+		if(get($token_name))
+		{
+			// Store the oauth token which will be used by the API client
+			$_SESSION['oauth_token'] = get($token_name);
+			
+			// Fetch the user's profile to find out their username
+			$profile = $this->api->request('account/profile');
+			
+			if(k($profile, 'username'))
+			{
+				$_SESSION['username'] = $profile->username;
+				$_SESSION['user_profile'] = $profile;
+
+				$privacy = $this->api->request('account/privacy');
+				$_SESSION['user_privacy'] = $privacy;
+			}
+			else
+			{
+				unset($_SESSION['oauth_token']);
+				return FALSE;
+			}
+		}
+		else
+			return FALSE;
+	}
+	
 	public function render($method, $params=FALSE)
 	{
 		$this->responded = TRUE;

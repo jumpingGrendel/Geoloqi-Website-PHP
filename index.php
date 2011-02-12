@@ -78,4 +78,30 @@ catch(Exception $e)
 	$controller->error(HTTP_SERVER_ERROR, 'Uncaught Exception', $msg);
 }
 
+/**
+ * In production mode, this function sends a redirect header and quits. In debug mode, displays a 
+ * web link to manually step through any redirections that are taking place.
+ */
+function redirect($url, $reason='')
+{
+	if(DEBUG_MODE)
+	{
+		echo '<a href="' . $url . '">' . $url . '</a>';
+		if($reason)
+			echo '<p>' . $reason . '</p>';
+			
+		$backtrace = debug_backtrace();
+		if(is_array($backtrace) && array_key_exists(0, $backtrace))
+		{
+			$base = dirname(__FILE__);
+			echo '<p>' . $_SERVER['SERVER_NAME'] . '<br />';
+			echo $_SERVER['REQUEST_URI'] . '</p>';
+			echo '<p>' . str_replace($base, '', $backtrace[0]['file']) . ' on line ' . $backtrace[0]['line'] . '</p>';
+		} 
+	}
+	else
+		header('Location: ' . $url);
+	die();
+}
+
 ?>

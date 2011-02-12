@@ -24,8 +24,7 @@ class Site_Oauth extends Site
 				$_SESSION['oauth_connection_data'] = $data;
 
 				// Redirect to the Twitter connection URL which will automatically redirect to twitter.com's auth
-				header('Location: /connect/twitter');
-				die();
+				redirect('/connect/twitter');
 			}
 			else
 			{
