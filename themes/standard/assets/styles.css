@@ -412,9 +412,8 @@ img {
 	text-decoration: none;
 }
 
-.settings.tabular td.section-header {
+.settings.tabular .section-header {
 	font-size: 16pt;
-	padding: 4px;
 }
 .settings.tabular td {
 	padding: 6px;

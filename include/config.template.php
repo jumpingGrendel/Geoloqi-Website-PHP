@@ -10,6 +10,7 @@ define('GEOLOQI_API_BASEURL', 'http://api.geoloqi.dev/1/');
 define('GEOLOQI_API_BASEURL_SECURE', 'https://api.geoloqi.dev/1/');
 
 define('WEBSITE_URL', 'http://geoloqi.com');
+define('WEBSITE_APP_URL', 'https://a.geoloqi.com');  // for viewing layer descriptions in mobile apps
 define('WEBSITE_SHORTURL', 'http://loqi.me'); // Set to FALSE to disable using short links
 
 define('GEOLOQI_GA_ID', FALSE);

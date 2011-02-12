@@ -195,7 +195,7 @@ class Site_Map extends Site
 ?>
 		<div class="share_popup">
 			<div class="caption">Link created!</div>
-			<input type="text" value="<?=$response->shortlink?>" style="width: 160px;" /><br />
+			<input type="text" value="<?=$response->shortlink?>" style="width: 200px;" onclick="this.select()" /><br />
 			<div class="tweet_box">
 <?php 
 			if($this->user->twitter == '')
@@ -206,9 +206,9 @@ class Site_Map extends Site
 			{
 ?>
 				<div class="tweet_this">Tweet this:</div>
-				<textarea class="tweet_text">Heading out! Track me on @geoloqi: <?=$response->shortlink?></textarea><br />
-				<input type="button" value="Close" class="btn_close" />
-				<input type="button" value="Tweet" class="btn_tweet" />
+				<textarea class="tweet_text"><?= (post('share_description') ? post('share_description') : 'Heading out! Track me on @geoloqi:') ?> <?=$response->shortlink?></textarea><br />
+				<input type="button" value="Close" class="btn small btn_close" />
+				<input type="button" value="Tweet" class="btn small btn-ok btn_tweet" />
 				<div class="tweet_count">140</div>
 <?php 
 			}

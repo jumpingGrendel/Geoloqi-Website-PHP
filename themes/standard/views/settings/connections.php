@@ -134,7 +134,7 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 <?php
 				echo '<input type="text" id="instamapper_devicekey" value="' . $instamapper_devicekey . '" class="text" style="' . ($instamapper_devicekey ? '' : 'display:none;') . '" />';
-				echo '<input type="button" class="submit" value="Create" id="instamapper_create" style="' . ($instamapper_devicekey ? 'display:none;' : '') . '" />';
+				echo '<input type="button" class="btn" value="Create" id="instamapper_create" style="' . ($instamapper_devicekey ? 'display:none;' : '') . '" />';
 ?>
 		</td>
 	</tr>
@@ -183,7 +183,7 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<div class="label">OAuth 2 Access Token</div>
 			<div class="description">
-				You can request a permanent access token for your account so you can start building apps right away! This access token will never expire, and has full access to your account, so guard it carefully! Only use it over https.
+				You can request a permanent access token for your account so you can start building apps right away! This access token will never expire, and has full access to your account, so guard it carefully! Use it only over https.
 				<br /><br />
 <?php 
 				if($permanent_token)
@@ -192,10 +192,12 @@ include($this->theme_file('settings/menu.php'));
 				}
 				else
 				{
-					echo '<input type="button" class="submit" value="Get Access Token" id="request_access_token" />';
+					echo '<input type="button" class="btn" value="Get Access Token" id="request_access_token" />';
 					echo '<input type="text" class="text" id="permanent_access_token" style="display: none; width: 400px;" />';	
 				}
 ?>
+				<br /><br />
+				<a href="http://geoloqi.com/api">API Documentation</a>
 			</div>
 		</td>
 	</tr>

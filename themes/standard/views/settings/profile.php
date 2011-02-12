@@ -123,7 +123,7 @@ include($this->theme_file('settings/menu.php'));
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="Save" class="submit" id="btn_save" />
+			<input type="submit" value="Save" class="btn" id="btn_save" />
 		</td>
 	</tr>
 	
@@ -153,7 +153,7 @@ include($this->theme_file('settings/menu.php'));
 	</tr>
 	<tr class="password_field">
 		<td colspan="2">
-			<input type="submit" value="Change Password" class="submit" id="btn_changepassword" />
+			<input type="submit" value="Change Password" class="btn" id="btn_changepassword" />
 		</td>
 	</tr>
 	<tr>

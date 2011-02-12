@@ -149,7 +149,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 ?>
 				<tr>
 					<td colspan="2">
-						<div class="small">Description:</div>
+						<div class="small">Message:</div>
 						<input type="text" id="share_description" />
 					</td>
 				</tr>
@@ -180,7 +180,7 @@ echo 'var public_location = ' . ($public_location ? 1 : 0) . ';' . "\n";
 						</select>
 					</td>
 					<td style="text-align: right; vertical-align: bottom;">
-						<input type="button" value="Create" class="submit" id="share_btn" />
+						<input type="button" value="Preview" class="submit" id="share_btn" />
 					</td>
 				</tr>
 				</table>
