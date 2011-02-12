@@ -8,3 +8,7 @@ body {
 	text-shadow: #222 0 -2px;
 	background: #374047 url(images/backgroundTexture.png) repeat;
 }
+
+a img {
+	border: 0;
+}

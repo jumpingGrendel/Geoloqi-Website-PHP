@@ -46,7 +46,7 @@ class Site_Connect extends Site
 							$_SESSION['user_profile'] = $profile;
 							$_SESSION['username'] = $profile->username;
 						
-							header('Location: /settings/profile');
+							redirect('/settings/profile', 'Connection completed');
 							die();
 						}
 						else
@@ -98,26 +98,28 @@ class Site_Connect extends Site
 			// Authorize URL makes the user approve the app every time, authenticate redirects seamlessly after the initial connection is made
 			try
 			{
-				$auth_url = $twitter->getAuthenticateUrl(null, array('oauth_callback' => 'http://' . $_SERVER['SERVER_NAME'] . '/connect/twitter'));
+				$auth_url = $twitter->getAuthenticateUrl(null, array('oauth_callback' => https() . $_SERVER['SERVER_NAME'] . '/connect/twitter'));
 			}
 			catch(EpiOAuthException $e)
 			{
 				$this->error(HTTP_SERVER_ERROR, 'Twitter Error', 'Unable to get the authentication URL from Twitter');
 			}
-			header('Location: ' . $auth_url);
+			redirect($auth_url);
 			die();
 		}
 	}	
 	
 	public function foursquare()
 	{
-		if(!session('username'))
-		{
-			header('Location: /');
-			die();
-		}
-		
-		$foursquare = new Foursquare(FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET, 'http://' . $_SERVER['SERVER_NAME'] . '/connect/foursquare');
+		$redirectURI = WEBSITE_URL . '/connect/foursquare';
+
+		if(get('foursquare_connect_redirect'))
+			$redirectURI .= '?redirect=' . urlencode(get('foursquare_connect_redirect'));
+
+		// The first visit from the mobile app will include an oauth_token from Geoloqi
+		$this->log_in_from_token();
+
+		$foursquare = new Foursquare(FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET, $redirectURI);
 	
 		if($foursquare->isCallback())
 		{
@@ -137,8 +139,10 @@ class Site_Connect extends Site
 					$this->error(HTTP_SERVER_ERROR, $response->error, k($response, 'error_description'));
 				}
 
-				header('Location: /settings/connections');
-				die();
+				if(get('redirect'))
+					redirect(get('redirect'));
+				else
+					redirect('/settings/connections');
 			}
 			else
 			{
@@ -147,12 +151,7 @@ class Site_Connect extends Site
 		}
 		else
 		{
-			// The first visit from the mobile app will include an oauth_token from Geoloqi
-			if(get('oauth_token'))
-				$_SESSION['oauth_token'] = get('oauth_token');
-
-			header('Location: ' . $foursquare->authorizeURL());
-			die();
+			redirect($foursquare->authorizeURL());
 		}	
 	}
 		
