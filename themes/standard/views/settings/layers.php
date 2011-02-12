@@ -56,7 +56,6 @@ if(GEOLOQI_ENABLE_LAYERS)
 		</tr>
 		<? endforeach; ?>
 	</table>
-	</div>
 <?php 
 } 
 else 

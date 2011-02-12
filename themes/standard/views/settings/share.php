@@ -5,7 +5,6 @@ include($this->theme_file('settings/menu.php'));
 ?>
 
 <div class="settings-wrap"><div class="settings tabular">
-	<div>
 		<table style="border-spacing: 0px; margin: 0; width: 100%">
 			<thead>
 				<tr>
@@ -66,7 +65,6 @@ include($this->theme_file('settings/menu.php'));
 			?>
 			</tbody>
 		</table>
-	</div>
 </div></div>
 
 <?php 

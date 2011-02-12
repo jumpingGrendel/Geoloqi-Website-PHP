@@ -1,24 +1,28 @@
 
 $(function(){
 	
-	$(".save-privacy").click(function(){
-		gb_show({
-			message: "Working...",
-			width: 300,
-			height: 60
-		});
-		
+	$("#subscribe_switch").click(function(){
+		$(this).blur();
 		$.post("/settings/layer.ajax", {
-			action: "save-privacy",
-			token: $(this).siblings(".token").val()
+			action: $(this).hasClass("on") ? "unsubscribe" : "subscribe",
+			id: $(this).siblings(".layer_id").val()
 		}, function(data){
-			if(data.result == "ok"){
-				gb_update("Ok!");
-				setTimeout(function(){
-					window.location = window.location;
-				}, 120);
+			if(data && data.layer_id){
+				var img = $("#subscribe_switch img").attr("src");
+				if(data.subscribed){
+					$("#subscribe_switch").removeClass("off").addClass("on");
+					$("#subscribe_switch img").attr("src", img.replace(/switch_off/, "switch_on"));
+				}else{
+					$("#subscribe_switch").removeClass("on").addClass("off");
+					$("#subscribe_switch img").attr("src", img.replace(/switch_on/, "switch_off"));
+				}
 			}else{
-				gb_update(data.error);
+				gb_show({
+					message: "Error: " + (data ? data.error : ""),
+					width: 300,
+					height: 60
+				});
+				setTimeout(gb_hide, 1500);
 			}
 		}, "json");		
 	});

@@ -219,17 +219,18 @@ class Site_Settings extends Site
 			return array('result'=>'null');
 	}
 	
-	public function layer()
+	public function layers()
 	{
 		$this->data['user_id'] = session('user_profile')->user_id;
 		$this->data['user_layers'] = $this->api->request('layer/list');
-		$this->data['layer_subscriptions'] = $this->api->request('layer/subscriptions');
-		$this->data['layers_near_you'] = $this->api->request('layer/near_you');
+		#$this->data['layer_subscriptions'] = $this->api->request('layer/subscriptions');
+		#$this->data['layers_near_you'] = $this->api->request('layer/near_you');
 		$this->data['featured_layers'] = $this->api->request('layer/featured');
 	}
 
 	public function layer_ajax()
 	{
+		/*
 		if(post('action') == 'save-privacy')
 		{
 			$result = $this->api->request('', array('token'=>post('token')));
@@ -240,6 +241,24 @@ class Site_Settings extends Site
 		}
 		else
 			return array('result'=>'null');
+		*/
+		
+		if(post('action') == 'subscribe' || post('action') == 'unsubscribe')
+		{
+			$result = $this->api->request('layer/' . post('action') . '/' . post('id'));
+			if(k($result, 'result') == 'ok')
+				return array('result'=>'ok');
+			else
+				return $result;
+		}
+	}
+	
+	public function layer($id=FALSE)
+	{
+		if($id)
+		{
+			$this->data['layer'] = $this->api->request('layer/info/' . $id . '?count_valid_places=1');
+		}
 	}
 	
 	protected function get_last_location()
