@@ -19,9 +19,7 @@ RewriteRule ^(account|connect|map|settings|help|oauth)/([^/\.]+)\.ajax$ index.ph
 # All other pages (i.e. geoloqi.com/settings/profile)
 RewriteRule ^(about|account|connect|map|settings|help|oauth|post)/([^/\.]+)$ index.php?controller=$1&method=$2 [QSA,L]
 
-RewriteRule ^(account)/([^/\.]+)/([^/\.]+)$ index.php?controller=$1&method=$2&value=$3 [QSA,L]
-
-RewriteRule ^(layer)/([^/\.]+)/([^/\.]+)$ index.php?controller=$1&method=$2&value=$3 [QSA,L]
+RewriteRule ^(account|layer|settings)/([^/\.]+)/([^/\.]+)$ index.php?controller=$1&method=$2&value=$3 [QSA,L]
 
 # User pages short form (geoloqi.com/aaronpk)
 RewriteRule ^([^/\.]+)$ index.php?controller=map&method=index&value=$1 [QSA,L]
