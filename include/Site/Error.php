@@ -11,6 +11,10 @@ class Site_Error extends Site
 				$this->data['error'] = k($_GET, 'error', 'Bad OAuth Refresh Tokens');
 				$this->data['error_description'] = 'The API rejected the refresh token. Try logging in again.';
 				break;
+			case 'oauth_rejected_token_access':
+				$this->data['error'] = k($_GET, 'error', 'Login timed out');
+				$this->data['error_description'] = 'Login timed out. Please go back and try again.';
+				break;
 			case 'oauth_rejected_token_unknown':
 				$this->data['error'] = k($_GET, 'error', 'Unknown OAuth Error');
 				$this->data['error_description'] = 'The API rejected the website\'s OAuth request.';

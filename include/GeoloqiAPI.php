@@ -132,6 +132,9 @@ class GeoloqiAPI
 		{
 			if(preg_match('/error=\'expired_token\'/', $headers['WWW-Authenticate']))
 			{
+				if(session('refresh_token') == '')
+					$this->error('access');
+			
 				// If the token expired, use the refresh token to get a new access token
 				$response = $this->request('oauth/token', array(
 					'grant_type' => 'refresh_token',
@@ -144,9 +147,6 @@ class GeoloqiAPI
 					$_SESSION['oauth_token'] = $response->access_token;
 					$_SESSION['refresh_token'] = $response->refresh_token;
 			
-					#echo "<b>SESSION</b>\n";
-					#pa($_SESSION);
-					
 					ob_end_clean();
 					
 					// Try the original request again
