@@ -337,6 +337,10 @@ img {
 	color: #f17700;
 }
 
+.settings table td table td {
+	vertical-align: middle;
+}
+
 .settings .submit {
 	border: 3px #666 solid;
 	font-size: 18px;

@@ -83,6 +83,8 @@ class Site_Settings extends Site
 		$this->data['permanent_token'] = k($response, 'access_token');
 		
 		$this->data['instamapper_devicekey'] = $_SESSION['user_profile']->instamapper_devicekey;
+		
+		$this->data['autocheckin_layer'] = $this->api->request('layer/find?type=autocheckin');
 	}
 	
 	public function connections_ajax()
@@ -251,6 +253,21 @@ class Site_Settings extends Site
 			else
 				return $result;
 		}
+		
+		if(post('action') == 'settings')
+		{
+			$post = array(
+				'settings' => array(
+					'foursquare_autocheckin' => post('foursquare_autocheckin')
+				)
+			);
+			$result = $this->api->request('layer/subscription/' . post('id'), json_encode($post));
+			if(k($result, 'settings'))
+				return array('result'=>'ok', 'layer_id'=>post('id'), 'settings'=>$result->settings);
+			else
+				return $result;
+		}
+		
 	}
 	
 	public function layer($id=FALSE)

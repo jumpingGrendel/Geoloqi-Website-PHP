@@ -34,7 +34,11 @@ include($this->theme_file('settings/menu.php'));
 		<td>
 			<div class="label">Foursquare</div>
 			<div class="description">
-				Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places.
+				Connect your Foursquare account to automatically check in on Foursquare when you are nearby your favorite places. 
+				<?php
+				if(k($autocheckin_layer, 'layer'))
+					echo 'Visit your <a href="/settings/layer/' . $autocheckin_layer->layer->layer_id . ' ">Automatic Checkin Layer</a> to turn checkins on or off.';
+				?>
 			</div>
 		</td>
 		<td>

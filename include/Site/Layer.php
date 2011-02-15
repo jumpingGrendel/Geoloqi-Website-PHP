@@ -18,7 +18,7 @@ class Site_Layer extends Site
 
 			if($response->type == 'autocheckin')
 			{
-				// Set a session variable to tell our connect script to redirect here after authenticating with Foursquare
+				// Pass a redirect URI to foursquare to redirect here after authenticating
 				$this->data['foursquare_connect_redirect'] = https() . $_SERVER['SERVER_NAME'] . '/layer/description/' . $id;
 			}
 		}
@@ -28,6 +28,7 @@ class Site_Layer extends Site
 		}
 		$this->data['layer'] = $response;
 		$this->data['description'] = (property_exists($response, 'description') ? $response->description : '');
+		$this->data['layer_settings'] = (property_exists($response, 'settings') ? $response->settings : array());
 	}
 }
 ?>
