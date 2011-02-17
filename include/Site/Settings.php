@@ -91,6 +91,7 @@ class Site_Settings extends Site
 	{
 		// Log in to Instamapper and make a new device
 		$instamapper = new InstamapperClient();
+		$instamapper->login();
 		$keys = $instamapper->add_device($this->user->username);
 		
 		if($keys == FALSE)
